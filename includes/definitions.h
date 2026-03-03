@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/02 14:19:02 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:56:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,24 @@
 # define KEY_O 111
 # define KEY_L 108
 # define KEY_K 107
+
+enum e_obj_type
+{
+	LIGHT,
+	CAMERA,
+	AMBIENT_LIGHT,
+	SPHERE,
+	PLAIN,
+	CILINDER
+};
+
+enum	e_identifier
+{
+	A,
+	C,
+	L,
+	sp,
+	pl,
+	cy
+};
 #endif

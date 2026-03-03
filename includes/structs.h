@@ -6,16 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/02 14:06:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/03 13:54:13 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-# ifndef M_PI
-#  define M_PI 3.14159265358979323846
-# endif
-# define ESC 65307
+# include "definitions.h"
 
 typedef struct s_color
 {
@@ -29,6 +26,7 @@ typedef struct s_color
 	double	blue;
 }	t_color;
 
+//file struct, must be changed
 typedef struct s_data
 {
 	int				abscissa;
@@ -69,9 +67,19 @@ typedef struct s_window
 	int			height;
 	t_canva		canva;
 	t_data		data;
-	t_matrix	*current_tf;
 	double		curr_scale;
 	int			pan_x;
 	int			pan_y;
 } t_window;
+
+typedef struct s_scene_obj
+{
+	e_obj_type	type;
+}	t_scene_obj;
+
+typedef struct s_amb_light
+{
+	
+}	t_amb_light;
+
 #endif
