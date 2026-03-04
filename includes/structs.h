@@ -6,20 +6,18 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/03 13:54:13 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/04 18:41:34 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 # include "definitions.h"
+# include <ctype.h>
+# include "libft.h"
 
 typedef struct s_color
 {
-	double	step_tpcy;
-	double	step_r;
-	double	step_g;
-	double	step_b;
 	double	tpcy;
 	double	red;
 	double	green;
@@ -46,10 +44,9 @@ typedef struct s_canva
 
 typedef struct s_point
 {
-	int			x;
-	int			y;
-	int			z;
-	__uint32_t	color;
+	double	x;
+	double	y;
+	double	z;
 }	t_point;
 
 typedef struct s_matrix
@@ -67,10 +64,8 @@ typedef struct s_window
 	int			height;
 	t_canva		canva;
 	t_data		data;
-	double		curr_scale;
-	int			pan_x;
-	int			pan_y;
-} t_window;
+	t_list		*scene_obj;
+}	t_window;
 
 typedef struct s_scene_obj
 {
@@ -79,7 +74,59 @@ typedef struct s_scene_obj
 
 typedef struct s_amb_light
 {
-	
+	e_obj_type	type;
+	double		light_rate;
+	t_color		color;
 }	t_amb_light;
+
+typedef struct s_cam
+{
+	e_obj_type	type;
+	t_point		point;
+	t_point		orient;
+	double		fov;
+}	t_cam;
+
+typedef struct s_light
+{
+	e_obj_type	type;
+	t_point		p;
+	double		bright_rate;
+	t_color		color;
+}	t_light;
+
+typedef struct s_sphere
+{
+	e_obj_type	type;
+	t_point		center;
+	t_color		color;
+	double		diam;
+}	t_sphere;
+
+typedef struct s_plane
+{
+	e_obj_type	type;
+	t_point		p;
+	t_point		n;
+	t_color		color;
+}	t_plane;
+
+typedef struct s_cilinder
+{
+	e_obj_type	type;
+	t_point		center;
+	t_point		vec;
+	double		diam;
+	double		height;
+	t_color		color;
+}	t_cilinder;
+
+typedef struct s_scene
+{
+	t_amb_light	*amb;
+	t_cam		*cam;
+	t_light		*light;
+	t_list		*objs;
+}	t_scene;
 
 #endif
