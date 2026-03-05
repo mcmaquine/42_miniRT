@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/03/03 19:12:43 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/03/05 14:47:39 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ LIBX = $(DIR_LIBX)/libmlx.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(LIBFT)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS) $(RDFLAGS)
+$(NAME): $(OBJS) $(LIBFT) $(LIBX)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 $(OBJS): | $(OBJS_DIR)
 
@@ -52,8 +52,7 @@ $(LIB): $(DIR_LIBX)
 
 val:
 	@valgrind -q --leak-check=full --track-origins=yes \
-	--track-fds=yes --show-leak-kinds=all \
-	--suppressions=readline.supp ./$(NAME)
+	--track-fds=yes --show-leak-kinds=all ./$(NAME)
 
 debug: CFLAGS += -g
 debug: re

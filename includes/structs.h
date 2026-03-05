@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/04 18:41:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/05 13:31:58 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,20 @@ typedef struct s_window
 	t_canva		canva;
 	t_data		data;
 	t_list		*scene_obj;
-}	t_window;
+}	t_window;void	sphere_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
+
+void	plane_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
+
+void	cilinder_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
 
 typedef struct s_scene_obj
 {

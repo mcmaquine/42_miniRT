@@ -1,17 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fileparser.h                                       :+:      :+:    :+:   */
+/*   scene_obj_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/05 10:36:47 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/03/05 13:31:51 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILEPARSER_H
-# define FILEPARSER_H
+#include "minirt.h"
 
-int		free_scene_obj(t_scene **scene_obj);
-#endif
+void	sphere_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
+
+void	plane_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
+
+void	cilinder_parser(char **params, t_scene *scene_obj)
+{
+	;
+}

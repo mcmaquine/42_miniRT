@@ -1,17 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fileparser.h                                       :+:      :+:    :+:   */
+/*   unique_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/05 10:36:47 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/03/05 13:23:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILEPARSER_H
-# define FILEPARSER_H
+#include "minirt.h"
 
-int		free_scene_obj(t_scene **scene_obj);
-#endif
+void	amb_light_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
+
+void	cam_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
+
+void	light_parser(char **params, t_scene *scene_obj)
+{
+	;
+}
