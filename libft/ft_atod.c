@@ -6,49 +6,22 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:37:58 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/05 18:05:05 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/05 22:11:52 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static double	solve_right(char *str);
+static double	solve_right(char *str, char **param);
 static double	power_ten(size_t i );
 static size_t	sizeof_split(char **arr);
-static void		solve_for_point(char *str, char *split, double *l, double *r);
+static double	solve_for_point(const char *str, char *split, char **param);
 
 /*
 Converts float number represented in a string and convert it to double.
 The separator must be.
 */
-// double	ft_atod(const char *nptr)
-// {
-// 	double	left;
-// 	double	right;
-// 	char	**parts;
-
-// 	if (!nptr)
-// 		return (0.0);
-// 	parts = ft_split(nptr, '.');
-// 	left = 0.0;
-// 	if (sizeof_split(parts) < 2 && ft_strchr(nptr, '.'))
-// 		right = solve_right(parts[0]);
-// 	else
-// 	{
-// 		if (ft_strlen(parts[0]) == 1 && **parts == '-')
-// 			right = -1 * solve_right(parts[0]);
-// 		else
-// 			left = ft_atoi(parts[0]);
-// 		right = solve_right(parts[1]);
-// 	}
-// 	ft_free_split(parts);
-// 	if (left >= 0)
-// 		return (left + right);
-// 	else
-// 		return (left - right);
-// }
-
-double	ft_atod(const char *nptr)
+ double	ft_atod(const char *nptr)
 {
 	char	**parts;
 	double	left;
@@ -59,25 +32,37 @@ double	ft_atod(const char *nptr)
 	{
 		parts = ft_split(nptr, '.');
 		if (sizeof_split(parts) < 2)
-			solve_for_point(nptr, parts[0], &left, &right);
+			return (solve_for_point(nptr, parts[0], parts));
 		else if (ft_strlen(parts[0]) == 1 && **parts == '-')
-			right = -solve_right(parts[0]);
+			return (-solve_right(parts[1], parts));
 		else if (ft_strlen(parts[0]) == 1 && **parts == '+')
-			right = solve_right(parts[0]);
+			return (solve_right(parts[1], parts));
+		else if (ft_atoi(parts[0]) == 0 && ft_strchr(parts[0], '-'))
+			return (-solve_right(parts[1], parts));
+		left = ft_atoi(parts[0]);
+		if (left < 0)
+			right = -solve_right(parts[1], parts);
+		else
+			right = solve_right(parts[1], parts);
 	}
 	else
 		return (ft_atoi(nptr));
+	return (left + right);
 }
 
-static double	solve_right(char *str)
+static double	solve_right(char *str, char **param)
 {
 	size_t	i;
 	double	result;
 
 	result = 0;
 	i = 0;
+	(void)param;
 	if (!str)
+	{
+		ft_free_split(param);
 		return (0.0);
+	}
 	while (str[i] == '0' && str[i])
 		i++;
 	while (str[i] && (str[i] > '0' && str[i] <= '9'))
@@ -85,6 +70,7 @@ static double	solve_right(char *str)
 		result = result + ((double)(str[i] - '0'))/power_ten(i + 1);
 		i++;
 	}
+	ft_free_split(param);
 	return (result);
 }
 
@@ -115,26 +101,19 @@ static size_t	sizeof_split(char **arr)
 	return (i);
 }
 
-static void		solve_for_point(char *str, char *split, double *l, double *r)
+static double	solve_for_point(const char *str, char *split, char **param)
 {
-	char	dot;
+	char	*dot;
+	double	result;
 
+	(void)param;
 	dot = ft_strchr(str, '.');
-	if (!dot)
-	{
-		*l = ft_atoi(split);
-		*r = 0.0;
-		return ;
-	}
-	if (str > dot)
-	{
-		*l = 0.0;
-		*r = solve_right(split);
-	}
+	if (str >= dot)
+		return (solve_right(split, param));
 	else
 	{
-		*l = ft_atoi(split);
-		*r = 0.0;
+		result = ft_atoi(split);
+		ft_free_split(param);
+		return (result);
 	}
-	return ;
 }
