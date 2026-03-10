@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_obj_parser.c                                 :+:      :+:    :+:   */
+/*   ft_compare_double.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/09 20:30:37 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/09 21:29:48 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/03/09 21:33:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-
-int	sphere_parser(char **params, t_scene *scene_obj)
+static double abs_double(double x)
 {
-	;
+    if (x < 0.0)
+        return (-x);
+    return (x);
 }
 
-int	plane_parser(char **params, t_scene *scene_obj)
+/*
+Return 0 if two doubles are equal (or their difference is less than tol), 1
+otherwise.
+*/
+int ft_dcmp(double num1, double num2, double tol)
 {
-	;
-}
+    double	diff;
 
-int	cilinder_parser(char **params, t_scene *scene_obj)
-{
-	;
+    diff = num1 - num2;
+    if (abs_double(diff) <= tol)
+        return (0);
+    return (1);
 }

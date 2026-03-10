@@ -6,14 +6,14 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/05 11:36:56 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:57:01 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	parser_line(char* line, t_scene *scene_obj);
-static void	parse_obj(char *param, t_scene *scene_obj);
+static void	parse_obj(char **param, t_scene *scene_obj);
 
 t_scene*	read_file(char *filename)
 {

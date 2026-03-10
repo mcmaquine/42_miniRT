@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_obj_parser.c                                 :+:      :+:    :+:   */
+/*   ft_sizeof_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/09 20:30:37 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/09 20:44:29 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/03/09 20:56:55 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	sphere_parser(char **params, t_scene *scene_obj)
+/*
+   Counts how many itens has in params, not including NULL element in the end.
+*/
+size_t	ft_sizeof_split(char **params)
 {
-	;
+	size_t	size;
+
+	if (!params)
+		return (0);
+	size = 0;
+	while (params[size])
+		size++;
+	return (size);	
 }
 
-int	plane_parser(char **params, t_scene *scene_obj)
-{
-	;
-}
-
-int	cilinder_parser(char **params, t_scene *scene_obj)
-{
-	;
-}

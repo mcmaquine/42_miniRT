@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/05 13:31:58 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/09 21:03:40 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,36 +65,23 @@ typedef struct s_window
 	t_canva		canva;
 	t_data		data;
 	t_list		*scene_obj;
-}	t_window;void	sphere_parser(char **params, t_scene *scene_obj)
-{
-	;
-}
-
-void	plane_parser(char **params, t_scene *scene_obj)
-{
-	;
-}
-
-void	cilinder_parser(char **params, t_scene *scene_obj)
-{
-	;
-}
+}	t_window;
 
 typedef struct s_scene_obj
 {
-	e_obj_type	type;
+	enum e_obj_type	type;
 }	t_scene_obj;
 
 typedef struct s_amb_light
 {
-	e_obj_type	type;
+	enum e_obj_type	type;
 	double		light_rate;
 	t_color		color;
 }	t_amb_light;
 
 typedef struct s_cam
 {
-	e_obj_type	type;
+	enum e_obj_type	type;
 	t_point		point;
 	t_point		orient;
 	double		fov;
@@ -102,7 +89,7 @@ typedef struct s_cam
 
 typedef struct s_light
 {
-	e_obj_type	type;
+	enum e_obj_type	type;
 	t_point		p;
 	double		bright_rate;
 	t_color		color;
@@ -110,7 +97,7 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	e_obj_type	type;
+	enum e_obj_type	type;
 	t_point		center;
 	t_color		color;
 	double		diam;
@@ -118,7 +105,7 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	e_obj_type	type;
+	enum e_obj_type	type;
 	t_point		p;
 	t_point		n;
 	t_color		color;
@@ -126,7 +113,7 @@ typedef struct s_plane
 
 typedef struct s_cilinder
 {
-	e_obj_type	type;
+	enum e_obj_type	type;
 	t_point		center;
 	t_point		vec;
 	double		diam;
