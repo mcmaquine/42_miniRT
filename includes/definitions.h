@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/03 13:56:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/11 18:55:01 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@
 # define KEY_L 108
 # define KEY_K 107
 
-enum e_obj_type
+typedef enum e_obj_type
 {
 	LIGHT,
 	CAMERA,
 	AMBIENT_LIGHT,
 	SPHERE,
-	PLAIN,
+	PLANE,
 	CILINDER
-};
+}	t_obj_type;
 
 enum	e_identifier
 {
