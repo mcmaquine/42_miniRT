@@ -6,14 +6,14 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/09 17:57:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/12 15:00:58 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int	parser_line(char* line, t_scene *scene_obj);
-static void	parse_obj(char **param, t_scene *scene_obj);
+static int	parse_obj(char **param, t_scene *scene_obj);
 
 t_scene*	read_file(char *filename)
 {
@@ -30,7 +30,7 @@ t_scene*	read_file(char *filename)
 	while (line)
 	{
 		status = parser_line(line, scene_obj);
-		if (!status)
+		if (status)
 		{
 			free_scene_obj(&scene_obj);
 			free(line);
@@ -56,18 +56,19 @@ static int	parser_line(char* line, t_scene *scene_obj)
 	i = 0;
 }
 
-static void	parse_obj(char	**params, t_scene *scene_obj)
+static int	parse_obj(char	**params, t_scene *scene_obj)
 {
 	if (!ft_strcmp(params[0], "A"))
-		;
+		return (amb_light_parser(params, scene_obj));
 	else if (!ft_strcmp(params[0], "C"))
-		;
+		return (cam_parser(params, scene_obj));
 	else if (!ft_strcmp(params[0], "L"))
-		;
+		return (light_parser(params, scene_obj));
 	else if (!ft_strcmp(params[0], "sp"))
-		;
+		return (sphere_parser(params, scene_obj));
 	else if (!ft_strcmp(params[0], "pl"))
-		;
+		return (plane_parser(params, scene_obj));
 	else if (!ft_strcmp(params[0], "cy"))
-		;
+		return (plane_parser(params, scene_obj));
+	return (0);
 }
