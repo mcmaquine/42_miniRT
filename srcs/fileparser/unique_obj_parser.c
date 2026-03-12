@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unique_obj.c                                       :+:      :+:    :+:   */
+/*   unique_obj_parser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/11 18:26:40 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/12 15:57:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	light_parser(char **params, t_scene *scene_obj)
 		free(light);
 		return (1);
 	}
-	if (fill_coordinate(params[1], &(light->p), 0.0, 0.0))
+	if (fill_coordinate(params[1], &(light->coord), 0.0, 0.0))
 	{
 		free(light);
 		return (1);
