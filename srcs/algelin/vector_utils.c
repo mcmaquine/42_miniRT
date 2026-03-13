@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   vector_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 21:06:52 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/12 21:42:56 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/03/12 22:44:15 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "libft.h"
-# include "mlx.h"
-# include "definitions.h"
-# include "structs.h"
-# include "fileparser.h"
-# include "algelin.h"
-#endif
+#include "minirt.h"
+
+t_point	*new_point(double x, double y, double z)
+{
+	t_point	*p;
+
+	p = ft_calloc(1, sizeof(t_point));
+	if (!p)
+		return (NULL);
+	p->x = x;
+	p->y = y;
+	p->z = z;
+	return (p);
+}
+
+void	zero_point(t_point *p)
+{
+	if (!p)
+		return ;
+	p->x = 0;
+	p->y = 0;
+	p->z = 0;
+}
