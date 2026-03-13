@@ -6,14 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/11 19:40:25 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:00:07 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	helper_parse_cilinder(char **params, t_scene *scene_obj, t_cilinder\
-	*cil);
+static int	helper_parse_cylinder(char **params, t_cylinder	*cyl);
 
 /*
 Parses a sphere object
@@ -27,7 +26,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	sphere->type = SPHERE;
 	sphere->diam = ft_atod(params[2]);
-	if (sphere->diam == 0.0)
+	if (sphere->diam <= 0.0)
 	{
 		free(sphere);
 		return (1);	
@@ -42,7 +41,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 		free(sphere);
 		return (1);
 	}
-	ft_lstadd_back(&(scene_obj->objs), sphere);
+	ft_lstadd_back(&(scene_obj->objs), ft_lstnew(sphere));
 	return (0);
 }
 
@@ -72,7 +71,7 @@ int	plane_parser(char **params, t_scene *scene_obj)
 		free(plane);
 		return (1);
 	}
-	ft_lstadd_back(&(scene_obj), plane);
+	ft_lstadd_back(&(scene_obj->objs), ft_lstnew(plane));
 	return (0);
 }
 
@@ -81,45 +80,41 @@ Parse a cilinder object
 */
 int	cilinder_parser(char **params, t_scene *scene_obj)
 {
-	t_cilinder	*cilinder;
+	t_cylinder	*cylinder;
 	int			error;
 
 	if (ft_sizeof_split(params) != 6)
 		return (1);
-	cilinder = ft_calloc(1, sizeof(t_cilinder));
-	error = helper_parse_cilinder(params, scene_obj, cilinder);
+	cylinder = ft_calloc(1, sizeof(t_cylinder));
+	error = helper_parse_cylinder(params, cylinder);
 	if (error)
-	{
-		free(cilinder);
 		return (error);
-	}
-	ft_lstadd_back(&(scene_obj->objs), cilinder);
+	ft_lstadd_back(&(scene_obj->objs), ft_lstnew(cylinder));
 	return (0);
 }
 
-static int	helper_parse_cilinder(char **params, t_scene *scene_obj, t_cilinder\
-	*cil)
+static int	helper_parse_cylinder(char **params, t_cylinder	*cyl)
 {
-	cil->diam = ft_atod(params[3]);
-	cil->height = ft_atod(params[4]);
-	if (cil->diam == 0.0 || cil->height == 0.0)
+	cyl->diam = ft_atod(params[3]);
+	cyl->height = ft_atod(params[4]);
+	if (cyl->diam <= 0.0 || cyl->height <= 0.0)
 	{
-		free(cil);
+		free(cyl);
 		return (1);
 	}
-	if (fill_coordinate(params[1], &(cil->center), 0, 0))
+	if (fill_coordinate(params[1], &(cyl->center), 0, 0))
 	{
-		free(cil);
+		free(cyl);
 		return (1);
 	}
-	if (fill_coordinate(params[2], &(cil->v_axis), -1.0, 1.0))
+	if (fill_coordinate(params[2], &(cyl->v_axis), -1.0, 1.0))
 	{
-		free(cil);
+		free(cyl);
 		return (1);
 	}
-	if (fill_color(params[5], &(cil->color)))
+	if (fill_color(params[5], &(cyl->color)))
 	{
-		free(cil);
+		free(cyl);
 		return (1);
 	}
 	return (0);

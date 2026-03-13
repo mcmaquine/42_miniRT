@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/11 18:55:55 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:57:02 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 typedef struct s_color
 {
-	double	tpcy;
-	double	red;
-	double	green;
-	double	blue;
+	int	tpcy;
+	int	red;
+	int	green;
+	int	blue;
 }	t_color;
 
 //file struct, must be changed
@@ -111,7 +111,7 @@ typedef struct s_plane
 	t_color		color;
 }	t_plane;
 
-typedef struct s_cilinder
+typedef struct s_cylinder
 {
 	t_obj_type	type;
 	t_point		center;
@@ -119,7 +119,7 @@ typedef struct s_cilinder
 	double		diam;
 	double		height;
 	t_color		color;
-}	t_cilinder;
+}	t_cylinder;
 
 typedef struct s_scene
 {

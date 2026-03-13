@@ -6,14 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 15:00:58 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/12 16:42:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	parser_line(char* line, t_scene *scene_obj);
-static int	parse_obj(char **param, t_scene *scene_obj);
+static int		parser_line(char* line, t_scene *scene_obj);
+static int		parse_obj(char **param, t_scene *scene_obj);
+static t_scene	*validate_unique_obj(t_scene **scene_obj);
 
 t_scene*	read_file(char *filename)
 {
@@ -23,7 +24,7 @@ t_scene*	read_file(char *filename)
 	t_scene	*scene_obj;
 
 	fd = open(filename, O_RDONLY);
-	if (fd < 3)
+	if (fd < 0)
 		return (NULL);
 	scene_obj = ft_calloc(1, sizeof(t_scene));
 	line = get_next_line(fd);
@@ -34,13 +35,14 @@ t_scene*	read_file(char *filename)
 		{
 			free_scene_obj(&scene_obj);
 			free(line);
-			break ;
+			close (fd);
+			return (NULL);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (scene_obj);
+	return (validate_unique_obj(&scene_obj));
 }
 
 static int	parser_line(char* line, t_scene *scene_obj)
@@ -51,9 +53,14 @@ static int	parser_line(char* line, t_scene *scene_obj)
 	params = ft_split(line, ' ');
 	if (!params)
 		return (1);
-	parse_obj(params, scene_obj);
+	if (ft_sizeof_split(params) == 1)
+	{
+		ft_free_split(params);
+		return (0);
+	}
+	i = parse_obj(params, scene_obj);
 	ft_free_split(params);
-	i = 0;
+	return (i);
 }
 
 static int	parse_obj(char	**params, t_scene *scene_obj)
@@ -69,6 +76,17 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 	else if (!ft_strcmp(params[0], "pl"))
 		return (plane_parser(params, scene_obj));
 	else if (!ft_strcmp(params[0], "cy"))
-		return (plane_parser(params, scene_obj));
+		return (cilinder_parser(params, scene_obj));
 	return (0);
+}
+
+static t_scene	*validate_unique_obj(t_scene **scene_obj)
+{
+	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light )
+	{
+		free_scene_obj(scene_obj);
+		return (NULL);
+	}
+	else
+		return (*scene_obj);
 }
