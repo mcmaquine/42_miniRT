@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/03/05 14:47:39 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/03/13 09:29:46 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,16 @@ LIBS = -Llibft -lft -lmlx -lm
 
 MAIN_SRC = main.c
 
-SRCS := $(MAIN_SRC)
+ALGELIN_SRC =	algelin/vector_measure.c\
+				algelin/vector_utils.c\
+				algelin/vectorvector.c
+
+FILEPARSER_SRC =	fileparser/openfile.c\
+					fileparser/scene_obj_parser.c\
+					fileparser/scene_obj_util.c\
+					fileparser/unique_obj_parser.c
+
+SRCS := $(MAIN_SRC) $(ALGELIN_SRC) $(FILEPARSER_SRC)
 
 SRCS := $(addprefix srcs/, $(SRCS))
 
@@ -58,9 +67,9 @@ debug: CFLAGS += -g
 debug: re
 
 clean:
+	rm -rf $(OBJS_DIR)
 	$(MAKE) -C $(DIR_LIBFT) clean
 	$(MAKE) -C $(DIR_LIBX) clean
-	rm -rf $(OBJS_DIR)
 
 fclean: clean
 	$(MAKE) -C $(DIR_LIBFT) fclean

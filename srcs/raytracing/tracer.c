@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   tracer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 18:16:27 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/03/13 10:43:02 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "libft.h"
-# include "mlx.h"
-# include "definitions.h"
-# include "structs.h"
-# include "fileparser.h"
-# include "algelin.h"
-# include "cof_matrix.h"
-#endif
+#include "minirt.h"
+
+int	tracer(t_cam *cam, t_window *win, int px, int py)
+{
+	t_point	forward;
+	t_point	world_up;
+	t_point	right;
+	t_point	up;
+
+	forward = vec_normalize(cam->orient);
+	world_up = fill_point(0, 1, 0);
+	right = vec_normalize(vec_cross(world_up, forward));
+	up = vec_normalize(vec_cross(forward, right));
+}

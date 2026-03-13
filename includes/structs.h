@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 19:57:02 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/13 09:09:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,11 @@ typedef struct s_scene
 	t_light		*light;
 	t_list		*objs;
 }	t_scene;
+
+typedef struct s_ray
+{
+	t_point	origin;
+	t_point	direction;
+}	t_ray;
 
 #endif
