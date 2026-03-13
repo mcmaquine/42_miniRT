@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 22:43:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 22:51:49 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/12 22:57:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ double	vec_magnitude(t_point *a)
 {
 	if (!a)
 		return (0);
-	return (sqrt(pow(a->x, 2) + pow(a->y, 2) + pow(a->z, 2)));
+	return (sqrt(a->x * a->x + a->y * a->y + a->z * a->z));
 }
 
 t_point	vec_normalize(t_point *a)
@@ -28,7 +28,7 @@ t_point	vec_normalize(t_point *a)
 	if (!a)
 		return (p);
 	mag = vec_magnitude(a);
-	if (mag == 0.0)
+	if (ft_dcmp(mag, 0.0, 1e-9))
 		return (p);
 	p.x = a->x / mag;
 	p.y = a->y / mag;
