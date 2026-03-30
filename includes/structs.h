@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 09:09:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:03:25 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ typedef struct s_color
 	int	green;
 	int	blue;
 }	t_color;
-
-//file struct, must be changed
-typedef struct s_data
-{
-	int				abscissa;
-	int				ordinate;
-	int				**coord;
-	unsigned int	**color;
-}	t_data;
 
 typedef struct s_canva
 {
@@ -55,17 +46,6 @@ typedef struct s_matrix
 	int		col;
 	double	**a;
 }	t_matrix;
-
-typedef struct s_window
-{
-	void		*mlx;
-	void		*win;
-	int			width;
-	int			height;
-	t_canva		canva;
-	t_data		data;
-	t_list		*scene_obj;
-}	t_window;
 
 typedef struct s_scene_obj
 {
@@ -134,5 +114,15 @@ typedef struct s_ray
 	t_point	origin;
 	t_point	direction;
 }	t_ray;
+
+typedef struct s_window
+{
+	void		*mlx;
+	void		*win;
+	int			width;
+	int			height;
+	t_canva		canva;
+	t_scene		scene_obj;
+}	t_window;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 22:43:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 10:35:24 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:16:34 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_point	vec_normalize(t_point a)
 	double	mag;
 
 	mag = vec_magnitude(a);
+	zero_point(&p);
 	if (!ft_dcmp(mag, 0.0, 1e-9))
 		return (p);
 	p.x = a.x / mag;

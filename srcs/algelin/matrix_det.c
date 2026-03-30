@@ -6,11 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 15:04:43 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 16:11:50 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/29 20:24:45 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static double	det2(t_matrix m);
+static double	det3(t_matrix m);
+static double	det4(t_matrix m);
 
 /*
 Return the determinant of square matrixes up to 4 by 4.
@@ -19,6 +23,8 @@ double	determinant(t_matrix m)
 {
 	if (m.col != m.row)
 		return (0);
+	if (m.row == 1)
+		return (m.a[0][0]);
 	if (m.row == 2)
 		return (det2(m));
 	if (m.row == 3)
