@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/03/13 09:29:46 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/03/25 18:50:05 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(OBJS_DIR)%.o: %.c
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all
 
-$(LIB): $(DIR_LIBX)
+$(LIBX): $(DIR_LIBX)
 	$(MAKE) -C $< all
 
 val:
