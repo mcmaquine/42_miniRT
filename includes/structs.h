@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/29 20:03:25 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/03/31 13:41:36 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,12 @@ typedef struct s_ray
 
 typedef struct s_window
 {
+	t_scene		scene_obj;
+	t_canva		canva;
 	void		*mlx;
 	void		*win;
 	int			width;
 	int			height;
-	t_canva		canva;
-	t_scene		scene_obj;
 }	t_window;
 
 #endif
