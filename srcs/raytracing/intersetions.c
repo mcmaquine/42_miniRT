@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   intersetions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/01 18:40:22 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/04/01 18:47:55 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include "libft.h"
-# include "mlx.h"
-# include "definitions.h"
-# include "structs.h"
-# include "fileparser.h"
-# include "algelin.h"
-# include "cof_matrix.h"
-# include "utils.h"
-# include "raytracer.h"
-#endif
+#include "minirt.h"
+
+t_plane	*find_planes(t_window *win)
+{
+	int		count;
+	t_list	*objs;
+
+	count = 0;
+	objs = win->scene_obj.objs;
+	while (objs)
+}

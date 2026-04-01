@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/31 13:26:30 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/01 18:37:36 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,38 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	double	ndc_y = (py + 0.5) / win->height;
 	double	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
 	double	screen_y = (1 - 2.0 * ndc_y) * half_width;
-
 	forward = vec_normalize(win->scene_obj.cam->orient);
 	world_up = fill_point(0, 1, 0);
+	if (fabs(vec_dot(forward, world_up)) > .9999 )
+		world_up = fill_point(0, 0, 1);
 	right = vec_normalize(vec_cross(world_up, forward));
 	up = vec_normalize(vec_cross(forward, right));
 	return (direction(vec_add(forward, vec_add(vec_scale(right, screen_x),\
 		vec_scale(up, screen_y))), win->scene_obj.cam->point));
+}
+
+double	intersect_plane(t_window *win, t_ray ray)
+{
+	t_plane	*planes;
+	double	t;
+	double	temp;
+	int		i;
+
+	//return a NULL terminated array of planes
+	planes = find_planes(win);
+	if (!planes)
+		return (-1.0);
+	i = 0;
+	temp = 0.0;
+	while (planes[i])
+	{
+		if (!ft_dcmp(vec_dot(planes[i]->normal, ray.direction), 0.0, 1e-5))
+			return (-1);
+		t = -vec_dot(planes[i]->normal, vec_sub(ray.origin, planes[i]->a_point))\
+			/vec_dot(planes[i]->normal, ray.direction);	
+	}
+	if (t > 0)
+		return (t);
+	else
+		return (-1);
 }
