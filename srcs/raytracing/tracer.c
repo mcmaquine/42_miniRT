@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/01 18:37:36 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/02 14:48:28 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,4 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	up = vec_normalize(vec_cross(forward, right));
 	return (direction(vec_add(forward, vec_add(vec_scale(right, screen_x),\
 		vec_scale(up, screen_y))), win->scene_obj.cam->point));
-}
-
-double	intersect_plane(t_window *win, t_ray ray)
-{
-	t_plane	*planes;
-	double	t;
-	double	temp;
-	int		i;
-
-	//return a NULL terminated array of planes
-	planes = find_planes(win);
-	if (!planes)
-		return (-1.0);
-	i = 0;
-	temp = 0.0;
-	while (planes[i])
-	{
-		if (!ft_dcmp(vec_dot(planes[i]->normal, ray.direction), 0.0, 1e-5))
-			return (-1);
-		t = -vec_dot(planes[i]->normal, vec_sub(ray.origin, planes[i]->a_point))\
-			/vec_dot(planes[i]->normal, ray.direction);	
-	}
-	if (t > 0)
-		return (t);
-	else
-		return (-1);
 }
