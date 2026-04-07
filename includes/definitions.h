@@ -6,12 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/30 17:50:16 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:19:39 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINITIONS_H
 # define DEFINITIONS_H
+# define REAL double
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
@@ -47,4 +48,5 @@ enum	e_identifier
 	pl,
 	cy
 };
+
 #endif

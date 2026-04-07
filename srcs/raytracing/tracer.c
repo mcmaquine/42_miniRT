@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/02 14:48:28 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:24:46 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	t_point	right;
 	t_point	up;
 	
-	double	half_width = tan(to_radians(win->scene_obj.cam->fov)/2.0);
-	double	aspect_ratio = (double)win->width / (double)win->height;
-	double	ndc_x = (px + 0.5) / win->width;
-	double	ndc_y = (py + 0.5) / win->height;
-	double	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
-	double	screen_y = (1 - 2.0 * ndc_y) * half_width;
+	REAL	half_width = tan(to_radians(win->scene_obj.cam->fov)/2.0);
+	REAL	aspect_ratio = (REAL)win->width / (REAL)win->height;
+	REAL	ndc_x = (px + 0.5) / win->width;
+	REAL	ndc_y = (py + 0.5) / win->height;
+	REAL	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
+	REAL	screen_y = (1 - 2.0 * ndc_y) * half_width;
 	forward = vec_normalize(win->scene_obj.cam->orient);
 	world_up = fill_point(0, 1, 0);
 	if (fabs(vec_dot(forward, world_up)) > .9999 )

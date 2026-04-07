@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 18:02:22 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/29 20:51:26 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:23:49 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	fill_matrix(t_cof_ctx *ctx);
 Calculate a cofactor of a square matrix for the element (ci,cj). Return 0 if is
 not a squared matrix.
 */
-double	cofactor(t_matrix m, int ci, int cj)
+REAL	cofactor(t_matrix m, int ci, int cj)
 {
 	t_cof_ctx	ctx;
-	double		cof;
+	REAL		cof;
 
 	if (m.row != m.col)
 		return (0);

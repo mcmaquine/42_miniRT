@@ -21,7 +21,7 @@ static void	print_header(const char *title)
 	printf("════════════════════════════════════════════" RESET "\n");
 }
 
-static void	check_double(const char *test, double got, double expected)
+static void	check_double(const char *test, REAL got, REAL expected)
 {
 	if (fabs(got - expected) < EPSILON)
 	{
@@ -207,7 +207,7 @@ static void	test_vec_normalize(void)
 	check_point("normalize (3,0,0)", vec_normalize(a), fill_point(1, 0, 0));
 
 	t_point	b = fill_point(1, 1, 1);
-	double	inv = 1.0 / sqrt(3.0);
+	REAL	inv = 1.0 / sqrt(3.0);
 	check_point("normalize (1,1,1)", vec_normalize(b),
 		fill_point(inv, inv, inv));
 
@@ -259,7 +259,7 @@ static void	test_create_free_matrix(void)
 
 /* --- determinant (ordem 1 a 4) --- */
 
-static t_matrix	*make_matrix(int n, double vals[])
+static t_matrix	*make_matrix(int n, REAL vals[])
 {
 	t_matrix	*m = create_matrix(n, n);
 	if (!m)
@@ -278,56 +278,56 @@ static void	test_determinant(void)
 	char		label[64];
 
 	/* 1×1: det([7]) = 7 */
-	double v1[] = {7};
+	REAL v1[] = {7};
 	m = make_matrix(1, v1);
 	snprintf(label, sizeof(label), "det([7]) = 7");
 	check_double(label, determinant(*m), 7.0);
 	free_matrix(m);
 
 	/* 2×2: det([[1,2],[3,4]]) = -2 */
-	double v2[] = {1, 2, 3, 4};
+	REAL v2[] = {1, 2, 3, 4};
 	m = make_matrix(2, v2);
 	check_double("det([[1,2],[3,4]]) = -2", determinant(*m), -2.0);
 	free_matrix(m);
 
 	/* 2×2 identidade: det = 1 */
-	double vi2[] = {1, 0, 0, 1};
+	REAL vi2[] = {1, 0, 0, 1};
 	m = make_matrix(2, vi2);
 	check_double("det(I2) = 1", determinant(*m), 1.0);
 	free_matrix(m);
 
 	/* 3×3: det([[6,1,1],[4,-2,5],[2,8,7]]) = -306 */
-	double v3[] = {6, 1, 1, 4, -2, 5, 2, 8, 7};
+	REAL v3[] = {6, 1, 1, 4, -2, 5, 2, 8, 7};
 	m = make_matrix(3, v3);
 	check_double("det 3×3 = -306", determinant(*m), -306.0);
 	free_matrix(m);
 
 	/* 3×3 identidade: det = 1 */
-	double vi3[] = {1,0,0, 0,1,0, 0,0,1};
+	REAL vi3[] = {1,0,0, 0,1,0, 0,0,1};
 	m = make_matrix(3, vi3);
 	check_double("det(I3) = 1", determinant(*m), 1.0);
 	free_matrix(m);
 
 	/* 3×3 singular: det = 0 */
-	double vs3[] = {1,2,3, 4,5,6, 7,8,9};
+	REAL vs3[] = {1,2,3, 4,5,6, 7,8,9};
 	m = make_matrix(3, vs3);
 	check_double("det singular 3×3 = 0", determinant(*m), 0.0);
 	free_matrix(m);
 
 	/* 4×4 identidade: det = 1 */
-	double vi4[] = {1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1};
+	REAL vi4[] = {1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1};
 	m = make_matrix(4, vi4);
 	check_double("det(I4) = 1", determinant(*m), 1.0);
 	free_matrix(m);
 
 	/* 4×4: det = 0 (linha repetida) */
-	double vr4[] = {1,2,3,4, 1,2,3,4, 5,6,7,8, 9,10,11,12};
+	REAL vr4[] = {1,2,3,4, 1,2,3,4, 5,6,7,8, 9,10,11,12};
 	m = make_matrix(4, vr4);
 	check_double("det 4×4 linha repetida = 0", determinant(*m), 0.0);
 	free_matrix(m);
 
 	/* 4×4 geral */
-	double v4[] = {1,2,3,4,  5,6,7,8,  9,10,11,12,  3,1,4,1};
+	REAL v4[] = {1,2,3,4,  5,6,7,8,  9,10,11,12,  3,1,4,1};
 	m = make_matrix(4, v4);
 	check_double("det 4×4 geral = 0", determinant(*m), 0.0);
 	free_matrix(m);
@@ -341,14 +341,14 @@ static void	test_cofactor(void)
 	t_matrix	*m;
 
 	/* 2×2: [[1,2],[3,4]] → cofator(0,0) = 4, cofator(0,1) = -3 */
-	double v2[] = {1, 2, 3, 4};
+	REAL v2[] = {1, 2, 3, 4};
 	m = make_matrix(2, v2);
 	check_double("cofator(0,0) de [[1,2],[3,4]] = 4", cofactor(*m, 0, 0), 4.0);
 	check_double("cofator(0,1) de [[1,2],[3,4]] = -3", cofactor(*m, 0, 1), -3.0);
 	free_matrix(m);
 
 	/* 3×3 */
-	double v3[] = {6,1,1, 4,-2,5, 2,8,7};
+	REAL v3[] = {6,1,1, 4,-2,5, 2,8,7};
 	m = make_matrix(3, v3);
 	/* cofator(0,0) = det([[-2,5],[8,7]]) = -14-40 = -54 */
 	check_double("cofator(0,0) de M3×3 = -54", cofactor(*m, 0, 0), -54.0);

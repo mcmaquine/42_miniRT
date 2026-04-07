@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:42:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 10:22:31 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:24:05 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_point	fill_point(double x, double y, double z)
+t_point	fill_point(REAL x, REAL y, REAL z)
 {
 	t_point	p;
 

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:07:51 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 10:33:15 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:24:14 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_point	vec_sub(t_point a, t_point b)
 	return (p);
 }
 
-t_point	vec_scale(t_point a, double t)
+t_point	vec_scale(t_point a, REAL t)
 {
 	t_point	p;
 
@@ -52,9 +52,9 @@ t_point	vec_cross(t_point a, t_point b)
 	return (p);
 }
 
-double vec_dot(t_point a, t_point b)
+REAL vec_dot(t_point a, t_point b)
 {
-	double	dot;
+	REAL	dot;
 
 	dot = a.x * b.x + a.y * b.y + a.z * b.z;
 	return (dot);

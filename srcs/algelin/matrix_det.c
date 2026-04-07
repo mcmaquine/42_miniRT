@@ -6,20 +6,20 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 15:04:43 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/29 20:24:45 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:23:57 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static double	det2(t_matrix m);
-static double	det3(t_matrix m);
-static double	det4(t_matrix m);
+static REAL	det2(t_matrix m);
+static REAL	det3(t_matrix m);
+static REAL	det4(t_matrix m);
 
 /*
 Return the determinant of square matrixes up to 4 by 4.
 */
-double	determinant(t_matrix m)
+REAL	determinant(t_matrix m)
 {
 	if (m.col != m.row)
 		return (0);
@@ -34,12 +34,12 @@ double	determinant(t_matrix m)
 	return (0);
 }
 
-static double	det2(t_matrix m)
+static REAL	det2(t_matrix m)
 {
 	return (m.a[0][0] * m.a[1][1] - m.a[0][1] * m.a[1][0]);
 }
 
-static double	det3(t_matrix m)
+static REAL	det3(t_matrix m)
 {
 	return (\
 		(m.a[0][0] * m.a[1][1] * m.a[2][2] + m.a[0][1] * m.a[1][2] * m.a[2][0]\
@@ -48,7 +48,7 @@ static double	det3(t_matrix m)
 		m.a[2][2] + m.a[0][0] * m.a[1][2] * m.a[2][1]));
 }
 
-static double	det4(t_matrix m)
+static REAL	det4(t_matrix m)
 {
 	return ((m.a[0][0] * m.a[1][1] * m.a[2][2] * m.a[3][3] +\
 		m.a[0][0] * m.a[1][2] * m.a[2][3] * m.a[3][1] +\

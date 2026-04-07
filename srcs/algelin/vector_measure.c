@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 22:43:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/29 20:16:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:24:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	vec_magnitude(t_point a)
+REAL	vec_magnitude(t_point a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
@@ -20,7 +20,7 @@ double	vec_magnitude(t_point a)
 t_point	vec_normalize(t_point a)
 {
 	t_point	p;
-	double	mag;
+	REAL	mag;
 
 	mag = vec_magnitude(a);
 	zero_point(&p);

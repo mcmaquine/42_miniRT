@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:24:58 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 14:30:35 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:24:00 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	*create_matrix(int rows, int cols)
 	m = ft_calloc(1, sizeof(t_matrix));
 	if (!m)
 		return (NULL);
-	m->a = ft_calloc(rows, sizeof(double *));
+	m->a = ft_calloc(rows, sizeof(REAL *));
 	if (!m->a)
 		return (NULL);
 	i = -1;
 	while (++i < rows)
-		m->a[i] = ft_calloc(cols, sizeof(double));
+		m->a[i] = ft_calloc(cols, sizeof(REAL));
 	m->col = cols;
 	m->row = rows;
 	return (m);

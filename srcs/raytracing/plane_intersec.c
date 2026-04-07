@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/02 14:48:46 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:24:29 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static	double	full_intersection(t_window *win, t_plane *plane, t_ray ray);
+static	REAL	full_intersection(t_window *win, t_plane *plane, t_ray ray);
 
 /*
 This function return a array of planes. It will be modified when the struct
@@ -46,11 +46,11 @@ t_plane	**find_planes(t_window *win)
 	return (planes);
 }
 
-double	intersect_plane(t_window *win, t_ray ray)
+REAL	intersect_plane(t_window *win, t_ray ray)
 {
 	t_plane	**planes;
-	double	t;
-	double	temp;
+	REAL	t;
+	REAL	temp;
 	int		i;
 
 	//return a NULL terminated array of planes
@@ -73,9 +73,9 @@ double	intersect_plane(t_window *win, t_ray ray)
 		return (-1);
 }
 
-static	double	full_intersection(t_window *win, t_plane *plane, t_ray ray)
+static	REAL	full_intersection(t_window *win, t_plane *plane, t_ray ray)
 {
-	double	dot;
+	REAL	dot;
 
 	if (!plane || !win)
 		return (-1);
