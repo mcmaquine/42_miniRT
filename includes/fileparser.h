@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 20:04:07 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 15:53:21 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int			light_parser(char **params, t_scene *scene_obj);
 //utils
 void		free_scene_obj(t_scene **scene_obj);
 int			fill_color(char *param, t_color *color);
-int			fill_coordinate(char *param, t_point *point, double min,\
-	double max);
+int			fill_coordinate(char *param, t_point *point, REAL min,\
+	REAL max);
 #endif

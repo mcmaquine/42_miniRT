@@ -6,12 +6,12 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 17:46:58 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/30 17:51:22 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 15:53:30 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-double to_radians(double degree);
+REAL to_radians(REAL degree);
 #endif
