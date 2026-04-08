@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:24:46 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/04/07 13:45:45 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,34 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	up = vec_normalize(vec_cross(forward, right));
 	return (direction(vec_add(forward, vec_add(vec_scale(right, screen_x),\
 		vec_scale(up, screen_y))), win->scene_obj.cam->point));
+}
+
+/*
+Return the least value in which a ray intersect an object.
+*/
+REAL	all_intersections(t_window *win, int px, int py)
+{
+	REAL	temp;
+	REAL	t;
+	t_ray	ray;
+	int		i;
+	REAL	(*intersections[4])(t_window *, t_ray);
+
+	intersections[0] = intersect_plane;
+	intersections[1] = intersect_cylinder;
+	intersections[2] = intersect_sphere;
+	intersections[3] = NULL;
+	ray = generate_ray(win, px, py);
+	t = DBL_MAX;
+	i = 0;
+	while (intersections[i])
+	{
+		temp = (intersections[i])(win, ray);
+		if (temp > 0 && temp < t)
+			t = temp;
+		i++;
+	}
+	if (t == DBL_MAX)
+		return (-1);
+	return (t);
 }
