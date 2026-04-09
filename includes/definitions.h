@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 19:51:31 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:35:30 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef enum e_obj_type
 	AMBIENT_LIGHT,
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	COUNT
 }	t_obj_type;
 
 enum	e_identifier
@@ -47,4 +48,5 @@ enum	e_identifier
 	pl,
 	cy
 };
+
 #endif
