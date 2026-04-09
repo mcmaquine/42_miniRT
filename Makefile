@@ -53,7 +53,7 @@ $(OBJS_DIR)%.o: %.c
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all
 
-$(LIB): $(DIR_LIBX)
+$(LIBX): $(DIR_LIBX)
 	$(MAKE) -C $< all
 
 val:
