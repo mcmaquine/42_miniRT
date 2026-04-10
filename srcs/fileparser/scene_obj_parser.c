@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 20:00:07 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/09 16:57:23 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 		free(sphere);
 		return (1);
 	}
-	ft_lstadd_back(&(scene_obj->objs), ft_lstnew(sphere));
+	ft_lstadd_back(&(scene_obj->objs)[SPHERE], ft_lstnew(sphere));
 	return (0);
 }
 
@@ -71,7 +71,7 @@ int	plane_parser(char **params, t_scene *scene_obj)
 		free(plane);
 		return (1);
 	}
-	ft_lstadd_back(&(scene_obj->objs), ft_lstnew(plane));
+	ft_lstadd_back(&(scene_obj->objs)[PLANE], ft_lstnew(plane));
 	return (0);
 }
 
@@ -89,7 +89,7 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	error = helper_parse_cylinder(params, cylinder);
 	if (error)
 		return (error);
-	ft_lstadd_back(&(scene_obj->objs), ft_lstnew(cylinder));
+	ft_lstadd_back(&(scene_obj->objs)[CYLINDER], ft_lstnew(cylinder));
 	return (0);
 }
 
