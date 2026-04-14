@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 17:23:19 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:13:13 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,19 @@ typedef struct s_window
 
 typedef struct s_scene_obj
 {
-	t_obj_type	type;
+	t_obj_type	base;
 }	t_scene_obj;
 
 typedef struct s_amb_light
 {
-	t_obj_type	type;
+	t_scene_obj	type;
 	double		light_rate;
 	t_color		color;
 }	t_amb_light;
 
 typedef struct s_cam
 {
-	t_obj_type	type;
+	t_scene_obj	type;
 	t_point		point;
 	t_point		orient;
 	double		fov;
@@ -89,7 +89,7 @@ typedef struct s_cam
 
 typedef struct s_light
 {
-	t_obj_type	type;
+	t_scene_obj	type;
 	t_point		coord;
 	double		bright_rate;
 	t_color		color;
@@ -97,7 +97,7 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	t_obj_type	type;
+	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
 	double		diam;
@@ -105,7 +105,7 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_obj_type	type;
+	t_scene_obj	type;
 	t_point		a_point;
 	t_point		normal;
 	t_color		color;
@@ -113,7 +113,7 @@ typedef struct s_plane
 
 typedef struct s_cylinder
 {
-	t_obj_type	type;
+	t_scene_obj	type;
 	t_point		center;
 	t_point		v_axis;
 	double		diam;
