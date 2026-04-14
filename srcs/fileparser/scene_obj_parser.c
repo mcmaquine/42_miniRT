@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/09 16:57:23 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:49:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 4)
 		return (1);
 	sphere = ft_calloc(1, sizeof(t_sphere));
-	sphere->type = SPHERE;
+	sphere->type.base = SPHERE;
 	sphere->diam = ft_atod(params[2]);
 	if (sphere->diam <= 0.0)
 	{
@@ -55,7 +55,7 @@ int	plane_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 4)
 		return (1);
 	plane = ft_calloc(1, sizeof(t_plane));
-	plane->type = PLANE;
+	plane->type.base = PLANE;
 	if (fill_coordinate(params[1], &(plane->a_point), 0, 0))
 	{
 		free(plane);
@@ -86,6 +86,7 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 6)
 		return (1);
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
+	cylinder->type.base = CYLINDER;
 	error = helper_parse_cylinder(params, cylinder);
 	if (error)
 		return (error);

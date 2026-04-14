@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 15:57:27 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/14 11:13:40 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	amb_light_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 3 || scene_obj->amb != NULL)
 		return (1);
 	scene_obj->amb = ft_calloc(1, sizeof(t_amb_light));
-	scene_obj->amb->type = AMBIENT_LIGHT;
+	scene_obj->amb->type.base = AMBIENT_LIGHT;
 	scene_obj->amb->light_rate = ft_atod(params[1]);
 	if (scene_obj->amb->light_rate < 0.0 || scene_obj->amb->light_rate > 1.0)
 		return (1);
@@ -33,7 +33,7 @@ int	cam_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 4 || scene_obj->cam != NULL)
 		return (1);
 	cam = ft_calloc(1, sizeof(t_cam));
-	cam->type = CAMERA;
+	cam->type.base = CAMERA;
 	cam->fov = ft_atod(params[3]);
 	if (cam->fov < 0.0 || cam->fov > 180)
 	{
@@ -61,7 +61,7 @@ int	light_parser(char **params, t_scene *scene_obj)
 	if (scene_obj->light != NULL || ft_sizeof_split(params) != 4)
 		return (1);
 	light = ft_calloc(1, sizeof(t_light));
-	light->type = LIGHT;
+	light->type.base = LIGHT;
 	light->bright_rate = ft_atod(params[2]);
 	if (light->bright_rate < 0.0 || light->bright_rate > 1.0)
 	{
