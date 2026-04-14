@@ -54,3 +54,8 @@ dkms.conf
 # debug information files
 *.dwo
 .vscode
+
+# extra
+miniRT
+tags
+*.swp
