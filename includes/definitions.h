@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 13:17:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/28 16:11:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@
 
 typedef enum e_obj_type
 {
-	LIGHT,
-	CAMERA,
-	AMBIENT_LIGHT,
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	COUNT
 }	t_obj_type;
+
+typedef enum e_scene
+{
+	LIGHT,
+	CAMERA,
+	AMBIENT_LIGHT
+}	t_scene;
 
 enum	e_identifier
 {
