@@ -17,12 +17,16 @@ Free all memory allocated for t_scene_obj
 */
 void	free_scene_obj(t_scene **scene_obj)
 {
+	int	i;
+
 	if (!(*scene_obj))
 		return ;
 	free((*scene_obj)->amb);
 	free((*scene_obj)->cam);
 	free((*scene_obj)->light);
-	ft_lstclear(&((*scene_obj)->objs), free);
+	i = -1;
+	while (++i < COUNT)
+		ft_lstclear(&((*scene_obj)->objs)[i], free);
 	free(*scene_obj);
 	*scene_obj = NULL;
 }
