@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:45:48 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/29 14:26:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:16:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	REAL	full_intersection(t_sphere *sph, t_ray ray);
 This function return a array of spheres. It will be modified when the struct
 t_scene change.
 */
+/*
 t_sphere **find_spheres(t_window *win)
 {
 	int			count;
@@ -45,27 +46,27 @@ t_sphere **find_spheres(t_window *win)
 	}
 	return (sph);
 }
-
+*/
 REAL	intersect_sphere(t_window *win, t_ray ray)
 {
-	t_sphere	**sph;
-	REAL		t;
-	REAL		temp;
-	int			i;
+	t_list	*sph;
+	REAL	t;
+	REAL	temp;
+	int		i;
 
-	sph = find_spheres(win);
+	sph = win->scene_obj.objs[SPHERE];
 	if (!sph)
 		return (-1.0);
 	i = -1;
 	temp = 0.0;
 	t = DBL_MAX;
-	while (sph[++i] != NULL)
+	while (sph != NULL)
 	{
-		temp = full_intersection(sph[i], ray);
+		temp = full_intersection((t_sphere *)sph->content, ray);
 		if (temp >= 0 && temp < t)
 			t = temp;
+		sph = sph->next;
 	}
-	free(sph);
 	if (t > 0)
 		return (t);
 	return (-1);

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 16:03:29 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:13:55 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	REAL	full_intersection(t_plane *plane, t_ray ray);
 This function return a array of planes. It will be modified when the struct
 t_scene change.
 */
+/*
 t_plane	**find_planes(t_window *win)
 {
 	int			count;
@@ -45,27 +46,28 @@ t_plane	**find_planes(t_window *win)
 	}
 	return (planes);
 }
+*/
 
 REAL	intersect_plane(t_window *win, t_ray ray)
 {
-	t_plane	**planes;
+	t_list	*planes;
 	REAL	t;
 	REAL	temp;
 	int		i;
 
-	planes = find_planes(win);
+	planes = win->scene_obj.objs[PLANE];
 	if (!planes)
 		return (-1.0);
 	i = -1;
 	temp = 0.0;
 	t = DBL_MAX;
-	while (planes[++i] != NULL)
+	while (planes != NULL)
 	{
-		temp = full_intersection(planes[i], ray);
+		temp = full_intersection((t_plane *)planes->content, ray);
 		if (temp >= 0 && temp < t)
 			t = temp;
+		planes = planes->next;
 	}
-	free(planes);
 	if (t > 0)
 		return (t);
 	return (-1);

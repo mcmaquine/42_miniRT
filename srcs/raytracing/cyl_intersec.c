@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/12 13:28:54 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:12:02 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static	REAL	full_intersection(t_cylinder *sph, t_ray ray);
 static	REAL	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t);
 
+/*
 t_cylinder	**find_cylinders(t_window *win)
 {
 	int			count;
@@ -42,27 +43,28 @@ t_cylinder	**find_cylinders(t_window *win)
 	}
 	return (cyl);
 }
+*/
 
 REAL	intersect_cylinder(t_window *win, t_ray ray)
 {
-	t_cylinder	**cyl;
-	REAL		t;
-	REAL		temp;
-	int			i;
+	t_list	*cyl;
+	REAL	t;
+	REAL	temp;
+	int		i;
 
-	cyl = find_cylinders(win);
+	cyl = win->scene_obj.objs[CYLINDER];
 	if (!cyl)
 		return (-1.0);
 	i = -1;
 	temp = 0.0;
 	t = DBL_MAX;
-	while (cyl[++i] != NULL)
+	while (cyl != NULL)
 	{
-		temp = full_intersection(cyl[i], ray);
+		temp = full_intersection((t_cylinder *)cyl->content, ray);
 		if (temp >= 0 && temp < t)
 			t = temp;
+		cyl = cyl->next;
 	}
-	free(cyl);
 	if (t > 0)
 		return (t);
 	return (-1);
