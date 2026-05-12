@@ -54,7 +54,7 @@ typedef struct s_scene_obj
 
 typedef struct s_amb_light
 {
-	t_scene_type	type;
+	t_scene_obj		type;
 	t_color			color;
 	REAL			light_rate;
 }	t_amb_light;
