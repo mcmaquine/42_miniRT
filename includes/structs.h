@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/14 11:13:13 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:13:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef struct s_point
 
 typedef struct s_matrix
 {
+	REAL	**a;
 	int		row;
 	int		col;
-	REAL	**a;
 }	t_matrix;
 
 typedef struct s_scene_obj
@@ -54,9 +54,9 @@ typedef struct s_scene_obj
 
 typedef struct s_amb_light
 {
-	t_obj_type	type;
-	REAL		light_rate;
-	t_color		color;
+	t_scene_type	type;
+	t_color			color;
+	REAL			light_rate;
 }	t_amb_light;
 
 typedef struct s_cam
@@ -71,8 +71,8 @@ typedef struct s_light
 {
 	t_scene_obj	type;
 	t_point		coord;
-	REAL		bright_rate;
 	t_color		color;
+	REAL		bright_rate;
 }	t_light;
 
 typedef struct s_sphere
@@ -81,6 +81,7 @@ typedef struct s_sphere
 	t_point		center;
 	t_color		color;
 	REAL		diam;
+	REAL		r_sq;
 }	t_sphere;
 
 typedef struct s_plane
@@ -94,11 +95,14 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_scene_obj	type;
+	t_plane		top;
+	t_plane		base;
 	t_point		center;
 	t_point		v_axis;
+	t_color		color;
 	REAL		diam;
 	REAL		height;
-	t_color		color;
+	REAL		r_sq;
 }	t_cylinder;
 
 typedef struct s_scene
