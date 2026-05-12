@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/04/09 11:20:48 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/05/12 15:30:50 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,13 @@ LIBS = -Llibft -lft -lmlx -lm
 
 MAIN_SRC = main.c
 
-ALGELIN_SRC =	\
-	algelin/vector_measure.c\
-	algelin/vector_utils.c\
+ALGELIN_SRC = \
+	algelin/cofator.c \
+	algelin/matrix_det.c \
+	algelin/matrix_ops.c \
+	algelin/matrix_utils.c \
+	algelin/vector_measure.c \
+	algelin/vector_utils.c \
 	algelin/vectorvector.c
 
 PARSER_SRCS = \
@@ -28,7 +32,18 @@ PARSER_SRCS = \
 	fileparser/scene_obj_util.c \
 	fileparser/unique_obj_parser.c
 
-SRCS := $(MAIN_SRC) $(ALGELIN_SRC) $(PARSER_SRCS)
+RAYTRACING_SRCS = \
+	raytracing/cyl_intersec.c \
+	raytracing/plane_intersec.c \
+	raytracing/sphere_intersec.c \
+	raytracing/tracer.c \
+	raytracing/tracer_utils.c \
+
+UTILS_SRCS = \
+	utils/math_utils.c
+
+SRCS := $(MAIN_SRC) $(ALGELIN_SRC) $(PARSER_SRCS) $(RAYTRACING_SRCS) \
+	$(UTILS_SRCS)
 
 SRCS := $(addprefix srcs/, $(SRCS))
 
