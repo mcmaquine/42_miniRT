@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/28 18:13:03 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/05/12 14:50:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_cylinder
 	t_color		color;
 	REAL		diam;
 	REAL		height;
+	REAL		height_2;
 	REAL		r_sq;
 }	t_cylinder;
 
