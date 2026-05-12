@@ -6,13 +6,14 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/29 15:23:14 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:28:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static	REAL	full_intersection(t_cylinder *sph, t_ray ray);
+static	REAL	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t);
 
 t_cylinder	**find_cylinders(t_window *win)
 {
@@ -85,6 +86,21 @@ static REAL	full_intersection(t_cylinder *cylinder, t_ray ray)
 	co_sq = co_sq * co_sq;
 	t = roots(1.0 - dv_axis*dv_axis, 2*(dco - dv_axis*cov_axis),\
 	co_sq - cov_axis*cov_axis - cylinder->diam * cylinder->diam * 0.25);
+	t = check_height_intersec(cylinder, ray, t);
 	return (t);
 }
 
+static	REAL	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t)
+{
+	t_point	point;
+	REAL	h;
+
+	if (t < 0)
+		return (t);
+	point = vec_add(r.origin, vec_scale(r.direction, t));
+	h = vec_dot(vec_sub(point, cyl->center), cyl->v_axis);
+	if (h > cyl->height / 2 || h < -cyl->height / 2)
+		return (-1);
+	else
+		return (t);
+}
