@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/10 16:10:52 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:24:17 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	fill_color(char *param, t_color *color)
 /*
 Fill point struct and validate if every coordinate is in range [min,max]
 */
-int	fill_coordinate(char *param, t_point *point, double min, double max)
+int	fill_coordinate(char *param, t_point *point, REAL min, REAL max)
 {
 	char	**points;
 
