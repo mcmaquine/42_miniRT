@@ -50,7 +50,7 @@ static int	parser_line(char* line, t_scene *scene_obj)
 	char	**params;
 	int		i;
 
-	params = ft_split(line, ' ');
+	params = ft_strsplit_any(line, "\t\n\v\f\r ");
 	if (!params)
 		return (1);
 	if (ft_sizeof_split(params) == 1)
