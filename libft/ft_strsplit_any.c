@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_splitv2.c                                       :+:      :+:    :+:   */
+/*   ft_strsplit_any.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 16:31:32 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/05/14 20:03:56 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/05/15 11:24:00 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static size_t	count_words(const char *s, char *delim);
 static char		**split_delim(const char *s, char *delim, size_t num_words);
 
-char	**ft_splitv2(const char *src, char *delim)
+char	**ft_strsplit_any(const char *src, char *delim)
 {
 	char	**splitted;
 	size_t	num_words;
