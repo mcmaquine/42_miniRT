@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/28 18:21:41 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/05/15 16:47:14 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,33 @@ enum	e_identifier
 	pl,
 	cy
 };
+
+typedef enum e_objs_type
+{
+	OBJ_AMBIENT,
+	OBJ_CAMERA,
+	OBJ_LIGHT,
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER,
+	TOTAL
+}	t_objs_type;
+
+typedef enum e_error_option
+{
+	ERR_NO_INFORMATION,
+	ERR_NO_OBJECT,
+	ERR_NO_PARAM_RATIO,
+	ERR_RATIO_OUT_RANGE,
+	ERR_NO_PARAM_COLOR,
+	ERR_COLOR_OUT_RANGE,
+	ERR_NO_PARAM_COORDS,
+	ERR_COORDS_INVALID,
+	ERR_NO_PARAM_VEC,
+	ERR_VEC_OUT_RANGE,
+	ERR_NO_PARAM_DIAMETER,
+	ERR_NO_PARAM_HEIGHT,
+	TOTAL_OPTIONS
+}	t_error_option;
 
 #endif

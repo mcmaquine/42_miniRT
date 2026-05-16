@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 15:53:21 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/05/16 13:27:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int			cam_parser(char **params, t_scene *scene_obj);
 int			light_parser(char **params, t_scene *scene_obj);
 //utils
 void		free_scene_obj(t_scene **scene_obj);
-int			fill_color(char *param, t_color *color);
-int			fill_coordinate(char *param, t_point *point, REAL min,\
-	REAL max);
+int			fill_color(char *param, t_color *color, t_objs_type obj);
+int			fill_coordinate(char *param, t_point *point);
+void	print_error(t_objs_type obj, t_error_option option, int line);
+
 #endif
