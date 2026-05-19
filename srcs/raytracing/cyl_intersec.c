@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/13 19:50:06 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/18 20:41:19 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,20 @@ static	REAL	full_intersection(t_cylinder *cyl, t_ray ray)
 	REAL	t_tube;
 	REAL	t_small;
 
-	t_top = check_face_intersec(&(cyl->top), cyl->diam*.5, ray);
-	t_base = check_face_intersec(&(cyl->base), cyl->r_sq, ray);
+	t_top = check_face_intersec(&(cyl->top), cyl->radius, ray);
+	t_base = check_face_intersec(&(cyl->base), cyl->radius, ray);
 	t_tube = check_tube_intersec(cyl, ray);
 	t_small = DBL_MAX;
 	if (t_base < t_small && t_base > 0)
 		t_small = t_base;
-	if (t_small == -1 || (t_tube < t_small && t_tube > 0))
+	if (t_top < t_small && t_top > 0)
+		t_small = t_top;
+	if (t_tube < t_small && t_tube > 0)
 		t_small = t_tube;
-	return (t_small);
+	if (t_small == DBL_MAX)
+		return (-1);
+	else
+		return (t_small);
 }
 
 static REAL	check_tube_intersec(t_cylinder *cyl, t_ray ray)
@@ -97,7 +102,7 @@ static	REAL	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t)
 		return (t);
 }
 
-static REAL	check_face_intersec(t_plane *p, REAL rad, t_ray r)
+static REAL	check_face_intersec(t_plane *p, REAL radius, t_ray r)
 {
 	REAL	dot;
 	REAL	t;
@@ -115,7 +120,7 @@ static REAL	check_face_intersec(t_plane *p, REAL rad, t_ray r)
 	{
 		pt = vec_add(r.origin , vec_scale(r.direction, t));
 		dist = vec_magnitude(vec_sub(pt, p->a_point));
-		if (dist <= rad)
+		if (dist <= radius)
 			return (t);
 		else
 			return (-1);

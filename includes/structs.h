@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/12 14:50:08 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/05/18 20:58:04 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_cylinder
 	REAL		diam;
 	REAL		height;
 	REAL		height_2;
+	REAL		radius;
 	REAL		r_sq;
 }	t_cylinder;
 
@@ -119,6 +120,16 @@ typedef struct s_ray
 	t_point	origin;
 	t_point	direction;
 }	t_ray;
+
+typedef struct s_hit
+{
+	REAL		t;
+	t_point		point;
+	t_point		normal;
+	t_color		color;
+	t_scene_obj	*obj;
+}	t_hit;
+
 
 typedef struct s_window
 {
