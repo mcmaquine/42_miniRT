@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 13:45:45 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/24 21:50:52 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,32 @@ t_ray	generate_ray(t_window *win, int px, int py)
 }
 
 /*
-Return the least value in which a ray intersect an object.
+Return the least t value and object associated to it in which a ray intersect an 
+object.
 */
-REAL	all_intersections(t_window *win, int px, int py)
+t_hit	all_intersections(t_window *win, int px, int py)
 {
-	REAL	temp;
-	REAL	t;
+	t_hit	temp;
+	t_hit	hit;
 	t_ray	ray;
 	int		i;
-	REAL	(*intersections[4])(t_window *, t_ray);
+	t_hit	(*intersections[4])(t_window *, t_ray);
 
 	intersections[0] = intersect_plane;
 	intersections[1] = intersect_cylinder;
 	intersections[2] = intersect_sphere;
 	intersections[3] = NULL;
 	ray = generate_ray(win, px, py);
-	t = DBL_MAX;
+	init_t_hit(&hit, DBL_MAX);
 	i = 0;
 	while (intersections[i])
 	{
 		temp = (intersections[i])(win, ray);
-		if (temp > 0 && temp < t)
-			t = temp;
+		if (temp.t > 0 && temp.t < hit.t)
+			hit = temp;
 		i++;
 	}
-	if (t == DBL_MAX)
-		return (-1);
-	return (t);
+	if (hit.t == DBL_MAX)
+		init_t_hit(&hit, -1);
+	return (hit);
 }

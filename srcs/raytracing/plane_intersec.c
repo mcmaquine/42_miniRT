@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/18 21:34:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/24 22:15:53 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_hit	intersect_plane(t_window *win, t_ray ray)
 	t_hit	hit;
 	t_hit	temp;
 
-	init_t_hit(&hit);
-	init_t_hit(&temp);
+	init_t_hit(&hit, -1);
+	init_t_hit(&temp, -1);
 	planes = win->scene_obj.objs[PLANE];
 	if (!planes)
 		return (hit);
@@ -43,7 +43,7 @@ static	t_hit	full_intersection(t_plane *plane, t_ray ray)
 	REAL	dot;
 	t_hit	hit;
 
-	init_t_hit(&hit);
+	init_t_hit(&hit, -1);
 	if (!plane)
 		return (hit);
 	dot = vec_dot(plane->normal, ray.direction);

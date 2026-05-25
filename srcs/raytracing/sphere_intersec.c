@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:45:48 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/24 20:47:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/24 22:16:12 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_hit	intersect_sphere(t_window *win, t_ray ray)
 	t_hit	temp;
 	t_hit	hit;
 
-	init_t_hit(&hit);
+	init_t_hit(&hit, -1);
 	sph = win->scene_obj.objs[SPHERE];
 	if (!sph)
 		return (hit);
@@ -45,7 +45,7 @@ static	t_hit	full_intersection(t_sphere *sphere, t_ray ray)
 	REAL	b;
 	t_hit	hit;
 
-	init_t_hit(&hit);
+	init_t_hit(&hit, -1);
 	if (!sphere)
 		return (hit);
 	v_sub = vec_sub(ray.origin, sphere->center);
