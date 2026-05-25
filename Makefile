@@ -6,14 +6,20 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/05/12 15:30:50 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/05/23 14:50:51 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes -I./libft -I./minilibx-linux
-LIBS = -Llibft -lft -lmlx -lm
+
+DIR_LIBFT = ./libft
+LIBFT = $(DIR_LIBFT)/libft.a
+
+DIR_LIBX = minilibx-linux/
+LIBX = $(DIR_LIBX)libmlx_Linux.a
+LIBS = -L$(MLX_DIR) -lmlx_Linux -lXext -Llibft -lX11 -lft -lmlx -lm -lz
 
 MAIN_SRC = main.c
 
@@ -51,16 +57,10 @@ OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIRS = $(sort $(dir $(OBJS)))
 
-DIR_LIBFT = ./libft
-LIBFT = $(DIR_LIBFT)/libft.a
-
-DIR_LIBX = ./minilibx-linux
-LIBX = $(DIR_LIBX)/libmlx.a
-
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(LIBX)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $(LIBS) $^ -o $@ $(LIBS)
 
 $(OBJS): | $(OBJS_DIR)
 
