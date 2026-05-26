@@ -63,13 +63,14 @@ static void	cylinder_calc(t_scene_obj *obj)
 	t_cylinder	*cy;
 
 	cy = (t_cylinder *)obj;
+	cy->radius = cy->diam * 0.5;
 	cy->r_sq = cy->diam * cy->diam * 0.25;
 	cy->v_axis = vec_normalize(cy->v_axis);
 	cy->height_2 = cy->height / 2;
-	cy->top->normal = cy->v_axis;
-	cy->base->normal = cy->v_axis;
-	cy->top->a_point = cy->center + cy->height_2 * cy->v_axis;
-	cy->base->a_point = cy->center - cy->height_2 * cy->v_axis;
-	cy->top->color = cy->color;
-	cy->base->color = cy->color;
+	cy->top.normal = cy->v_axis;
+	cy->base.normal = cy->v_axis;
+	cy->top.a_point = vec_add(cy->center, vec_scale(cy->v_axis, cy->height_2));
+	cy->base.a_point = vec_sub(cy->center, vec_scale(cy->v_axis, cy->height_2));
+	cy->top.color = cy->color;
+	cy->base.color = cy->color;
 }
