@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 14:15:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/29 15:22:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/24 22:16:46 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,13 @@ REAL roots(REAL a, REAL b, REAL c)
 		return (t2);
 	else
 		return (-1);
+}
+
+void	init_t_hit(t_hit *hit, REAL t)
+{
+	hit->color = (t_color){0, 0, 0, 0};
+	hit->normal = (t_point){0.0, 0.0, 0.0};
+	hit->point = hit->normal;
+	hit->t = t;
+	hit->obj = NULL;
 }

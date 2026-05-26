@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/05/23 14:50:51 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/05/24 21:58:46 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ RAYTRACING_SRCS = \
 	raytracing/plane_intersec.c \
 	raytracing/sphere_intersec.c \
 	raytracing/tracer.c \
-	raytracing/tracer_utils.c \
+	raytracing/tracer_utils.c
 
 UTILS_SRCS = \
 	utils/math_utils.c
