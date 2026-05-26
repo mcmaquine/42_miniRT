@@ -15,5 +15,6 @@
 
 typedef void	(*t_objs)(t_scene_obj *obj);
 
-REAL to_radians(REAL degree);
+REAL	to_radians(REAL degree);
+void	calc_components(t_scene *scene);
 #endif

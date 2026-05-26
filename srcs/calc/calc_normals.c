@@ -27,7 +27,7 @@ void	calc_components(t_scene *scene)
 	t_list	*node;
 	int		i;
 
-	scene->cam.orient = vec_normalize(scene->cam.orient);
+	scene->cam->orient = vec_normalize(scene->cam->orient);
 	i = 0;
 	while (i < COUNT)
 	{

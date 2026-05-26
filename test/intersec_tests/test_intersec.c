@@ -57,6 +57,7 @@ static void run_tests(t_test *tests, int count)
             i++;
             continue ;
         }
+        calc_components(scene);
         win = setup_window(scene);
         hit = all_intersections(&win, win.width / 2, win.height / 2);
         got_hit = hit.t > 0;
@@ -64,7 +65,7 @@ static void run_tests(t_test *tests, int count)
         if (got_hit == tests[i].expect_hit
             && (!tests[i].expect_hit || got_type == tests[i].expect_type))
         {
-            printf("[PASS] %s", tests[i].name);
+            printf("\e[32m[PASS]\e[0m %s", tests[i].name);
             if (got_hit)
                 printf(" | t=%.4f type=%s", hit.t, type_to_str(got_type));
             printf("\n");
@@ -72,7 +73,7 @@ static void run_tests(t_test *tests, int count)
         }
         else
         {
-            printf("[FAIL] %s | expected hit=%d type=%s | got hit=%d type=%s t=%.4f\n",
+            printf("\e[31m[FAIL]\e[0m %s | expected hit=%d type=%s | got hit=%d type=%s t=%.4f\n",
                 tests[i].name,
                 tests[i].expect_hit,
                 type_to_str(tests[i].expect_type),
@@ -89,9 +90,6 @@ static void run_tests(t_test *tests, int count)
 
 int main(void)
 {
-	int fd = open("test/intersec_tests/scenes/sphere_hit.rt", O_RDONLY);
-	printf("fd = %d\n", fd);
-	close(fd);
     t_test  tests[] = {
         {"sphere hit center",       "test/intersec_tests/scenes/sphere_hit.rt",          1, SPHERE},
         {"sphere miss",             "test/intersec_tests/scenes/sphere_miss.rt",         0, -1},
