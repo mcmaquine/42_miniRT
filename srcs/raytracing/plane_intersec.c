@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/24 22:15:53 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/27 19:02:04 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	t_hit	full_intersection(t_plane *plane, t_ray ray)
 	if (!plane)
 		return (hit);
 	dot = vec_dot(plane->normal, ray.direction);
-	if (!ft_dcmp(dot, 0.0, 1e-5))
+	if (!ft_dcmp(dot, 0.0, 1e-2))
 		return (hit);
 	hit.t = -vec_dot(plane->normal, vec_sub(ray.origin, plane->a_point)) / dot;
 	if (hit.t > 0)
