@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:24:17 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/05 14:57:58 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ Fill struct point and checks its params.
 int	fill_color(char *param, t_color *color)
 {
 	char	**colors;
+	t_color	temp;
 
 	colors = ft_split(param, ',');
 	if (ft_sizeof_split(colors) != 3)
@@ -44,15 +45,18 @@ int	fill_color(char *param, t_color *color)
 		ft_free_split(colors);
 		return (1);
 	}
-	color->red = ft_atoi(colors[0]);
-	color->green = ft_atoi(colors[1]);
-	color->blue = ft_atoi(colors[2]);
-	color->tpcy = 0;
+	temp.red = ft_atoi(colors[0]);
+	temp.green = ft_atoi(colors[1]);
+	temp.blue = ft_atoi(colors[2]);
+	color->tpcy = 0.0;
 	ft_free_split(colors);
-	if ((color->red < 0 || color->red > 255) 
-		|| (color->green < 0 || color->green > 255)
-		|| (color->blue < 0 || color->blue > 255))
+	if ((temp.red < 0 || temp.red > 255) 
+		|| (temp.green < 0 || temp.green > 255)
+		|| (temp.blue < 0 || temp.blue > 255))
 		return (1);
+	color->red = temp.red / 255.0;
+	color->green = temp.green / 255.0;
+	color->blue = temp.blue / 255.0;
 	return (0);
 }
 
