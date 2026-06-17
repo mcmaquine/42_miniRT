@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/24 21:46:52 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:16:40 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray)
 	hit.t = roots(1.0 - dv_axis*dv_axis, 2*(dco - dv_axis*cov_axis),\
 	co_sq - cov_axis*cov_axis - cyl->r_sq);
 	if (hit.t > 0)
+	{
 		hit.obj = (t_scene_obj *)cyl;
+		hit.color = cyl->color;
+	}
 	hit = check_height_intersec(cyl, ray, hit.t);
 	return (hit);
 }
@@ -105,6 +108,7 @@ static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t)
 	{
 		hit.t = t;
 		hit.obj = (t_scene_obj *)cyl;
+		hit.color = cyl->color;
 	}
 	return (hit);
 }
@@ -128,7 +132,10 @@ static t_hit	check_face_intersec(t_plane *p, REAL radius, t_ray r)
 		pt = vec_add(r.origin , vec_scale(r.direction, hit.t));
 		dist = vec_magnitude(vec_sub(pt, p->a_point));
 		if (dist <= radius)
+		{
 			hit.obj = (t_scene_obj *)p;
+			hit.color = p->color;
+		}
 		else
 			hit.t = -1;
 	}
