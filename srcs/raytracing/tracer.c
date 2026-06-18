@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/17 20:03:04 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/17 21:02:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ t_hit	all_intersections(t_window *win, int px, int py)
 	if (hit.t == DBL_MAX)
 		init_t_hit(&hit, -1);
 	if (hit.t > 0)
+		calculate_normal(&hit, ray);
 	return (hit);
 }
