@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:09:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/17 20:52:29 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/19 20:24:13 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ t_color	phong_amb_color(t_window *w, t_hit *hit)
 	t_color	color;
 	REAL	light_rate;
 
+	color.red = 0.0;
+	color.green = 0.0;
+	color.blue = 0.0;
+	color.tpcy = 0.0;
 	if (!w || !hit)
 		return (color);
 	light_rate = w->scene_obj.amb->light_rate;
@@ -37,7 +41,7 @@ t_color	phong_diffuse_color(t_window *win, t_hit *hit)
 
 	light = *(win->scene_obj.light);
 	light_dir = vec_normalize(vec_sub(light.coord, hit->point));
-	diff_factor = max(0, vec_dot(hit->normal, light_dir));
+	diff_factor = fmax(0, vec_dot(hit->normal, light_dir));
 	rate = light.bright_rate * diff_factor;
 	diffuse.red = rate * light.color.red * hit->color.red;
 	diffuse.green = rate * light.color.green * hit->color.green;

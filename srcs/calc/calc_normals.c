@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_normals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:21:31 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/05/13 19:33:06 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/19 19:33:45 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,6 @@ static void	cylinder_calc(t_scene_obj *obj)
 	cy->base.a_point = vec_sub(cy->center, vec_scale(cy->v_axis, cy->height_2));
 	cy->top.color = cy->color;
 	cy->base.color = cy->color;
+	cy->top.type.base = PLANE;
+	cy->base.type.base = PLANE;
 }
