@@ -46,6 +46,7 @@ static t_window setup_window(t_scene *scene)
     t_window    win;
 
     ft_memset(&win, 0, sizeof(t_window));
+    calc_components(scene);
     win.scene_obj = *scene;
     win.width = 800;
     win.height = 600;
@@ -95,7 +96,7 @@ static void run_tests(t_test *tests, int count, char *argv0)
         win = setup_window(scene);
         hit = all_intersections(&win, win.width / 2, win.height / 2);
         got_hit = hit.t > 0;
-        got_type = hit.obj ? (int)((t_scene_obj *)hit.obj)->type : -1;
+        got_type = hit.obj ? (int)((t_scene_obj *)hit.obj)->base : -1;
         if (got_hit == tests[i].expect_hit
             && (!tests[i].expect_hit || got_type == tests[i].expect_type))
         {
@@ -133,6 +134,9 @@ int main(int argc, char **argv)
         {"cylinder miss",           "cylinder_miss.rt",       0, -1},
         {"multiple objects",        "multiple_objects.rt",    1, SPHERE},
         {"camera inside sphere",    "camera_inside_sphere.rt",1, SPHERE},
+        {"sphere tangent",          "sphere_tangent.rt",          1, SPHERE},
+        {"camera inside cylinder",  "camera_inside_cylinder.rt",  1, CYLINDER},
+        {"closest of two spheres",  "closest_of_two_spheres.rt",  1, SPHERE},
     };
     (void)argc;
     int count = sizeof(tests) / sizeof(tests[0]);

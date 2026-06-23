@@ -21,6 +21,7 @@ SRCS    = test_intersec.c \
           ../../srcs/raytracing/sphere_intersec.c \
           ../../srcs/raytracing/tracer.c \
           ../../srcs/raytracing/tracer_utils.c \
+          ../../srcs/raytracing/normals.c \
           ../../srcs/utils/math_utils.c \
           ../../srcs/calc/calc_normals.c
 

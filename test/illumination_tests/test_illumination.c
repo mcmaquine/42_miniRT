@@ -201,6 +201,12 @@ int main(int argc, char **argv)
         {"zero ambient only diffuse",
             "zero_ambient.rt",
             1, 1, 0.0, 0.0, 0.0, 0.05, 0, 0, 0, 0},
+        {"mixed color object",
+            "mixed_color_object.rt",
+            1, 1, 0.2, 0.1, 0.0, 0.05, 0, 0, 0, 0},
+        {"two objects closest is red",
+            "two_objects_closest.rt",
+            1, 1, 0.0, 0.0, 0.0, 0.05, 0, 0, 0, 0},
     };
     (void)argc;
     int count = sizeof(tests) / sizeof(tests[0]);
