@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 15:53:21 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/19 18:44:08 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			cilinder_parser(char **params, t_scene *scene_obj);
 int			amb_light_parser(char **params, t_scene *scene_obj);
 int			cam_parser(char **params, t_scene *scene_obj);
 int			light_parser(char **params, t_scene *scene_obj);
+void		calc_components(t_scene *scene);
 //utils
 void		free_scene_obj(t_scene **scene_obj);
 int			fill_color(char *param, t_color *color);

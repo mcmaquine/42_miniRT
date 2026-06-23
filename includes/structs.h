@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/27 16:53:26 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:07:41 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@
 
 typedef struct s_color
 {
-	int	tpcy;
-	int	red;
-	int	green;
-	int	blue;
+	REAL	tpcy;
+	REAL	red;
+	REAL	green;
+	REAL	blue;
 }	t_color;
 
 typedef struct s_canva
 {
 	void	*img;
-	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	char	*addr;
 }	t_canva;
 
 typedef struct s_point

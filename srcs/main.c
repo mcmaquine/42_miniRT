@@ -6,17 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/22 22:05:37 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/23 19:51:34 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-#define width 1280 // pass to header
-#define height 720 // pass to header
-
-static void	start_mlx(t_window *scene);
-void render(t_scene *scene);
 
 int	main(int argc, char *argv[])
 {

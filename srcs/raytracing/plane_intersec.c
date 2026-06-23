@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/27 19:02:04 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:11:41 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static	t_hit	full_intersection(t_plane *plane, t_ray ray)
 		return (hit);
 	hit.t = -vec_dot(plane->normal, vec_sub(ray.origin, plane->a_point)) / dot;
 	if (hit.t > 0)
+	{
 		hit.obj = (t_scene_obj *)plane;
+		hit.color = plane->color;
+	}
 	else
 		hit.t = -1;
 	return (hit);
