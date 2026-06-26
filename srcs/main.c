@@ -60,13 +60,14 @@ void render(t_window *scene)
 
 static int pixel_color(t_color color)
 {
-	int	col;
+	int	t;
+	int	r;
+	int	g;
+	int	b;
 
-	color.tpcy = 0;
-	col = (char)(color.red * 255.0f);
-	col = col << 8;
-	col += (char)(color.green * 255.0f);
-	col = col << 8;
-	col += (char)(color.blue * 255.0f);
-	return (col);
+	t = color.tpcy;
+	r = (int)(color.red * 255.0f);
+	g = (int)(color.green * 255.0f);
+	b = (int)(color.blue * 255.0f);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
