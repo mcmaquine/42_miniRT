@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:09:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/19 20:24:13 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:40:04 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_color	phong_amb_color(t_window *w, t_hit *hit)
 	color.tpcy = 0.0;
 	if (!w || !hit)
 		return (color);
-	light_rate = w->scene_obj.amb->light_rate;
-	color.red = light_rate * w->scene_obj.amb->color.red * hit->color.red;
-	color.green = light_rate * w->scene_obj.amb->color.green * hit->color.green;
-	color.blue = light_rate * w->scene_obj.amb->color.blue * hit->color.blue;
+	light_rate = w->scene_obj->amb->light_rate;
+	color.red = light_rate * w->scene_obj->amb->color.red * hit->color.red;
+	color.green = light_rate * w->scene_obj->amb->color.green * hit->color.green;
+	color.blue = light_rate * w->scene_obj->amb->color.blue * hit->color.blue;
 	color.tpcy = 0;
 	return (color);
 }
@@ -39,7 +39,7 @@ t_color	phong_diffuse_color(t_window *win, t_hit *hit)
 	REAL	diff_factor;
 	REAL	rate;
 
-	light = *(win->scene_obj.light);
+	light = *(win->scene_obj->light);
 	light_dir = vec_normalize(vec_sub(light.coord, hit->point));
 	diff_factor = fmax(0, vec_dot(hit->normal, light_dir));
 	rate = light.bright_rate * diff_factor;

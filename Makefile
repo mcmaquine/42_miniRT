@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/06/25 21:07:37 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/06/25 22:44:50 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT = $(DIR_LIBFT)/libft.a
 
 DIR_LIBX = minilibx-linux/
 LIBX = $(DIR_LIBX)libmlx_Linux.a
-LIBS = -L$(MLX_DIR) -lmlx_Linux -lXext -Llibft -lX11 -lft -lmlx -lm -lz
+LIBS = -L$(MLX_DIR) -lmlx_Linux -lXext -Llibft -lX11 -lft -Lmlx -lm -lz
 
 MAIN_SRC = main.c
 
@@ -40,18 +40,25 @@ PARSER_SRCS = \
 
 RAYTRACING_SRCS = \
 	raytracing/cyl_intersec.c \
+	raytracing/normals.c \
+	raytracing/phong.c \
 	raytracing/plane_intersec.c \
 	raytracing/sphere_intersec.c \
 	raytracing/tracer.c \
 	raytracing/tracer_utils.c
 
+CALC_SRCS = \
+	calc/calc_normals.c
+
 UTILS_SRCS = \
-	utils/math_utils.c \
-	utils/start_window.c
+	utils/math_utils.c
+
+WINDOW_SRC = \
+	window/start_window.c
 
 SRCS := $(MAIN_SRC) $(ALGELIN_SRC) $(PARSER_SRCS) $(RAYTRACING_SRCS) \
-	$(UTILS_SRCS)
-
+	$(UTILS_SRCS) $(WINDOW_SRC) $(CALC_SRCS)
+ 
 SRCS := $(addprefix srcs/, $(SRCS))
 
 OBJS_DIR = objs/
