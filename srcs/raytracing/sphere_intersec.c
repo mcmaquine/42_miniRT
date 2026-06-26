@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:45:48 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/19 18:51:02 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:13:48 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_hit	intersect_sphere(t_window *win, t_ray ray)
 	t_hit	hit;
 
 	init_t_hit(&hit, -1);
-	sph = win->scene_obj.objs[SPHERE];
+	sph = win->scene_obj->objs[SPHERE];
 	if (!sph)
 		return (hit);
 	hit.t = DBL_MAX;

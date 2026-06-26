@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/05/24 21:58:46 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/06/25 21:07:37 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ RAYTRACING_SRCS = \
 	raytracing/tracer_utils.c
 
 UTILS_SRCS = \
-	utils/math_utils.c
+	utils/math_utils.c \
+	utils/start_window.c
 
 SRCS := $(MAIN_SRC) $(ALGELIN_SRC) $(PARSER_SRCS) $(RAYTRACING_SRCS) \
 	$(UTILS_SRCS)

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/17 20:16:40 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:13:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_hit	intersect_cylinder(t_window *win, t_ray ray)
 	t_hit	temp;
 
 	init_t_hit(&hit, -1);
-	cyl = win->scene_obj.objs[CYLINDER];
+	cyl = win->scene_obj->objs[CYLINDER];
 	if (!cyl)
 		return (hit);
 	hit.t = DBL_MAX;

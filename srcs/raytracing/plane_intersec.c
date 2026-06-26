@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/17 20:11:41 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:13:31 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_hit	intersect_plane(t_window *win, t_ray ray)
 
 	init_t_hit(&hit, -1);
 	init_t_hit(&temp, -1);
-	planes = win->scene_obj.objs[PLANE];
+	planes = win->scene_obj->objs[PLANE];
 	if (!planes)
 		return (hit);
 	hit.t = DBL_MAX;

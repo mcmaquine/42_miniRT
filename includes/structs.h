@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/05 15:07:41 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:06:27 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_hit
 
 typedef struct s_window
 {
-	t_scene		scene_obj;
+	t_scene		*scene_obj;
 	t_canva		canva;
 	void		*mlx;
 	void		*win;

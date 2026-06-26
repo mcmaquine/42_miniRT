@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/19 18:51:24 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:15:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	t_point	right;
 	t_point	up;
 	
-	REAL	half_width = tan(to_radians(win->scene_obj.cam->fov)/2.0);
+	REAL	half_width = tan(to_radians(win->scene_obj->cam->fov)/2.0);
 	REAL	aspect_ratio = (REAL)win->width / (REAL)win->height;
 	REAL	ndc_x = (px + 0.5) / win->width;
 	REAL	ndc_y = (py + 0.5) / win->height;
 	REAL	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
 	REAL	screen_y = (1 - 2.0 * ndc_y) * half_width;
-	forward = vec_normalize(win->scene_obj.cam->orient);
+	forward = vec_normalize(win->scene_obj->cam->orient);
 	world_up = fill_point(0, 1, 0);
 	if (fabs(vec_dot(forward, world_up)) > .9999 )
 		world_up = fill_point(0, 0, 1);
 	right = vec_normalize(vec_cross(world_up, forward));
 	up = vec_normalize(vec_cross(forward, right));
 	return (direction(vec_add(forward, vec_add(vec_scale(right, screen_x),\
-		vec_scale(up, screen_y))), win->scene_obj.cam->point));
+		vec_scale(up, screen_y))), win->scene_obj->cam->point));
 }
 
 /*

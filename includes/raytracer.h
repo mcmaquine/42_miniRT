@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:57 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/17 21:01:46 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:01:22 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ t_color	calculate_illumination(t_window *win, t_hit hit);
 //utils
 REAL 	roots(REAL a, REAL b, REAL c);
 void	init_t_hit(t_hit *hit, REAL t);
+//window
+void	start_window(t_window *win, int width, int height);
 #endif

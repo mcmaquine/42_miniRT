@@ -6,11 +6,14 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/23 19:51:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/25 22:12:21 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void render(t_window *scene);
+static int pixel_color(t_color color);
 
 int	main(int argc, char *argv[])
 {
@@ -20,41 +23,50 @@ int	main(int argc, char *argv[])
 		return (1); // message given a usage example
 	//TODO valid file extension
 	//TODO update scene_obj -> *scene_obj in header
-	scene = read_file(argv[1]);
-	start_mlx(&scene);
+	scene.scene_obj = read_file(argv[1]);
+	//TODO call calc_normals
+	calc_components(scene.scene_obj);
+	start_window(&scene, WIDTH, HEIGHT);
 	render(&scene);
-	mlx_loop(scene->mlx);
-}
-
-// move function above to srcs/window/start_window.c
-
-static void	start_mlx(t_window *scene)
-{
-	scene->mlx = mlx_init();
-	scene->win = mlx_new_window(scene->mlx, width, height, "miniRT");
-	scene.canva->img = mlx_new_image(scene->mlx, width, height);
-	scene.canva->addr = mlx_get_data_addr(scene.canva->img, \
-&scene.canva.bits_per_pixel, &scene.canva.line_length, &scene.canva.endian);
+	mlx_loop(scene.mlx);
+	return (0);
 }
 
 void render(t_window *scene)
 {
 	int		px;
 	int		py;
-	char	*ptr;
+	int		*ptr;
+	t_hit	hit;
+	t_color	color;
 
-	ptr = scene.canva->addr;
+	ptr = (int *)scene->canva.addr;
 	py = 0;
-	while (py < height)
+	while (py < HEIGHT)
 	{
 		px = 0;
-		while (px < width)
+		while (px < WIDTH)
 		{
-			all_intersections(scene, px, py);
-			//calc color pixel;
+			hit = all_intersections(scene, px, py);
+			color = calculate_illumination(scene, hit);
+			*ptr = pixel_color(color);
 			ptr++;
 			px++;
 		}
 		py++;
 	}
+	mlx_put_image_to_window(scene->mlx, scene->win, scene->canva.img, 0, 0);
+}
+
+static int pixel_color(t_color color)
+{
+	int	col;
+
+	color.tpcy = 0;
+	col = (char)(color.red * 255.0f);
+	col = col << 8;
+	col += (char)(color.green * 255.0f);
+	col = col << 8;
+	col += (char)(color.blue * 255.0f);
+	return (col);
 }
