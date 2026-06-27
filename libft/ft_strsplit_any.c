@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 16:31:32 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/05/15 11:24:00 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/27 18:26:59 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static char	**split_delim(const char *s, char *delim, size_t num_words)
 		while (ft_strchr(delim, *start))
 			start++;
 		end = start;
-		while (!ft_strchr(delim, *end))
+		while (*end && !ft_strchr(delim, *end))
 			end++;
-		str = ft_calloc((end - start), sizeof(char));
+		str = ft_calloc((end - start + 1), sizeof(char));
 		ft_strlcpy(str, start, (end - start + 1));
 		splitted[i] = str;
 		start = end;
