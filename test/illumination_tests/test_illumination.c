@@ -55,7 +55,7 @@ static t_window setup_window(t_scene *scene)
 
     ft_memset(&win, 0, sizeof(t_window));
     calc_components(scene);
-    win.scene_obj = *scene;
+    win.scene_obj = scene;
     win.width = 800;
     win.height = 600;
     win.mlx = NULL;
