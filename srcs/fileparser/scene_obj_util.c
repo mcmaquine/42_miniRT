@@ -34,7 +34,7 @@ void	free_scene_obj(t_scene **scene_obj)
 /*
 Fill struct point and checks its params.
 */
-int	fill_color(char *param, t_color *color)
+int	fill_color(char *param, t_color *color, t_objs_type obj)
 {
 	char	**colors;
 	t_color	temp;
@@ -42,6 +42,7 @@ int	fill_color(char *param, t_color *color)
 	colors = ft_split(param, ',');
 	if (ft_sizeof_split(colors) != 3)
 	{
+		print_error(obj, ERR_NO_PARAM_COLOR, 0);
 		ft_free_split(colors);
 		return (1);
 	}
@@ -53,7 +54,10 @@ int	fill_color(char *param, t_color *color)
 	if ((temp.red < 0 || temp.red > 255) 
 		|| (temp.green < 0 || temp.green > 255)
 		|| (temp.blue < 0 || temp.blue > 255))
+	{
+		print_error(obj, ERR_COLOR_OUT_RANGE, 0);
 		return (1);
+	}
 	color->red = temp.red / 255.0;
 	color->green = temp.green / 255.0;
 	color->blue = temp.blue / 255.0;
@@ -70,6 +74,33 @@ int	fill_coordinate(char *param, t_point *point, REAL min, REAL max)
 	points = ft_split(param, ',');
 	if (ft_sizeof_split(points) != 3)
 	{
+		print_error(obj, ERR_NO_PARAM_COORDS, 0);
+		ft_free_split(points);
+		return (1);
+	}
+	point->x = ft_atod(points[0]);
+	point->y = ft_atod(points[1]);
+	point->z = ft_atod(points[2]);
+	if ((point->x < min || point->x > max)
+		|| (point->y < min || point->y > max)
+		|| (point->z < min || point->z > max))
+	{
+		print_error(obj, ERR_COORDS_INVALID, 0);
+		ft_free_split(points);
+		return (1);
+	}
+	ft_free_split(points);
+	return (0);
+}
+
+int	fill_normalized(char *param, t_point *point)
+{
+	char	**points;
+
+	points = ft_split(param, ',');
+	if (ft_sizeof_split(points) != 3)
+	{
+		print_error(obj, ERR_NO_PARAM_VEC, 0);
 		ft_free_split(points);
 		return (1);
 	}
@@ -77,11 +108,12 @@ int	fill_coordinate(char *param, t_point *point, REAL min, REAL max)
 	point->y = ft_atod(points[1]);
 	point->z = ft_atod(points[2]);
 	ft_free_split(points);
-	if (min == 0.0 && max == 0.0)
-		return (0);
-	else if ((point->x < min || point->x > max)
-		|| (point->y < min || point->y > max)
-		|| (point->z < min || point->z > max))
+	if ((point->x < -1.0 || point->x > 1.0)
+		|| (point->y < -1.0 || point->y > 1.0)
+		|| (point->z < -1.0 || point->z > 1.0))
+	{
+		print_error(obj, ERR_VEC_OUT_RANGE, 0);
 		return (1);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:46:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/09 21:34:59 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/15 11:23:31 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strtrim(const char *s1, const char *set);
 char	**ft_split(const char *s, char c);
+char	**ft_strsplit_any(const char *s, char *delim);
 int		ft_free_split(char **split);
 size_t	ft_sizeof_split(char **params);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));

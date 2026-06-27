@@ -7,6 +7,7 @@
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
 #    Updated: 2026/06/27 16:11:20 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/05/15 15:07:36 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +37,8 @@ PARSER_SRCS = \
 	fileparser/openfile.c \
 	fileparser/scene_obj_parser.c \
 	fileparser/scene_obj_util.c \
-	fileparser/unique_obj_parser.c
+	fileparser/unique_obj_parser.c \
+	fileparser/error_message.c
 
 RAYTRACING_SRCS = \
 	raytracing/cyl_intersec.c \

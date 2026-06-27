@@ -6,12 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/12 16:42:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/05/15 13:32:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+static int		check_extension(char *filename);
 static int		parser_line(char* line, t_scene *scene_obj);
 static int		parse_obj(char **param, t_scene *scene_obj);
 static t_scene	*validate_unique_obj(t_scene **scene_obj);
@@ -23,6 +24,8 @@ t_scene*	read_file(char *filename)
 	char*	line;
 	t_scene	*scene_obj;
 
+	if (check_extension(filename))
+		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
@@ -45,12 +48,22 @@ t_scene*	read_file(char *filename)
 	return (validate_unique_obj(&scene_obj));
 }
 
+static int check_extension(char *filename)
+{
+	int	len;
+
+	len = ft_strlen(filename);
+	if (ft_strncmp((filename + (len - 3)), ".rt", 3))
+		return (1);
+	return (0);
+}
+
 static int	parser_line(char* line, t_scene *scene_obj)
 {
 	char	**params;
 	int		i;
 
-	params = ft_split(line, ' ');
+	params = ft_strsplit_any(line, "\t\n\v\f\r ");
 	if (!params)
 		return (1);
 	if (ft_sizeof_split(params) == 1)
