@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:45:48 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/25 22:13:48 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/27 15:52:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_hit	intersect_sphere(t_window *win, t_ray ray)
 	{
 		temp = full_intersection((t_sphere *)sph->content, ray);
 		if (temp.t >= 0 && temp.t < hit.t)
-		hit = temp;
+			hit = temp;
 		sph = sph->next;
 	}
 	if (hit.t > 0 && hit.t < DBL_MAX)
