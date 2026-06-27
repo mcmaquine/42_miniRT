@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:18:16 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/27 11:55:10 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <float.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "libft.h"
 # include "mlx.h"
 # include "definitions.h"
@@ -25,4 +27,5 @@
 # include "cof_matrix.h"
 # include "utils.h"
 # include "raytracer.h"
+# include "window.h"
 #endif
