@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 17:46:58 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/13 18:45:56 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/27 11:59:22 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,6 @@ typedef void	(*t_objs)(t_scene_obj *obj);
 
 REAL	to_radians(REAL degree);
 void	calc_components(t_scene *scene);
+void	free_window(t_window *win);
+
 #endif
