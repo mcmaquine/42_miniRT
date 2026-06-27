@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 11:30:45 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/27 17:27:21 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 		|| (temp.green < 0 || temp.green > 255)
 		|| (temp.blue < 0 || temp.blue > 255))
 	{
-		print_error(obj, ERR_COLOR_OUT_RANGE, 0);
+		print_error(obj, ERR_OUT_RANGE_COLOR, 0);
 		return (1);
 	}
 	color->red = temp.red / 255.0;
@@ -67,7 +67,7 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 /*
 Fill point struct and validate if every coordinate is in range [min,max]
 */
-int	fill_coordinate(char *param, t_point *point, REAL min, REAL max)
+int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
 {
 	char	**points;
 
@@ -81,19 +81,11 @@ int	fill_coordinate(char *param, t_point *point, REAL min, REAL max)
 	point->x = ft_atod(points[0]);
 	point->y = ft_atod(points[1]);
 	point->z = ft_atod(points[2]);
-	if ((point->x < min || point->x > max)
-		|| (point->y < min || point->y > max)
-		|| (point->z < min || point->z > max))
-	{
-		print_error(obj, ERR_COORDS_INVALID, 0);
-		ft_free_split(points);
-		return (1);
-	}
 	ft_free_split(points);
 	return (0);
 }
 
-int	fill_normalized(char *param, t_point *point)
+int	fill_normalized(char *param, t_point *point, t_objs_type obj)
 {
 	char	**points;
 
@@ -112,7 +104,7 @@ int	fill_normalized(char *param, t_point *point)
 		|| (point->y < -1.0 || point->y > 1.0)
 		|| (point->z < -1.0 || point->z > 1.0))
 	{
-		print_error(obj, ERR_VEC_OUT_RANGE, 0);
+		print_error(obj, ERR_OUT_RANGE_VEC, 0);
 		return (1);
 	}
 	return (0);

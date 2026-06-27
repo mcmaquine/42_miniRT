@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/16 14:17:59 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/27 17:25:28 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 		free(sphere);
 		return (1);	
 	}
-	if (fill_coordinate(params[1], &(sphere->center))
+	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE)
 		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE))
 	{
 		free(sphere);
@@ -59,8 +59,8 @@ int	plane_parser(char **params, t_scene *scene_obj)
 	}
 	plane = ft_calloc(1, sizeof(t_plane));
 	plane->type.base = PLANE;
-	if (fill_coordinate(params[1], &(plane->a_point))
-		|| fill_normalized(params[2], &(plane->normal))
+	if (fill_coordinate(params[1], &(plane->a_point), OBJ_PLANE)
+		|| fill_normalized(params[2], &(plane->normal), OBJ_PLANE)
 		|| fill_color(params[3], &(plane->color), OBJ_PLANE))
 	{
 		free(plane);
@@ -85,7 +85,7 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	error = helper_parse_cylinder(params, cylinder);
 	if (error)
 	{
-		free(cyl);
+		free(cylinder);
 		return (error);
 	}
 	ft_lstadd_back(&(scene_obj->objs)[CYLINDER], ft_lstnew(cylinder));
@@ -100,8 +100,8 @@ static int	helper_parse_cylinder(char **params, t_cylinder	*cyl)
 		print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, 0);
 	else if (cyl->height <= 0.0)
 		print_error(OBJ_CYLINDER, ERR_NO_PARAM_HEIGHT, 0);
-	else if (fill_coordinate(params[1], &(cyl->center))
-		|| fill_normalized(params[2], &(cyl->v_axis))
+	else if (fill_coordinate(params[1], &(cyl->center), OBJ_CYLINDER)
+		|| fill_normalized(params[2], &(cyl->v_axis), OBJ_CYLINDER)
 		|| fill_color(params[5], &(cyl->color), OBJ_CYLINDER))
 		return (1);
 	else
