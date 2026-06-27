@@ -2,10 +2,16 @@
 
 #include "minirt.h"
 
+void	free_scene(t_scene *scene);
+void	clear_sphere(void *obj);
+void	clear_plane(void *obj);
+void	clear_cylinder(void *obj);
+void	free_mlx(void *mlx, void *win, void *img);
+
 void	free_window(t_window *win)
 {
 	free_scene(win->scene_obj);
-	free_mlx(win->mlx, win->win, win->canva->img);
+	free_mlx(win->mlx, win->win, win->canva.img);
 }
 
 /* free_scene
@@ -54,8 +60,8 @@ void	clear_cylinder(void *obj)
 	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)obj;
-	clear_plane(&cylinder.top);
-	clear_plane(&cylinder.base);
+	clear_plane(&cylinder->top);
+	clear_plane(&cylinder->base);
 	free(cylinder);
 }
 
@@ -70,4 +76,5 @@ void	free_mlx(void *mlx, void *win, void *img)
 		mlx_destroy_display(mlx);
 		free(mlx);
 	}
+	exit(0);
 }
