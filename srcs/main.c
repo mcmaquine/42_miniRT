@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/25 22:12:21 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/27 15:13:14 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	main(int argc, char *argv[])
 	//TODO valid file extension
 	//TODO update scene_obj -> *scene_obj in header
 	scene.scene_obj = read_file(argv[1]);
-	//TODO call calc_normals
-	calc_components(scene.scene_obj);
+	calc_components(scene.scene_obj); // calculate normals
 	start_window(&scene, WIDTH, HEIGHT);
 	render(&scene);
 	mlx_loop(scene.mlx);
