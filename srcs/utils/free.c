@@ -30,6 +30,9 @@ void	free_scene(t_scene *scene)
 	clear_cylinder
 	};
 
+	free(scene->amb);
+	free(scene->cam);
+	free(scene->light);
 	i = 0;
 	while (i < COUNT)
 	{
@@ -37,6 +40,7 @@ void	free_scene(t_scene *scene)
 		ft_lstclear(lst, ft[i]);
 		i++;
 	}
+	free(scene);
 }
 
 void	clear_sphere(void *obj)
