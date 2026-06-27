@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/06/25 22:44:50 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/06/27 16:11:20 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,12 @@ CALC_SRCS = \
 	calc/calc_normals.c
 
 UTILS_SRCS = \
-	utils/math_utils.c
+	utils/math_utils.c \
+	utils/free.c
 
 WINDOW_SRC = \
-	window/start_window.c
+	window/start_window.c \
+	window/events.c
 
 SRCS := $(MAIN_SRC) $(ALGELIN_SRC) $(PARSER_SRCS) $(RAYTRACING_SRCS) \
 	$(UTILS_SRCS) $(WINDOW_SRC) $(CALC_SRCS)
