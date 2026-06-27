@@ -60,8 +60,6 @@ void	clear_cylinder(void *obj)
 	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)obj;
-	clear_plane(&cylinder->top);
-	clear_plane(&cylinder->base);
 	free(cylinder);
 }
 

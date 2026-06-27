@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:05:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 12:37:50 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/27 16:38:07 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ void	start_window(t_window *win, int width, int height)
 		return ;// error message
 	win->canva.addr = mlx_get_data_addr(win->canva.img, \
 &win->canva.bits_per_pixel, &win->canva.line_length, &win->canva.endian);
+	win->width = WIDTH;
+	win->height = HEIGHT;
 	events(win);
 }
