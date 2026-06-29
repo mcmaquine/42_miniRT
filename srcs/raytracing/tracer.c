@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 15:47:39 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/29 15:26:03 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ t_ray	generate_ray(t_window *win, int px, int py)
 Return the least t value and object associated to it in which a ray intersect an 
 object.
 */
-t_hit	all_intersections(t_window *win, int px, int py)
+t_hit	all_intersections(t_window *win, t_ray ray)
 {
 	t_hit	temp;
 	t_hit	hit;
-	t_ray	ray;
 	int		i;
 	t_hit	(*intersections[4])(t_window *, t_ray);
 
@@ -61,7 +60,6 @@ t_hit	all_intersections(t_window *win, int px, int py)
 	intersections[CYLINDER] = intersect_cylinder;
 	intersections[SPHERE] = intersect_sphere;
 	intersections[3] = NULL;
-	ray = generate_ray(win, px, py);
 	init_t_hit(&hit, DBL_MAX);
 	i = 0;
 	while (intersections[i])

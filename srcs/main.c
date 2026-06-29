@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 15:13:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/29 15:34:49 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void render(t_window *scene)
 	int		*ptr;
 	t_hit	hit;
 	t_color	color;
+	t_ray	ray;
 
 	ptr = (int *)scene->canva.addr;
 	py = 0;
@@ -46,7 +47,8 @@ void render(t_window *scene)
 		px = 0;
 		while (px < WIDTH)
 		{
-			hit = all_intersections(scene, px, py);
+			ray = generate_ray(scene, px, py);
+			hit = all_intersections(scene, ray);
 			color = calculate_illumination(scene, hit);
 			*ptr = pixel_color(color);
 			ptr++;

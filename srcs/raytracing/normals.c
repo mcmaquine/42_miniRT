@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:10:05 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/17 20:53:20 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:22:57 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void cylinder_normal(t_hit *hit);
 
+/*
+Compute normal vector to a point P on t
+*/
 void	calculate_normal(t_hit *hit, t_ray ray)
 {
 	if (!hit->obj)
