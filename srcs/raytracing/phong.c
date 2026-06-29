@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:09:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 17:38:31 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/29 20:28:55 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ t_color	calculate_illumination(t_window *win, t_hit hit)
 
 	if (hit.t < 0)
 		return ((t_color){0 ,0 ,0 ,0});
-	// if (!is_in_shadow(win, &hit))
+	if (!is_in_shadow(win, &hit))
 		diffuse = phong_diffuse_color(win, &hit);
-	// else
-	// 	ft_memset(&diffuse, 0, sizeof(t_color));
+	else
+		ft_memset(&diffuse, 0, sizeof(t_color));
 	ambient = phong_amb_color(win, &hit);
 	final_color.red = diffuse.red + ambient.red;
 	final_color.green = diffuse.green + ambient.green;
