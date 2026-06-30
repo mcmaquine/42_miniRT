@@ -82,6 +82,7 @@ static void run_tests(t_test *tests, int count, char *argv0)
     int         i;
     t_scene     *scene;
     t_window    win;
+    t_ray       ray;
     t_hit       hit;
     t_color     color;
     int         ok;
@@ -103,7 +104,8 @@ static void run_tests(t_test *tests, int count, char *argv0)
             continue ;
         }
         win = setup_window(scene);
-        hit = all_intersections(&win, win.width / 2, win.height / 2);
+        ray = generate_ray(&win, win.width / 2, win.height / 2);
+        hit = all_intersections(&win, ray);
         if (!tests[i].expect_hit)
         {
             if (hit.t < 0)

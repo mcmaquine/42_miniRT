@@ -47,7 +47,7 @@ static t_window setup_window(t_scene *scene)
 
     ft_memset(&win, 0, sizeof(t_window));
     calc_components(scene);
-    win.scene_obj = *scene;
+    win.scene_obj = scene;
     win.width = 800;
     win.height = 600;
     win.mlx = NULL;
@@ -73,6 +73,7 @@ static void run_tests(t_test *tests, int count, char *argv0)
     int         i;
     t_scene     *scene;
     t_window    win;
+    t_ray       ray;
     t_hit       hit;
     int         got_hit;
     int         got_type;
@@ -94,7 +95,8 @@ static void run_tests(t_test *tests, int count, char *argv0)
             continue ;
         }
         win = setup_window(scene);
-        hit = all_intersections(&win, win.width / 2, win.height / 2);
+        ray = generate_ray(&win, win.width / 2, win.height / 2);
+        hit = all_intersections(&win, ray);
         got_hit = hit.t > 0;
         got_type = hit.obj ? (int)((t_scene_obj *)hit.obj)->base : -1;
         if (got_hit == tests[i].expect_hit
