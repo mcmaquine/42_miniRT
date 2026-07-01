@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/15 13:32:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/30 22:01:03 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_scene*	read_file(char *filename)
 	char*	line;
 	t_scene	*scene_obj;
 
-	if (valid_extension(filename, ".rt"))
+	if (!valid_extension(filename, ".rt"))
 		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -77,14 +77,16 @@ static int	parser_line(char* line, t_scene *scene_obj)
 	int		i;
 
 	params = ft_strsplit_any(line, "\t\n\v\f\r ");
+	i = 0;
 	if (!params)
-		return (1);
+		return (0);
 	if (ft_sizeof_split(params) == 1)
 	{
 		ft_free_split(params);
-		return (0);
+		return (1);
 	}
-	i = parse_obj(params, scene_obj);
+	if (params[0] != NULL)
+		i = parse_obj(params, scene_obj);
 	ft_free_split(params);
 	return (i);
 }
@@ -103,7 +105,7 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 		return (plane_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "cy"))
 		return (cilinder_parser(params, scene_obj));
-	return (0);
+	return (1);
 }
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)

@@ -4,7 +4,7 @@ void    print_scene(t_scene *scene);
 
 static void print_color(t_color color)
 {
-    printf("R:%d G:%d B:%d", color.red, color.green, color.blue);
+    printf("R:%.2f G:%.2f B:%.2f", color.red, color.green, color.blue);
 }
 
 static void print_point(t_point p)
@@ -28,48 +28,56 @@ static void print_cam(t_cam *cam)
     printf(" fov:%.4f\n", cam->fov);
 }
 
-static void print_objs(t_list *objs)
+static void print_objs(t_list *objs[])
 {
+    t_list      *node;
     t_scene_obj *obj;
     t_sphere    *sp;
     t_plane     *pl;
     t_cylinder  *cy;
+    int         i;
 
-    while (objs)
+    i = 0;
+    while (i < COUNT)
     {
-        obj = (t_scene_obj *)objs->content;
-        if (obj->type == SPHERE)
+        node = objs[i];
+        while (node)
         {
-            sp = (t_sphere *)obj;
-            printf("  [SP] center:");
-            print_point(sp->center);
-            printf(" diam:%.4f color:", sp->diam);
-            print_color(sp->color);
-            printf("\n");
+            obj = (t_scene_obj *)node->content;
+            if (obj->base == SPHERE)
+            {
+                sp = (t_sphere *)obj;
+                printf("  [SP] center:");
+                print_point(sp->center);
+                printf(" diam:%.4f color:", sp->diam);
+                print_color(sp->color);
+                printf("\n");
+            }
+            else if (obj->base == PLANE)
+            {
+                pl = (t_plane *)obj;
+                printf("  [PL] point:");
+                print_point(pl->a_point);
+                printf(" normal:");
+                print_point(pl->normal);
+                printf(" color:");
+                print_color(pl->color);
+                printf("\n");
+            }
+            else if (obj->base == CYLINDER)
+            {
+                cy = (t_cylinder *)obj;
+                printf("  [CY] center:");
+                print_point(cy->center);
+                printf(" axis:");
+                print_point(cy->v_axis);
+                printf(" diam:%.4f height:%.4f color:", cy->diam, cy->height);
+                print_color(cy->color);
+                printf("\n");
+            }
+            node = node->next;
         }
-        else if (obj->type == PLANE)
-        {
-            pl = (t_plane *)obj;
-            printf("  [PL] point:");
-            print_point(pl->a_point);
-            printf(" normal:");
-            print_point(pl->normal);
-            printf(" color:");
-            print_color(pl->color);
-            printf("\n");
-        }
-        else if (obj->type == CYLINDER)
-        {
-            cy = (t_cylinder *)obj;
-            printf("  [CY] center:");
-            print_point(cy->center);
-            printf(" axis:");
-            print_point(cy->v_axis);
-            printf(" diam:%.4f height:%.4f color:", cy->diam, cy->height);
-            print_color(cy->color);
-            printf("\n");
-        }
-        objs = objs->next;
+        i++;
     }
 }
 
