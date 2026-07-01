@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/05/15 13:32:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/06/29 21:51:53 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_scene*	read_file(char *filename)
 	char*	line;
 	t_scene	*scene_obj;
 
-	if (valid_extension(filename, ".rt"))
+	if (!valid_extension(filename, ".rt"))
 		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
