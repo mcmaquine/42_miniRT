@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/30 21:13:27 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/01 09:00:40 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int pixel_color(t_color color)
 
 	t = color.tpcy;
 	r = (int)(color.red * 255.0f);
-	g = (int)(color.green * 255.0f);
+	g = (int)(color.green * 255.0f); 
 	b = (int)(color.blue * 255.0f);
 	return (t << 24 | r << 16 | g << 8 | b);
 }

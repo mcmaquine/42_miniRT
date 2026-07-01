@@ -6,14 +6,32 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 17:30:20 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/01 13:55:33 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+static int	parse_ambient_rate(char *param, REAL *rate)
+{
+	if (!is_valid_real(param))
+	{
+		print_error(OBJ_AMBIENT, ERR_RATIO_INVALID, 0);
+		return (1);
+	}
+	*rate = ft_atod(param);
+	if (*rate < 0.0 || *rate > 1.0)
+	{
+		print_error(OBJ_AMBIENT, ERR_OUT_RANGE_RATIO, 0);
+		return (1);
+	}
+	return (0);
+}
+
 int	amb_light_parser(char **params, t_scene *scene_obj)
 {
+	REAL	light_rate;
+
 	if (scene_obj->amb != NULL)
 	{
 		print_error(OBJ_AMBIENT, ERR_NO_UNIQUE, 0);
@@ -22,18 +40,15 @@ int	amb_light_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 3)
 	{
 		print_error(OBJ_AMBIENT, ERR_NO_INFORMATION, 0);
-		return (1); // more params than the object can handle
+		return (1);
 	}
+	if (parse_ambient_rate(params[1], &light_rate))
+		return (1);
 	scene_obj->amb = ft_calloc(1, sizeof(t_amb_light));
 	if (!scene_obj->amb)
 		return (1);
 	scene_obj->amb->type.base = AMBIENT_LIGHT;
-	scene_obj->amb->light_rate = ft_atod(params[1]);
-	if (scene_obj->amb->light_rate < 0.0 || scene_obj->amb->light_rate > 1.0)
-	{
-		print_error(OBJ_AMBIENT, ERR_OUT_RANGE_RATIO, 0);
-		return (1);
-	}
+	scene_obj->amb->light_rate = light_rate;
 	if (fill_color(params[2], &(scene_obj->amb->color), OBJ_AMBIENT))
 		return (1);
 	return (0);
