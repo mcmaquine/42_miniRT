@@ -24,6 +24,10 @@ typedef struct s_color
 	REAL	blue;
 }	t_color;
 
+# ifdef BONUS
+#  include "structs_bonus.h"
+# endif
+
 typedef struct s_canva
 {
 	void	*img;
@@ -80,6 +84,9 @@ typedef struct s_sphere
 	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
+# ifdef BONUS
+	t_material	material;
+# endif
 	REAL		diam;
 	REAL		r_sq;
 }	t_sphere;
@@ -90,6 +97,9 @@ typedef struct s_plane
 	t_point		a_point;
 	t_point		normal;
 	t_color		color;
+# ifdef BONUS
+	t_material	material;
+# endif
 }	t_plane;
 
 typedef struct s_cylinder
@@ -100,6 +110,9 @@ typedef struct s_cylinder
 	t_point		center;
 	t_point		v_axis;
 	t_color		color;
+# ifdef BONUS
+	t_material	material;
+# endif
 	REAL		diam;
 	REAL		height;
 	REAL		height_2;
@@ -125,6 +138,9 @@ typedef struct s_hit
 {
 	REAL		t;
 	t_point		point;
+# ifdef BONUS
+	t_point		view_origin;
+# endif
 	t_point		normal;
 	t_color		color;
 	t_scene_obj	*obj;

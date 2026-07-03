@@ -62,5 +62,7 @@ dkms.conf
 
 # extra
 miniRT
+.mandatory
+.bonus
 tags
 *.swp

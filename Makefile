@@ -69,10 +69,34 @@ OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIRS = $(sort $(dir $(OBJS)))
 
-all: $(NAME)
+BONUS_SRCS := $(filter-out srcs/main.c srcs/raytracing/phong.c \
+	srcs/fileparser/scene_obj_parser.c srcs/calc/calc_normals.c, $(SRCS))
+BONUS_SRCS += srcs/main_bonus.c \
+	srcs/raytracing/phong_bonus.c \
+	srcs/raytracing/texture_bonus.c \
+	srcs/raytracing/reflection_bonus.c \
+	srcs/fileparser/scene_obj_parser_bonus.c \
+	srcs/fileparser/material_parser_bonus.c \
+	srcs/calc/calc_normals_bonus.c
+BONUS_OBJS_DIR = objs_bonus/
+BONUS_OBJS = $(addprefix $(BONUS_OBJS_DIR), $(BONUS_SRCS:.c=.o))
+BONUS_OBJS_DIRS = $(sort $(dir $(BONUS_OBJS)))
+MANDATORY_STAMP = .mandatory
+BONUS_STAMP = .bonus
 
-$(NAME): $(OBJS) $(LIBFT) $(LIBX)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $@ $(LIBS)
+all: $(MANDATORY_STAMP)
+
+$(MANDATORY_STAMP): $(OBJS) $(LIBFT) $(LIBX)
+	$(CC) $(CFLAGS) $(LIBS) $^ -o $(NAME) $(LIBS)
+	rm -f $(BONUS_STAMP)
+	touch $@
+
+bonus: $(BONUS_STAMP)
+
+$(BONUS_STAMP): $(BONUS_OBJS) $(LIBFT) $(LIBX)
+	$(CC) $(CFLAGS) $(LIBS) $^ -o $(NAME) $(LIBS)
+	rm -f $(MANDATORY_STAMP)
+	touch $@
 
 $(OBJS): | $(OBJS_DIR)
 
@@ -81,6 +105,15 @@ $(OBJS_DIR):
 
 $(OBJS_DIR)%.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(BONUS_OBJS): | $(BONUS_OBJS_DIR)
+$(BONUS_OBJS): Makefile
+
+$(BONUS_OBJS_DIR):
+	mkdir -p $(BONUS_OBJS_DIRS)
+
+$(BONUS_OBJS_DIR)%.o: %.c
+	$(CC) $(CFLAGS) -DBONUS $(INCLUDES) -c $< -o $@
 
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all
@@ -96,7 +129,8 @@ debug: CFLAGS += -g
 debug: re
 
 clean:
-	rm -rf $(OBJS_DIR)
+	rm -rf $(OBJS_DIR) $(BONUS_OBJS_DIR)
+	rm -f $(MANDATORY_STAMP) $(BONUS_STAMP)
 	$(MAKE) -C $(DIR_LIBFT) clean
 	$(MAKE) -C $(DIR_LIBX) clean
 
@@ -106,4 +140,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
