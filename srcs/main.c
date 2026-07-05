@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 15:34:49 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 17:37:37 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
+#include <sys/time.h>
+long	get_current_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
 void render(t_window *scene)
 {
 	int		px;
@@ -42,6 +51,7 @@ void render(t_window *scene)
 
 	ptr = (int *)scene->canva.addr;
 	py = 0;
+	long start = get_current_time();
 	while (py < HEIGHT)
 	{
 		px = 0;
@@ -56,6 +66,7 @@ void render(t_window *scene)
 		}
 		py++;
 	}
+	printf("end calcs in %ld\n", get_current_time() - start);
 	mlx_put_image_to_window(scene->mlx, scene->win, scene->canva.img, 0, 0);
 }
 
