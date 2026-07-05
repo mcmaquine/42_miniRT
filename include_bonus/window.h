@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:15:07 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 11:51:09 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:27:30 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WINDOW_H
 # define WINDOW_H
-# include "minirt.h"
+# include "minirt_bonus.h"
 
 void	start_window(t_window *win, int width, int height);
 void	events(t_window *win);
