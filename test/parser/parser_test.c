@@ -1066,164 +1066,151 @@ static void	test_free_scene_obj(void)
 }
 
 /* ===================================================================== */
-/*  SEÇÃO 12 — read_file (integração com arquivos .rt temporários)       */
+/*  SEÇÃO 12 — read_file (integração com arquivos .rt em scenes/)        */
 /* ===================================================================== */
 
-static void	write_rt_file(const char *path, const char *content)
+/*
+** Resolve o caminho de um arquivo dentro da pasta "scenes", funcionando
+** tanto quando o binário é executado a partir de test/parser (rodando
+** "./test_parser" ali dentro) quanto a partir da raiz do projeto
+** (rodando algo como "test/parser/test_parser").
+**
+** Tenta, nesta ordem:
+**   1) scenes/<nome>                      (cwd == test/parser)
+**   2) test/parser/scenes/<nome>          (cwd == raiz do projeto)
+**   3) ./scenes/<nome>                    (fallback explícito)
+**
+** Retorna um buffer estático (não thread-safe, suficiente para os testes).
+*/
+static const char	*scene_path(const char *name)
 {
-	int	fd;
+	static char	buf[512];
+	const char	*candidates_fmt[3];
+	size_t		i;
 
-	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-		return ;
-	write(fd, content, strlen(content));
-	close(fd);
+	candidates_fmt[0] = "scenes/%s";
+	candidates_fmt[1] = "test/parser/scenes/%s";
+	candidates_fmt[2] = "./scenes/%s";
+	i = 0;
+	while (i < 3)
+	{
+		snprintf(buf, sizeof(buf), candidates_fmt[i], name);
+		if (access(buf, F_OK) == 0)
+			return (buf);
+		i++;
+	}
+	/* nenhum candidato encontrado: devolve o primeiro para a mensagem
+	** de erro do teste apontar um caminho plausível */
+	snprintf(buf, sizeof(buf), candidates_fmt[0], name);
+	return (buf);
+}
+
+/*
+** Roda read_file() sobre um arquivo de scenes/ e verifica se o
+** resultado (NULL ou não-NULL) bate com o esperado.
+*/
+static void	check_scene_file(const char *label, const char *filename,
+								int expect_success)
+{
+	t_scene		*sc;
+	const char	*path;
+
+	path = scene_path(filename);
+	sc = read_file(path);
+	if ((sc != NULL) == (expect_success != 0))
+	{
+		printf(GREEN "  [PASS]" RESET " %s (%s)\n", label, filename);
+		g_passed++;
+	}
+	else
+	{
+		printf(RED "  [FAIL]" RESET " %s (%s) → esperado %s, obteve %s\n",
+			label, filename,
+			expect_success ? "sucesso" : "NULL",
+			sc != NULL ? "sucesso" : "NULL");
+		g_failed++;
+	}
+	free_scene_obj(&sc);
 }
 
 static void	test_read_file(void)
 {
 	t_scene	*sc;
 
-	print_header("read_file");
+	print_header("read_file — cenas de test/parser/scenes");
 
-	/* --- Caso feliz: arquivo .rt mínimo válido --- */
-	write_rt_file("/tmp/valid.rt",
-		"A 0.5 255,255,255\n"
-		"C 0,0,-5 0,0,1 90\n"
-		"L 0,5,0 0.8 255,255,255\n"
-		"sp 0,0,0 2.0 255,0,0\n");
-	sc = read_file("/tmp/valid.rt");
-	if (sc != NULL)
-	{ printf(GREEN "  [PASS]" RESET " arquivo válido carregado corretamente\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " arquivo válido retornou NULL\n"); g_failed++; }
-	free_scene_obj(&sc);
+	/* --- Casos válidos --- */
+	check_scene_file("cena mínima válida",
+		"valid_minimal.rt", 1);
+	check_scene_file("cena com múltiplos objetos válida",
+		"valid_multiple_objects.rt", 1);
+	check_scene_file("linhas em branco ignoradas corretamente",
+		"valid_blank_lines.rt", 1);
+	check_scene_file("múltiplos espaços entre tokens ignorados",
+		"valid_multiple_spaces.rt", 1);
 
-	/* --- Caso feliz: apenas objetos obrigatórios, sem shapes --- */
-	write_rt_file("/tmp/minimal.rt",
-		"A 0.2 100,100,100\n"
-		"C 1,2,3 0,0,-1 60\n"
-		"L 0,10,0 1.0 255,255,255\n");
-	sc = read_file("/tmp/minimal.rt");
-	if (sc != NULL)
-	{ printf(GREEN "  [PASS]" RESET " cena mínima (sem shapes) carregada\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " cena mínima retornou NULL\n"); g_failed++; }
-	free_scene_obj(&sc);
+	/* --- Objetos obrigatórios ausentes --- */
+	check_scene_file("cena sem ambient retorna NULL",
+		"err_no_ambient.rt", 0);
+	check_scene_file("cena sem câmera retorna NULL",
+		"err_no_camera.rt", 0);
+	check_scene_file("cena sem light retorna NULL",
+		"err_no_light.rt", 0);
 
-	/* --- Caso feliz: cena com múltiplos shapes --- */
-	write_rt_file("/tmp/multi_shapes.rt",
-		"A 0.3 200,200,200\n"
-		"C 0,0,-10 0,0,1 80\n"
-		"L 5,5,5 0.6 255,200,100\n"
-		"sp 1,0,0 1.0 255,0,0\n"
-		"sp -1,0,0 1.5 0,255,0\n"
-		"pl 0,-1,0 0,1,0 100,100,100\n"
-		"cy 0,0,5 0,1,0 1.0 3.0 0,0,255\n");
-	sc = read_file("/tmp/multi_shapes.rt");
-	if (sc != NULL)
-	{ printf(GREEN "  [PASS]" RESET " cena com múltiplos shapes carregada\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " cena com múltiplos shapes retornou NULL\n"); g_failed++; }
-	free_scene_obj(&sc);
+	/* --- Objetos duplicados --- */
+	check_scene_file("ambient duplicado retorna NULL",
+		"err_dup_ambient.rt", 0);
+	check_scene_file("light duplicada retorna NULL",
+		"err_dup_light.rt", 0);
 
-	/* --- Extensão inválida: deve retornar NULL --- */
-	write_rt_file("/tmp/invalid.txt",
-		"A 0.5 255,255,255\nC 0,0,0 0,1,0 90\nL 0,5,0 0.8 255,255,255\n");
-	sc = read_file("/tmp/invalid.txt");
-	if (sc == NULL)
-	{ printf(GREEN "  [PASS]" RESET " extensão .txt rejeitada (retornou NULL)\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " extensão .txt incorretamente aceita\n"); g_failed++; free_scene_obj(&sc); }
+	/* --- Erros de valores/formatação --- */
+	check_scene_file("ratio de ambient alto demais retorna NULL",
+		"err_amb_rate_high.rt", 0);
+	check_scene_file("ratio de ambient baixo demais retorna NULL",
+		"err_amb_rate_low.rt", 0);
+	check_scene_file("componente de cor alto demais retorna NULL",
+		"err_color_high.rt", 0);
+	check_scene_file("componente de cor baixo demais retorna NULL",
+		"err_color_low.rt", 0);
+	check_scene_file("fov acima do limite retorna NULL",
+		"err_fov_high.rt", 0);
+	check_scene_file("letras misturadas em número retorna NULL",
+		"err_letters_in_number.rt", 0);
+	check_scene_file("token obrigatório faltando retorna NULL",
+		"err_missing_token.rt", 0);
+	check_scene_file("orientação fora do intervalo retorna NULL",
+		"err_orient_out_of_range.rt", 0);
+	check_scene_file("diâmetro de esfera zero retorna NULL",
+		"err_sphere_diam_zero.rt", 0);
+	check_scene_file("tipo de objeto desconhecido retorna NULL",
+		"err_unknown_type.rt", 0);
+
+	/* --- Extensão inválida: deve retornar NULL (gerado à parte, pois não
+	**     faz sentido manter um "*.txt" dentro da pasta scenes/) --- */
+	{
+		int	fd;
+
+		fd = open("/tmp/invalid.txt",
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd >= 0)
+		{
+			write(fd, "A 0.5 255,255,255\nC 0,0,0 0,1,0 90\n"
+				"L 0,5,0 0.8 255,255,255\n", 62);
+			close(fd);
+		}
+		sc = read_file("/tmp/invalid.txt");
+		if (sc == NULL)
+		{ printf(GREEN "  [PASS]" RESET " extensão .txt rejeitada (retornou NULL)\n"); g_passed++; }
+		else
+		{ printf(RED "  [FAIL]" RESET " extensão .txt incorretamente aceita\n"); g_failed++; free_scene_obj(&sc); }
+	}
 
 	/* --- Arquivo inexistente --- */
-	sc = read_file("/tmp/nao_existe.rt");
+	sc = read_file(scene_path("nao_existe.rt"));
 	if (sc == NULL)
 	{ printf(GREEN "  [PASS]" RESET " arquivo inexistente retornou NULL\n"); g_passed++; }
 	else
 	{ printf(RED "  [FAIL]" RESET " arquivo inexistente não retornou NULL\n"); g_failed++; free_scene_obj(&sc); }
-
-	/* --- Faltando ambient: deve retornar NULL --- */
-	write_rt_file("/tmp/no_ambient.rt",
-		"C 0,0,0 0,1,0 90\n"
-		"L 0,5,0 0.8 255,255,255\n");
-	sc = read_file("/tmp/no_ambient.rt");
-	if (sc == NULL)
-	{ printf(GREEN "  [PASS]" RESET " cena sem ambient retornou NULL\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " cena sem ambient não retornou NULL\n"); g_failed++; free_scene_obj(&sc); }
-
-	/* --- Faltando câmera: deve retornar NULL --- */
-	write_rt_file("/tmp/no_cam.rt",
-		"A 0.5 255,255,255\n"
-		"L 0,5,0 0.8 255,255,255\n");
-	sc = read_file("/tmp/no_cam.rt");
-	if (sc == NULL)
-	{ printf(GREEN "  [PASS]" RESET " cena sem câmera retornou NULL\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " cena sem câmera não retornou NULL\n"); g_failed++; free_scene_obj(&sc); }
-
-	/* --- Faltando light: deve retornar NULL --- */
-	write_rt_file("/tmp/no_light.rt",
-		"A 0.5 255,255,255\n"
-		"C 0,0,0 0,1,0 90\n");
-	sc = read_file("/tmp/no_light.rt");
-	if (sc == NULL)
-	{ printf(GREEN "  [PASS]" RESET " cena sem light retornou NULL\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " cena sem light não retornou NULL\n"); g_failed++; free_scene_obj(&sc); }
-
-	/* --- Ambient duplicado: deve retornar NULL --- */
-	write_rt_file("/tmp/dup_ambient.rt",
-		"A 0.5 255,255,255\n"
-		"A 0.3 100,100,100\n"
-		"C 0,0,0 0,1,0 90\n"
-		"L 0,5,0 0.8 255,255,255\n");
-	sc = read_file("/tmp/dup_ambient.rt");
-	if (sc == NULL)
-	{ printf(GREEN "  [PASS]" RESET " ambient duplicado retornou NULL\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " ambient duplicado não retornou NULL\n"); g_failed++; free_scene_obj(&sc); }
-
-	/* --- Câmera duplicada: deve retornar NULL --- */
-	write_rt_file("/tmp/dup_cam.rt",
-		"A 0.5 255,255,255\n"
-		"C 0,0,0 0,1,0 90\n"
-		"C 1,1,1 0,1,0 60\n"
-		"L 0,5,0 0.8 255,255,255\n");
-	sc = read_file("/tmp/dup_cam.rt");
-	if (sc == NULL)
-	{ printf(GREEN "  [PASS]" RESET " câmera duplicada retornou NULL\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " câmera duplicada não retornou NULL\n"); g_failed++; free_scene_obj(&sc); }
-
-	/* --- Light duplicada: deve retornar NULL --- */
-	write_rt_file("/tmp/dup_light.rt",
-		"A 0.5 255,255,255\n"
-		"C 0,0,0 0,1,0 90\n"
-		"L 0,5,0 0.8 255,255,255\n"
-		"L 1,1,1 0.5 200,200,200\n");
-	sc = read_file("/tmp/dup_light.rt");
-	if (sc == NULL)
-	{ printf(GREEN "  [PASS]" RESET " light duplicada retornou NULL\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " light duplicada não retornou NULL\n"); g_failed++; free_scene_obj(&sc); }
-
-	/* --- Arquivo com linhas em branco e comentários ignorados --- */
-	write_rt_file("/tmp/blanks.rt",
-		"\n"
-		"A 0.5 255,255,255\n"
-		"\n"
-		"C 0,0,0 0,1,0 90\n"
-		"\n"
-		"L 0,5,0 0.8 255,255,255\n"
-		"\n");
-	sc = read_file("/tmp/blanks.rt");
-	if (sc != NULL)
-	{ printf(GREEN "  [PASS]" RESET " linhas em branco ignoradas corretamente\n"); g_passed++; }
-	else
-	{ printf(RED "  [FAIL]" RESET " linhas em branco causaram falha\n"); g_failed++; }
-	free_scene_obj(&sc);
 }
 
 /* ===================================================================== */
