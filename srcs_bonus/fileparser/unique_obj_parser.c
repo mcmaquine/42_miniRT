@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 17:30:20 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 int	amb_light_parser(char **params, t_scene *scene_obj)
 {

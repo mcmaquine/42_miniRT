@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 22:43:16 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:24:03 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:32 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 REAL	vec_magnitude(t_point a)
 {

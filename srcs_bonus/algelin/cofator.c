@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 18:02:22 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:23:49 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:30 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static int	get_sign(int ci, int cj);
 static void	fill_row(t_cof_ctx *ctx, int row, int x);

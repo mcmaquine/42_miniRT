@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/25 22:13:08 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:43 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static	t_hit	full_intersection(t_cylinder *sph, t_ray ray);
 static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t);

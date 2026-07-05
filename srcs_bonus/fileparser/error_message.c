@@ -6,11 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:42:39 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/05/16 15:08:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:40 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static const char	*obj_name(t_objs_type obj)
 {

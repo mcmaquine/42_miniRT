@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 14:15:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 17:31:51 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:46 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 	Calculate roots from 2nd degree equation, givens its constants a, b and c.

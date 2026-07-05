@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:21:31 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/06/27 15:23:22 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:49:51 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "minirt_bonus.h"
 
 static void	sphere_calc(t_scene_obj *obj);
 static void	plane_calc(t_scene_obj *obj);

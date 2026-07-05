@@ -6,11 +6,11 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 11:05:21 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/06/27 15:10:32 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:51 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 int	key_map(int keysym, t_window *win);
 int	close_program(t_window *win);

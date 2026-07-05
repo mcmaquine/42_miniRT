@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 15:04:43 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:23:57 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:31 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static REAL	det2(t_matrix m);
 static REAL	det3(t_matrix m);

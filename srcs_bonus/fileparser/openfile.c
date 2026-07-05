@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 21:51:53 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:40 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static int		valid_extension(char *filename, char *extension);
 static int		parser_line(char* line, t_scene *scene_obj);
