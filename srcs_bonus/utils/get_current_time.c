@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_utils.c                                       :+:      :+:    :+:   */
+/*   get_current_time.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 17:38:21 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:51 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/07/04 17:26:53 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/07/04 17:32:15 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-/*
-Converts degree to radians
-*/
-REAL to_radians(REAL degree)
+long	get_current_time(void)
 {
-	return (degree * (M_PI / 180.0));
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
