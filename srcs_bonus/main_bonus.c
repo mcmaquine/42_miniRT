@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 17:34:30 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/07 00:00:00 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	main(int argc, char *argv[])
 {
-	t_window	scene;
-	t_thread	*threads;
-	int			num_threads;
-	int			i;
+	t_window		scene;
+	t_render_queue	*queue;
+	t_thread		*threads;
+	int				num_threads;
+	int				i;
 
 	if (argc != 2)
 		return (1); // message given a usage example
@@ -26,7 +27,8 @@ int	main(int argc, char *argv[])
 	calc_components(scene.scene_obj); // calculate normals
 	start_window(&scene, WIDTH, HEIGHT);
 	num_threads = get_num_thread();
-	threads = thread_init(&scene, WIDTH, HEIGHT, num_threads);
+	queue = queue_init(WIDTH, HEIGHT, TILE_SIZE);
+	threads = thread_init(&scene, queue, num_threads);
 	i = 0;
 	long start = get_current_time();
 	while (i < num_threads)
@@ -40,9 +42,16 @@ int	main(int argc, char *argv[])
 		pthread_join(threads[i].thread_id, NULL);
 		i++;
 	}
-	printf("end calcs in %ld\n", get_current_time() - start);
+	long end = get_current_time();
+	if (end - start > 1000)
+		printf("end calcs in %ld.%ld\n", ((end - start) / 1000), ((end - start) - ((end - start) / 1000 * 1000)));
+	else
+		printf("end calcs in %ld\n", end - start);
 	mlx_put_image_to_window(scene.mlx, scene.win, scene.canva.img, 0, 0);
 	mlx_loop(scene.mlx);
+	pthread_mutex_destroy(&queue->lock);
+	free(queue->tiles);
+	free(queue);
 	free(threads);
 	return (0);
 }
