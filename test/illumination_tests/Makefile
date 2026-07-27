@@ -12,6 +12,7 @@ SRCS    = test_illumination.c \
           ../../srcs/algelin/vector_utils.c \
           ../../srcs/algelin/vectorvector.c \
           ../../srcs/fileparser/openfile.c \
+          ../../srcs/fileparser/error_message.c \
           ../../srcs/fileparser/scene_obj_parser.c \
           ../../srcs/fileparser/scene_obj_util.c \
           ../../srcs/fileparser/unique_obj_parser.c \

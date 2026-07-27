@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 15:34:49 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/01 09:00:40 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char *argv[])
 	//TODO valid file extension
 	//TODO update scene_obj -> *scene_obj in header
 	scene.scene_obj = read_file(argv[1]);
+	if (!scene.scene_obj)
+		return(1);
 	calc_components(scene.scene_obj); // calculate normals
 	start_window(&scene, WIDTH, HEIGHT);
 	render(&scene);
@@ -68,7 +70,7 @@ static int pixel_color(t_color color)
 
 	t = color.tpcy;
 	r = (int)(color.red * 255.0f);
-	g = (int)(color.green * 255.0f);
+	g = (int)(color.green * 255.0f); 
 	b = (int)(color.blue * 255.0f);
 	return (t << 24 | r << 16 | g << 8 | b);
 }

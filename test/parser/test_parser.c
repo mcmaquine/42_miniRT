@@ -56,6 +56,7 @@ int main(void)
         {"valid multiple objects",      "./scenes/valid_multiple_objects.rt",  0},
         {"valid blank lines",           "./scenes/valid_blank_lines.rt",       0},
         {"valid multiple spaces",       "./scenes/valid_multiple_spaces.rt",   0},
+        {"valid comments",              "./scenes/valid_comments.rt",          0},
         {"error no ambient",            "./scenes/err_no_ambient.rt",          1},
         {"error no camera",             "./scenes/err_no_camera.rt",           1},
         {"error no light",              "./scenes/err_no_light.rt",            1},

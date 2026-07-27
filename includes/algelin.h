@@ -6,12 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:05:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 15:53:16 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/03 15:01:23 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALGELIN_H
 # define ALGELIN_H
+
 t_point	vec_add(t_point a, t_point b);
 t_point	vec_sub(t_point a, t_point b);
 t_point	vec_scale(t_point a, REAL t);

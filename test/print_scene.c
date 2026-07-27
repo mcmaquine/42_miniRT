@@ -4,7 +4,7 @@ void    print_scene(t_scene *scene);
 
 static void print_color(t_color color)
 {
-    printf("R:%d G:%d B:%d", color.red, color.green, color.blue);
+    printf("R:%.2f G:%.2f B:%.2f", color.red, color.green, color.blue);
 }
 
 static void print_point(t_point p)

@@ -36,6 +36,9 @@
 *.x86_64
 *.hex
 miniRT
+test_parser
+test_intersec
+test_illumination
 
 # Debug files
 *.dSYM/
@@ -47,6 +50,7 @@ miniRT
 *.mod*
 *.cmd
 .tmp_versions/
+.agents/
 modules.order
 Module.symvers
 Mkfile.old
@@ -58,5 +62,7 @@ dkms.conf
 
 # extra
 miniRT
+.mandatory
+.bonus
 tags
 *.swp

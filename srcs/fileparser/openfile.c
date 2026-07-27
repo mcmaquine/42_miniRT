@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 21:51:53 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/27 19:17:05 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static t_scene	*validate_unique_obj(t_scene **scene_obj);
 t_scene*	read_file(char *filename)
 {
 	int		fd;
-	int		status;
 	char*	line;
 	t_scene	*scene_obj;
 
@@ -33,8 +32,7 @@ t_scene*	read_file(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
-		status = parser_line(line, scene_obj);
-		if (status)
+		if (parser_line(line, scene_obj))
 		{
 			free_scene_obj(&scene_obj);
 			free(line);
@@ -77,12 +75,18 @@ static int	parser_line(char* line, t_scene *scene_obj)
 	int		i;
 
 	params = ft_strsplit_any(line, "\t\n\v\f\r ");
+	i = 0;
 	if (!params)
-		return (1);
-	if (ft_sizeof_split(params) == 1)
+		return (0);
+	if (!params[0] || params[0][0] == '#')
 	{
 		ft_free_split(params);
 		return (0);
+	}
+	if (ft_sizeof_split(params) == 1)
+	{
+		ft_free_split(params);
+		return (1);
 	}
 	i = parse_obj(params, scene_obj);
 	ft_free_split(params);
@@ -103,7 +107,7 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 		return (plane_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "cy"))
 		return (cilinder_parser(params, scene_obj));
-	return (0);
+	return (1);
 }
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)

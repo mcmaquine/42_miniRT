@@ -24,6 +24,22 @@ typedef struct s_color
 	REAL	blue;
 }	t_color;
 
+typedef enum e_pattern
+{
+	PATTERN_NONE,
+	PATTERN_CHECKER
+}	t_pattern;
+
+typedef struct s_material
+{
+	t_pattern	pattern;
+	t_color		checker_color;
+	REAL		checker_scale;
+	char		*bump_path;
+	REAL		bump_strength;
+	REAL		reflection;
+}	t_material;
+
 typedef struct s_canva
 {
 	void	*img;
@@ -80,6 +96,7 @@ typedef struct s_sphere
 	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
+	t_material	material;
 	REAL		diam;
 	REAL		r_sq;
 }	t_sphere;
@@ -90,6 +107,7 @@ typedef struct s_plane
 	t_point		a_point;
 	t_point		normal;
 	t_color		color;
+	t_material	material;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -100,6 +118,7 @@ typedef struct s_cylinder
 	t_point		center;
 	t_point		v_axis;
 	t_color		color;
+	t_material	material;
 	REAL		diam;
 	REAL		height;
 	REAL		height_2;
@@ -125,11 +144,11 @@ typedef struct s_hit
 {
 	REAL		t;
 	t_point		point;
+	t_point		view_origin;
 	t_point		normal;
 	t_color		color;
 	t_scene_obj	*obj;
 }	t_hit;
-
 
 typedef struct s_window
 {

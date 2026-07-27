@@ -7,13 +7,15 @@ LIBS = -Llibft -Lft -Lmlx -lm
 
 LIBFT  = ../../libft/libft.a
 
-SRCS =	\
-	../../srcs/fileparser/error_message.c \
-	../../srcs/fileparser/openfile.c \
-	../../srcs/fileparser/scene_obj_parser.c \
-	../../srcs/fileparser/scene_obj_util.c \
-	../../srcs/fileparser/unique_obj_parser.c \
-	./parser_test.c
+SRCS    = test_parser.c \
+          print_scene.c \
+          ../../srcs/fileparser/openfile.c \
+          ../../srcs/fileparser/scene_obj_parser.c \
+          ../../srcs/fileparser/scene_obj_util.c \
+          ../../srcs/fileparser/unique_obj_parser.c \
+          ../../srcs/fileparser/error_message.c
+
+NAME    = test_parser
 
 all: $(NAME)
 

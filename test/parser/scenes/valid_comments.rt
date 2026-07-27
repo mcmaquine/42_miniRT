@@ -1,0 +1,11 @@
+# Full-line comments must be ignored
+
+A 0.2 255,255,255
+
+	C 0,0,0 0,0,1 70
+
+   # Leading whitespace before a comment is also valid
+L 0,5,0 0.5 255,255,255
+
+# Objects can be separated by comments
+sp 0,0,20 10 255,0,0

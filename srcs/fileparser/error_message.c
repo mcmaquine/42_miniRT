@@ -33,6 +33,7 @@ static const char	*error_msg(t_error_option option)
 	[ERR_NO_OBJECT] = "missing object declaration in scene file",
 	[ERR_NO_UNIQUE] = "not a unique object in scene",
 	[ERR_NO_PARAM_RATIO] = "missing ratio parameter",
+	[ERR_RATIO_INVALID] = "invalid ratio value",
 	[ERR_NO_PARAM_COLOR] = "missing color parameter",
 	[ERR_NO_PARAM_COORDS] = "missing coordinates parameter",
 	[ERR_NO_PARAM_VEC] = "missing orientation vector parameter",

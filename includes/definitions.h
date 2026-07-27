@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 11:56:19 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/01 18:51:02 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define EPSILON 1e-4
+# define SPECULAR_STRENGTH 0.5
+# define SHININESS 32.0
 
 typedef enum e_obj_type
 {
@@ -70,6 +72,7 @@ typedef enum e_error_option
 	ERR_NO_OBJECT,
 	ERR_NO_UNIQUE,
 	ERR_NO_PARAM_RATIO,
+	ERR_RATIO_INVALID,
 	ERR_NO_PARAM_COLOR,
 	ERR_NO_PARAM_COORDS,
 	ERR_NO_PARAM_VEC,
