@@ -14,8 +14,6 @@
 
 static void	slab_test(t_point *min, t_point *max, t_ray ray, t_aabb box);
 static void	swap_real(REAL *a, REAL *b);
-static REAL	real_min(REAL x, REAL y, REAL z);
-static REAL	real_max(REAL x, REAL y, REAL z);
 
 int	hit_box(t_ray ray, t_aabb box)
 {
@@ -55,28 +53,4 @@ static void	swap_real(REAL *a, REAL *b)
 	temp = *a;
 	*a = *b;
 	*b = temp;
-}
-
-static REAL	real_min(REAL x, REAL y, REAL z)
-{
-	REAL less;
-
-	less = x;
-	if (y < less)
-		less = y;
-	if (z < less)
-		less = z;
-	return (less);
-}
-
-static REAL	real_max(REAL x, REAL y, REAL z)
-{
-	REAL bigger;
-
-	bigger = x;
-	if (y > bigger)
-		bigger = y;
-	if (z > bigger)
-		bigger = z;
-	return (bigger);
 }

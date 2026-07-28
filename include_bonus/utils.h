@@ -18,5 +18,7 @@ typedef void	(*t_objs)(t_scene_obj *obj);
 REAL	to_radians(REAL degree);
 void	calc_components(t_scene *scene);
 void	free_window(t_window *win);
+REAL	real_min(REAL x, REAL y, REAL z);
+REAL	real_max(REAL x, REAL y, REAL z);
 
 #endif
