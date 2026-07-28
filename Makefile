@@ -120,7 +120,9 @@ UTILS_SRCS_BONUS = \
 	utils/math_utils.c \
 	utils/free.c \
 	utils/num_threads.c \
-	utils/get_current_time.c
+	utils/get_current_time.c \
+	utils/real_min.c \
+	utils/real_max.c
 
 WINDOW_SRC_BONUS = \
 	window/start_window.c \
