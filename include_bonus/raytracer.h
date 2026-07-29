@@ -19,6 +19,8 @@ t_hit	intersect_plane(t_window *win, t_ray ray);
 t_hit	intersect_sphere(t_window *win, t_ray ray);
 t_hit	intersect_cylinder(t_window *win, t_ray);
 void	calculate_normal(t_hit *hit, t_ray ray);
+t_hit	full_intersection_sphere(t_sphere *sphere, t_ray ray);
+t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray);
 // Phong
 t_color	phong_diffuse_color(t_window *win, t_hit *hit);
 t_color	phong_amb_color(t_window *w, t_hit *hit);

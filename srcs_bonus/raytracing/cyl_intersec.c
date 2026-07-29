@@ -12,7 +12,6 @@
 
 #include "minirt.h"
 
-static	t_hit	full_intersection(t_cylinder *sph, t_ray ray);
 static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t);
 static	t_hit	check_face_intersec(t_plane *p, REAL r_sq, t_ray r);
 static	t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray);
@@ -38,7 +37,7 @@ t_hit	intersect_cylinder(t_window *win, t_ray ray)
 	return (hit);
 }
 
-static	t_hit	full_intersection(t_cylinder *cyl, t_ray ray)
+t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray)
 {
 	t_hit	hit_top;
 	t_hit	hit_base;

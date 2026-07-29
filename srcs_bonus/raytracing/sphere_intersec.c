@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static	t_hit	full_intersection(t_sphere *sph, t_ray ray);
+t_hit	full_intersection_sphere(t_sphere *sph, t_ray ray);
 
 t_hit	intersect_sphere(t_window *win, t_ray ray)
 {
@@ -39,7 +39,7 @@ t_hit	intersect_sphere(t_window *win, t_ray ray)
 	return (hit);
 }
 
-static	t_hit	full_intersection(t_sphere *sphere, t_ray ray)
+t_hit	full_intersection_sphere(t_sphere *sphere, t_ray ray)
 {
 	t_point	v_sub;
 	REAL	b;
