@@ -57,13 +57,12 @@ void	free_bvh(t_bvh_node *node)
 {
 	if (!node)
 		return ;
-	if (node->type == OBJ)
-		free(node);
-	else
+	if (node->type == NODE)
 	{
 		if (node->left)
 			free_bvh(node->left);
 		if (node->right)
 			free_bvh(node->right);
 	}
+	free(node);
 }
