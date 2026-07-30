@@ -27,7 +27,7 @@ LIBS     = -L$(DIR_LIBX) -lmlx_Linux -lXext -L$(DIR_LIBFT) -lX11 -lft -lm -lz
 # Mandatory
 # ----------------------------------------------------------------------------
 
-INCLUDES      = -I./includes -I./libft -I./minilibx-linux
+INCLUDES = -I./includes -I./libft -I./minilibx-linux
 
 MAIN_SRC = main.c
 
@@ -81,6 +81,7 @@ OBJS_DIRS = $(sort $(dir $(OBJS)))
 # ----------------------------------------------------------------------------
 
 INCLUDES_BONUS = -I./include_bonus -I./libft -I./minilibx-linux
+LIBS_BONUS = $(LIBS) -lpthread
 
 MAIN_SRC_BONUS = main_bonus.c
 
@@ -122,8 +123,7 @@ UTILS_SRCS_BONUS = \
 	utils/num_threads.c \
 	utils/get_current_time.c \
 	utils/real_min.c \
-	utils/real_max.c \
-	utils/get_current_time.c
+	utils/real_max.c
 
 WINDOW_SRC_BONUS = \
 	window/start_window.c \
@@ -135,11 +135,9 @@ SRCS_BONUS := $(MAIN_SRC_BONUS) $(ALGELIN_SRC_BONUS) $(PARSER_SRCS_BONUS) \
 
 SRCS_BONUS := $(addprefix srcs_bonus/, $(SRCS_BONUS))
 
-OBJS_DIR_BONUS  = objs_bonus/
+OBJS_DIR_BONUS = objs_bonus/
 OBJS_BONUS      = $(addprefix $(OBJS_DIR_BONUS), $(SRCS_BONUS:.c=.o))
 OBJS_DIRS_BONUS = $(sort $(dir $(OBJS_BONUS)))
-
-LIBS_BONUS = $(LIBS) -lpthread
 
 # ----------------------------------------------------------------------------
 # Rules
@@ -163,14 +161,6 @@ $(OBJS_DIR):
 $(OBJS_DIR)%.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(BONUS_OBJS): | $(BONUS_OBJS_DIR)
-$(BONUS_OBJS): Makefile
-
-$(BONUS_OBJS_DIR):
-	mkdir -p $(BONUS_OBJS_DIRS)
-
-$(BONUS_OBJS_DIR)%.o: %.c
-	$(CC) $(CFLAGS) -DBONUS $(INCLUDES) -c $< -o $@
 $(OBJS_BONUS): | $(OBJS_DIR_BONUS)
 
 $(OBJS_DIR_BONUS):
@@ -200,8 +190,7 @@ debug_bonus: CFLAGS += -g
 debug_bonus: re_bonus
 
 clean:
-	rm -rf $(OBJS_DIR) $(BONUS_OBJS_DIR)
-	rm -f $(MANDATORY_STAMP) $(BONUS_STAMP)
+	rm -rf $(OBJS_DIR) $(OBJS_DIR_BONUS)
 	$(MAKE) -C $(DIR_LIBFT) clean
 
 fclean: clean
