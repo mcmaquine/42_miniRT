@@ -27,7 +27,7 @@ t_hit	intersect_sphere(t_window *win, t_ray ray)
 	hit.t = DBL_MAX;
 	while (sph != NULL)
 	{
-		temp = full_intersection((t_sphere *)sph->content, ray);
+		temp = full_intersection_sphere((t_sphere *)sph->content, ray);
 		if (temp.t >= 0 && temp.t < hit.t)
 			hit = temp;
 		sph = sph->next;

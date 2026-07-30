@@ -29,7 +29,7 @@ t_hit	intersect_cylinder(t_window *win, t_ray ray)
 	hit.t = DBL_MAX;
 	while (cyl != NULL)
 	{
-		temp = full_intersection((t_cylinder *)cyl->content, ray);
+		temp = full_intersection_cylinder((t_cylinder *)cyl->content, ray);
 		if (temp.t >= 0 && temp.t < hit.t)
 			hit = temp;
 		cyl = cyl->next;
