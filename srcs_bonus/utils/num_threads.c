@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.h                                          :+:      :+:    :+:   */
+/*   num_threads.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/01 21:30:22 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/03 21:27:38 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/07/03 21:02:44 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/07/03 21:04:24 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef THREADS_H
-# define THREADS_H
+#include "minirt_bonus.h"
 
-typedef struct	s_thread
+int	get_num_thread(void)
 {
-	pthread_t	thread_id;
-	int			id;
-	char		*addr;
-	int			width;
-	int			height;
-}	t_thread;
+	int	num_cores;
 
-#endif
+	num_cores = sysconf(_SC_NPROCEORS_ONLN);
+	if (num_cores < 1)
+		return (1);
+	return (num_cores);
+}

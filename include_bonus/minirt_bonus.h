@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 21:32:00 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/03 20:59:21 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <pthread.h>
+# include <unistd.h>
 # include "libft.h"
 # include "mlx.h"
 # include "definitions.h"

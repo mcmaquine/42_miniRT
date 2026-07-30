@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.h                                          :+:      :+:    :+:   */
+/*   get_aabb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/01 21:30:22 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/03 21:27:38 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/07/25 18:49:56 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/07/25 19:03:50 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef THREADS_H
-# define THREADS_H
+#include "minirt_bonus.h"
 
-typedef struct	s_thread
+t_aabb	get_aabb(t_scene_obj *obj)
 {
-	pthread_t	thread_id;
-	int			id;
-	char		*addr;
-	int			width;
-	int			height;
-}	t_thread;
+	t_aabb	box;
 
-#endif
+	box = (t_aabb){0};
+	if (obj->base == SPHERE)
+		box = sphere_aabb((t_sphere *)obj);
+	if (obj->base == CYLINDER)
+		box = cylinder_aabb((t_cylinder *)obj);
+	return (box);
+}
