@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   num_threads.c                                      :+:      :+:    :+:   */
+/*   get_current_time.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/03 21:02:44 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/04 17:41:57 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/07/04 17:26:53 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/07/04 17:32:15 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-int	get_num_thread(void)
+long	get_current_time(void)
 {
-	int	num_cores;
+	struct timeval	tv;
 
-	num_cores = sysconf(_SC_NPROCESSORS_ONLN);
-	if (num_cores < 1)
-		return (1);
-	return (num_cores * 2);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

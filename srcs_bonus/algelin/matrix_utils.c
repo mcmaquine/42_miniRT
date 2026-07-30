@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:24:58 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:24:00 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:32 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 Create a matrix initilizing its values with zero

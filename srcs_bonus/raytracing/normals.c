@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:10:05 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 11:22:57 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:43 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static void cylinder_normal(t_hit *hit);
 

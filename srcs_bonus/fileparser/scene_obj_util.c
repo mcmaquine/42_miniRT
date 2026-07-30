@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 17:27:21 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 /*
 Free all memory allocated for t_scene_obj

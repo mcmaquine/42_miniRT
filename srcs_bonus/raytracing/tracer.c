@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/30 10:28:47 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:46 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static t_ray	direction(t_point	to_normalize, t_point origin)
 {

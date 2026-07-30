@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 11:56:19 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 17:42:10 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define KEY_O 111
 # define KEY_L 108
 # define KEY_K 107
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 1000
+# define HEIGHT 1000
 # define EPSILON 1e-4
 
 typedef enum e_obj_type

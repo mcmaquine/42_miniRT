@@ -76,36 +76,6 @@ OBJS_DIR  = objs/
 OBJS      = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIRS = $(sort $(dir $(OBJS)))
 
-<<<<<<< HEAD
-BONUS_SRCS := $(filter-out srcs/main.c srcs/raytracing/phong.c \
-	srcs/fileparser/scene_obj_parser.c srcs/calc/calc_normals.c, $(SRCS))
-BONUS_SRCS += srcs/main_bonus.c \
-	srcs/raytracing/phong_bonus.c \
-	srcs/raytracing/texture_bonus.c \
-	srcs/raytracing/reflection_bonus.c \
-	srcs/fileparser/scene_obj_parser_bonus.c \
-	srcs/fileparser/material_parser_bonus.c \
-	srcs/calc/calc_normals_bonus.c
-BONUS_OBJS_DIR = objs_bonus/
-BONUS_OBJS = $(addprefix $(BONUS_OBJS_DIR), $(BONUS_SRCS:.c=.o))
-BONUS_OBJS_DIRS = $(sort $(dir $(BONUS_OBJS)))
-MANDATORY_STAMP = .mandatory
-BONUS_STAMP = .bonus
-
-all: $(MANDATORY_STAMP)
-
-$(MANDATORY_STAMP): $(OBJS) $(LIBFT) $(LIBX)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $(NAME) $(LIBS)
-	rm -f $(BONUS_STAMP)
-	touch $@
-
-bonus: $(BONUS_STAMP)
-
-$(BONUS_STAMP): $(BONUS_OBJS) $(LIBFT) $(LIBX)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $(NAME) $(LIBS)
-	rm -f $(MANDATORY_STAMP)
-	touch $@
-=======
 # ----------------------------------------------------------------------------
 # Bonus
 # ----------------------------------------------------------------------------
@@ -152,7 +122,8 @@ UTILS_SRCS_BONUS = \
 	utils/num_threads.c \
 	utils/get_current_time.c \
 	utils/real_min.c \
-	utils/real_max.c
+	utils/real_max.c \
+	utils/get_current_time.c
 
 WINDOW_SRC_BONUS = \
 	window/start_window.c \
@@ -183,7 +154,6 @@ $(NAME): $(OBJS) $(LIBFT) $(LIBX)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(LIBX)
 	$(CC) $(CFLAGS) $(OBJS_BONUS) -o $@ $(LIBS_BONUS)
->>>>>>> bonus/bvh
 
 $(OBJS): | $(OBJS_DIR)
 
@@ -193,7 +163,6 @@ $(OBJS_DIR):
 $(OBJS_DIR)%.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-<<<<<<< HEAD
 $(BONUS_OBJS): | $(BONUS_OBJS_DIR)
 $(BONUS_OBJS): Makefile
 
@@ -202,7 +171,6 @@ $(BONUS_OBJS_DIR):
 
 $(BONUS_OBJS_DIR)%.o: %.c
 	$(CC) $(CFLAGS) -DBONUS $(INCLUDES) -c $< -o $@
-=======
 $(OBJS_BONUS): | $(OBJS_DIR_BONUS)
 
 $(OBJS_DIR_BONUS):
@@ -210,7 +178,6 @@ $(OBJS_DIR_BONUS):
 
 $(OBJS_DIR_BONUS)%.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
->>>>>>> bonus/bvh
 
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all
@@ -233,14 +200,9 @@ debug_bonus: CFLAGS += -g
 debug_bonus: re_bonus
 
 clean:
-<<<<<<< HEAD
 	rm -rf $(OBJS_DIR) $(BONUS_OBJS_DIR)
 	rm -f $(MANDATORY_STAMP) $(BONUS_STAMP)
-=======
-	rm -rf $(OBJS_DIR) $(OBJS_DIR_BONUS)
->>>>>>> bonus/bvh
 	$(MAKE) -C $(DIR_LIBFT) clean
-	$(MAKE) -C $(DIR_LIBX) clean
 
 fclean: clean
 	$(MAKE) -C $(DIR_LIBFT) fclean
@@ -248,10 +210,6 @@ fclean: clean
 
 re: fclean all
 
-<<<<<<< HEAD
-.PHONY: all bonus clean fclean re
-=======
 re_bonus: fclean bonus
 
 .PHONY: all bonus clean fclean re re_bonus val val_bonus debug debug_bonus
->>>>>>> bonus/bvh

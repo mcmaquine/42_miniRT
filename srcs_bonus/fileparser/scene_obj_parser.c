@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 17:25:28 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static int	helper_parse_cylinder(char **params, t_cylinder	*cyl);
 

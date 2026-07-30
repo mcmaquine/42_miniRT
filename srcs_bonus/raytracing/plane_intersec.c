@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:11 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/25 22:13:31 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:44 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static	t_hit	full_intersection(t_plane *plane, t_ray ray);
 

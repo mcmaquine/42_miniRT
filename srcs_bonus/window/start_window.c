@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:05:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 16:38:07 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:52 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	start_window(t_window *win, int width, int height)
 {
