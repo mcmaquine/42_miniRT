@@ -28,11 +28,19 @@ t_hit	hit_bvh(t_bvh_node *node, t_ray ray)
 	{
 		hit_l = hit_bvh(node->left, ray);
 		hit_r = hit_bvh(node->right, ray);
-		if (hit_l.t > 0 && hit_l.t < hit_r.t)
-			return (hit_l);
-		else if (hit_l.t > 0 && hit_r.t < hit_l.t)
+		if (hit_l.t < 0 && hit_r.t < 0)
+		{
+			hit.t = -1;
+			return (hit);
+		}
+		if (hit_l.t > 0 && hit_r.t > 0)
+		{
+			if (hit_l.t < hit_r.t)
+				return (hit_l);
 			return (hit_r);
-		hit.t = -1;
-		return (hit);
+		}
+		if (hit_l.t < 0 && hit_r.t > 0)
+			return (hit_r);
+		return (hit_l);
 	}
 }
