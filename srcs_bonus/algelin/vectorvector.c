@@ -32,7 +32,7 @@ t_point	vec_sub(t_point a, t_point b)
 	return (p);
 }
 
-t_point	vec_scale(t_point a, REAL t)
+t_point	vec_scale(t_point a, double t)
 {
 	t_point	p;
 
@@ -52,9 +52,9 @@ t_point	vec_cross(t_point a, t_point b)
 	return (p);
 }
 
-REAL vec_dot(t_point a, t_point b)
+double vec_dot(t_point a, t_point b)
 {
-	REAL	dot;
+	double	dot;
 
 	dot = a.x * b.x + a.y * b.y + a.z * b.z;
 	return (dot);

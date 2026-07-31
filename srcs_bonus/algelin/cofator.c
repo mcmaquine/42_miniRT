@@ -20,10 +20,10 @@ static void	fill_matrix(t_cof_ctx *ctx);
 Calculate a cofactor of a square matrix for the element (ci,cj). Return 0 if is
 not a squared matrix.
 */
-REAL	cofactor(t_matrix m, int ci, int cj)
+double	cofactor(t_matrix m, int ci, int cj)
 {
 	t_cof_ctx	ctx;
-	REAL		cof;
+	double		cof;
 
 	if (m.row != m.col)
 		return (0);

@@ -28,13 +28,13 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	t_point	world_up;
 	t_point	right;
 	t_point	up;
-	
-	REAL	half_width = tan(to_radians(win->scene_obj->cam->fov)/2.0);
-	REAL	aspect_ratio = (REAL)win->width / (REAL)win->height;
-	REAL	ndc_x = (px + 0.5) / win->width;
-	REAL	ndc_y = (py + 0.5) / win->height;
-	REAL	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
-	REAL	screen_y = (1 - 2.0 * ndc_y) * half_width;
+
+	double	half_width = tan(to_radians(win->scene_obj->cam->fov)/2.0);
+	double	aspect_ratio = (double)win->width / (double)win->height;
+	double	ndc_x = (px + 0.5) / win->width;
+	double	ndc_y = (py + 0.5) / win->height;
+	double	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
+	double	screen_y = (1 - 2.0 * ndc_y) * half_width;
 	forward = vec_normalize(win->scene_obj->cam->orient);
 	world_up = fill_point(0, 1, 0);
 	if (fabs(vec_dot(forward, world_up)) > .9999 )
@@ -46,7 +46,7 @@ t_ray	generate_ray(t_window *win, int px, int py)
 }
 
 /*
-Return the least t value and object associated to it in which a ray intersect an 
+Return the least t value and object associated to it in which a ray intersect an
 object.
 */
 t_hit	all_intersections(t_window *win, t_ray ray)

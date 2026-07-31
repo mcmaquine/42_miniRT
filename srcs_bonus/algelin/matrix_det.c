@@ -12,14 +12,14 @@
 
 #include "minirt_bonus.h"
 
-static REAL	det2(t_matrix m);
-static REAL	det3(t_matrix m);
-static REAL	det4(t_matrix m);
+static double	det2(t_matrix m);
+static double	det3(t_matrix m);
+static double	det4(t_matrix m);
 
 /*
 Return the determinant of square matrixes up to 4 by 4.
 */
-REAL	determinant(t_matrix m)
+double	determinant(t_matrix m)
 {
 	if (m.col != m.row)
 		return (0);
@@ -34,12 +34,12 @@ REAL	determinant(t_matrix m)
 	return (0);
 }
 
-static REAL	det2(t_matrix m)
+static double	det2(t_matrix m)
 {
 	return (m.a[0][0] * m.a[1][1] - m.a[0][1] * m.a[1][0]);
 }
 
-static REAL	det3(t_matrix m)
+static double	det3(t_matrix m)
 {
 	return (\
 		(m.a[0][0] * m.a[1][1] * m.a[2][2] + m.a[0][1] * m.a[1][2] * m.a[2][0]\
@@ -48,7 +48,7 @@ static REAL	det3(t_matrix m)
 		m.a[2][2] + m.a[0][0] * m.a[1][2] * m.a[2][1]));
 }
 
-static REAL	det4(t_matrix m)
+static double	det4(t_matrix m)
 {
 	return ((m.a[0][0] * m.a[1][1] * m.a[2][2] * m.a[3][3] +\
 		m.a[0][0] * m.a[1][2] * m.a[2][3] * m.a[3][1] +\

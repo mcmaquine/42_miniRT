@@ -40,7 +40,7 @@ t_hit	intersect_plane(t_window *win, t_ray ray)
 
 static	t_hit	full_intersection(t_plane *plane, t_ray ray)
 {
-	REAL	dot;
+	double	dot;
 	t_hit	hit;
 
 	init_t_hit(&hit, -1);

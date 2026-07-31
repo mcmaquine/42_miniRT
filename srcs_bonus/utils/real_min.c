@@ -1,8 +1,8 @@
 #include "minirt_bonus.h"
 
-REAL	real_min(REAL x, REAL y, REAL z)
+double	real_min(double x, double y, double z)
 {
-	REAL less;
+	double less;
 
 	less = x;
 	if (y < less)

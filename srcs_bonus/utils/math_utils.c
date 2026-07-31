@@ -15,7 +15,7 @@
 /*
 Converts degree to radians
 */
-REAL to_radians(REAL degree)
+double to_radians(double degree)
 {
 	return (degree * (M_PI / 180.0));
 }

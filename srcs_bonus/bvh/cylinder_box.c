@@ -19,7 +19,7 @@ t_aabb	cylinder_aabb(t_cylinder *cylinder)
 	t_point	center_top;
 	//t_point	min;
 	//t_point max;
-	REAL	r;
+	double	r;
 
 	center_base = cylinder->base.a_point;
 	center_top = cylinder->top.a_point;

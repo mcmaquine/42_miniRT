@@ -42,7 +42,7 @@ t_hit	intersect_sphere(t_window *win, t_ray ray)
 t_hit	full_intersection_sphere(t_sphere *sphere, t_ray ray)
 {
 	t_point	v_sub;
-	REAL	b;
+	double	b;
 	t_hit	hit;
 
 	init_t_hit(&hit, -1);

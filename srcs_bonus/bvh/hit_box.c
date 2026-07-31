@@ -13,14 +13,14 @@
 #include "minirt_bonus.h"
 
 static void	slab_test(t_point *min, t_point *max, t_ray ray, t_aabb box);
-static void	swap_real(REAL *a, REAL *b);
+static void	swap_real(double *a, double *b);
 
 int	hit_box(t_ray ray, t_aabb box)
 {
 	t_point axis_min;
 	t_point axis_max;
-	REAL	entry;
-	REAL	exit;
+	double	entry;
+	double	exit;
 
 	slab_test(&axis_min, &axis_max, ray, box);
 	entry = real_max(axis_min.x, axis_min.y, axis_min.z);
@@ -46,9 +46,9 @@ static void	slab_test(t_point *min, t_point *max, t_ray ray, t_aabb box)
 		swap_real(&min->z, &max->z);
 }
 
-static void	swap_real(REAL *a, REAL *b)
+static void	swap_real(double *a, double *b)
 {
-	REAL temp;
+	double temp;
 
 	temp = *a;
 	*a = *b;
