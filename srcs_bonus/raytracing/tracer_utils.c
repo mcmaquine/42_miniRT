@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 14:15:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 17:31:51 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/31 12:12:28 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,36 @@ void	init_t_hit(t_hit *hit, REAL t)
 	hit->point = hit->normal;
 	hit->t = t;
 	hit->obj = NULL;
+}
+
+/*
+Check if a ray intersects a circular plane.
+*/
+t_hit	circular_plane_intersec(t_plane *p, REAL radius, t_ray r)
+{
+	t_point	pt;
+	t_hit	hit;
+	REAL	dot;
+	REAL	dist;
+
+	init_t_hit(&hit, -1);
+	if (!p)
+		return (hit);
+	dot = vec_dot(p->normal, r.direction);
+	if (!ft_dcmp(dot, 0.0, 1e-5))
+		return (hit);
+	hit.t = -vec_dot(p->normal, vec_sub(r.origin, p->a_point)) / dot;
+	if (hit.t > 0)
+	{
+		pt = vec_add(r.origin , vec_scale(r.direction, hit.t));
+		dist = vec_magnitude(vec_sub(pt, p->a_point));
+		if (dist <= radius)
+		{
+			hit.obj = (t_scene_obj *)p;
+			hit.color = p->color;
+		}
+		else
+			hit.t = -1;
+	}
+	return (hit);
 }

@@ -13,15 +13,14 @@
 #include "minirt.h"
 
 static int		valid_extension(char *filename, char *extension);
-static int		parser_line(char* line, t_scene *scene_obj);
+static int		parser_line(char *line, t_scene *scene_obj);
 static int		parse_obj(char **param, t_scene *scene_obj);
 static t_scene	*validate_unique_obj(t_scene **scene_obj);
 
-t_scene*	read_file(char *filename)
+t_scene	*read_file(char *filename)
 {
 	int		fd;
-	int		status;
-	char*	line;
+	char	*line;
 	t_scene	*scene_obj;
 
 	if (!valid_extension(filename, ".rt"))
@@ -33,12 +32,11 @@ t_scene*	read_file(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
-		status = parser_line(line, scene_obj);
-		if (status)
+		if (parser_line(line, scene_obj))
 		{
 			free_scene_obj(&scene_obj);
 			free(line);
-			close (fd);
+			close(fd);
 			return (NULL);
 		}
 		free(line);
@@ -71,7 +69,7 @@ static int	valid_extension(char *file, char *extension)
 	return (1);
 }
 
-static int	parser_line(char* line, t_scene *scene_obj)
+static int	parser_line(char *line, t_scene *scene_obj)
 {
 	char	**params;
 	int		i;
@@ -103,17 +101,17 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 		return (plane_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "cy"))
 		return (cilinder_parser(params, scene_obj));
+	if (!ft_strcmp(params[0], "co"))
+		return (cone_parser(params, scene_obj));
 	return (0);
 }
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)
 {
-    //TODO missing error message
-	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light )
+	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light)
 	{
 		free_scene_obj(scene_obj);
 		return (NULL);
 	}
-	else
-		return (*scene_obj);
+	return (*scene_obj);
 }

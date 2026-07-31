@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:07:51 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:24:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/31 12:42:39 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ t_point	vec_add(t_point a, t_point b)
 	return (p);
 }
 
+/*
+Return vector subraction between vector a and b.
+*/
 t_point	vec_sub(t_point a, t_point b)
 {
 	t_point p;
