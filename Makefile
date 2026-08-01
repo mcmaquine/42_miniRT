@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/07/04 17:29:24 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/07/31 22:08:14 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,18 @@ RAYTRACING_SRCS_BONUS = \
 	raytracing/tracer.c \
 	raytracing/tracer_utils.c
 
+BVH_SRCS_BONUS = \
+	bvh/add_box.c \
+	bvh/build_bvh.c \
+	bvh/compare_axis.c \
+	bvh/cylinder_box.c \
+	bvh/get_aabb.c \
+	bvh/group_box.c \
+	bvh/hit_box.c \
+	bvh/hit_bvh.c \
+	bvh/init_bvh.c \
+	bvh/intersect_bvh.c
+
 CALC_SRCS_BONUS = \
 	calc/calc_normals.c
 
@@ -123,7 +135,9 @@ UTILS_SRCS_BONUS = \
 	utils/num_threads.c \
 	utils/get_current_time.c \
 	utils/real_min.c \
-	utils/real_max.c
+	utils/real_max.c \
+	utils/array_objs.c \
+	utils/count_objs.c
 
 WINDOW_SRC_BONUS = \
 	window/start_window.c \
@@ -131,7 +145,7 @@ WINDOW_SRC_BONUS = \
 
 SRCS_BONUS := $(MAIN_SRC_BONUS) $(ALGELIN_SRC_BONUS) $(PARSER_SRCS_BONUS) \
 	$(RAYTRACING_SRCS_BONUS) $(UTILS_SRCS_BONUS) $(WINDOW_SRC_BONUS) \
-	$(CALC_SRCS_BONUS) $(THREAD_SRCS_BONUS)
+	$(CALC_SRCS_BONUS) $(THREAD_SRCS_BONUS) $(BVH_SRCS_BONUS)
 
 SRCS_BONUS := $(addprefix srcs_bonus/, $(SRCS_BONUS))
 
