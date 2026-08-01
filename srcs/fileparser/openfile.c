@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/01 15:02:41 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/01 15:32:54 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ t_scene*	read_file(char *filename)
 		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		ft_printf("miniRT: %s: No such file or directory\n", filename);
 		return (NULL);
+	}
 	scene_obj = ft_calloc(1, sizeof(t_scene));
 	line = get_next_line(fd);
 	while (line)
