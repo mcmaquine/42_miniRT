@@ -1232,7 +1232,7 @@ static void	test_read_file(void)
 int	main(void)
 {
 	printf(BOLD "\n╔══════════════════════════════════════════════╗\n");
-	printf("║   SUITE DE TESTES — PARSERS DO MINIRT       ║\n");
+	printf("║   SUITE DE TESTES — PARSERS DO MINIRT        ║\n");
 	printf("╚══════════════════════════════════════════════╝" RESET "\n");
 
 	test_print_error_all_messages();
