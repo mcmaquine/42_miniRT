@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 21:51:53 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/01 15:02:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ static int	valid_extension(char *file, char *extension)
 		extension++;
 	}
 	if (*ptr_dot)
+	{
+		ft_printf("miniRT: file: Invalid extension\n");
 		return (0);
+	}
 	return (1);
 }
 

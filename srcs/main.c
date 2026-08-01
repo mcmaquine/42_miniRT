@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 15:34:49 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/01 14:57:27 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		return (1); // message given a usage example
-	//TODO valid file extension
-	//TODO update scene_obj -> *scene_obj in header
 	scene.scene_obj = read_file(argv[1]);
+	if (!scene.scene_obj)
+		return (1);
 	calc_components(scene.scene_obj); // calculate normals
 	start_window(&scene, WIDTH, HEIGHT);
 	render(&scene);
