@@ -15,7 +15,7 @@ t_bvh_node	*build_bvh(t_scene_obj **objs, int n)
 		node = ft_calloc(1, sizeof(t_bvh_node));
 		if (!node)
 			return (NULL);
-		node->base = OBJ;
+		node->type.base = OBJ;
 		node->obj = objs[0];
 		node->box = get_aabb(objs[0]);
 		return (node);
@@ -25,7 +25,7 @@ t_bvh_node	*build_bvh(t_scene_obj **objs, int n)
 	node = ft_calloc(1, sizeof(t_bvh_node));
 	if (!node)
 		return (NULL);
-	node->base = NODE;
+	node->type.base = NODE;
 	node->box = box;
 	node->left = build_bvh(objs, (n >> 1));
 	if (!node->left)
@@ -57,7 +57,7 @@ void	free_bvh(t_bvh_node *node)
 {
 	if (!node)
 		return ;
-	if (node->type == NODE)
+	if (node->type.base == NODE)
 	{
 		if (node->left)
 			free_bvh(node->left);
