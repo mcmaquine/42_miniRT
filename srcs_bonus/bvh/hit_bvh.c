@@ -12,7 +12,7 @@ t_hit	hit_bvh(t_bvh_node *node, t_ray ray)
 	if (!hit_box(ray, node->box))
 		return (hit);
 	hit.t = DBL_MAX;
-	if (node->type == OBJ)
+	if (node->type.base == OBJ)
 	{
 		if (node->obj->base == SPHERE)
 			hit = full_intersection_sphere((t_sphere *)node->obj, ray);
