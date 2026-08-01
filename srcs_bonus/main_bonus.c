@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/07 00:00:00 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/31 21:54:25 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char *argv[])
 	//TODO valid file extension
 	scene.scene_obj = read_file(argv[1]);
 	calc_components(scene.scene_obj); // calculate normals
+	init_bvh(scene.scene_obj);
 	start_window(&scene, WIDTH, HEIGHT);
 	num_threads = get_num_thread();
 	queue = queue_init(WIDTH, HEIGHT, TILE_SIZE);
@@ -53,5 +54,6 @@ int	main(int argc, char *argv[])
 	free(queue->tiles);
 	free(queue);
 	free(threads);
+	// TODO destroy miniRT
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 16:59:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/31 21:08:45 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,15 @@ typedef struct s_cylinder
 	double		r_sq;
 }	t_cylinder;
 
+typedef struct s_bvh_node	t_bvh_node;
+
 typedef struct s_scene
 {
 	t_amb_light	*amb;
 	t_cam		*cam;
 	t_light		*light;
 	t_list		*objs[COUNT];
+	t_bvh_node	*tree;
 }	t_scene;
 
 typedef struct s_ray

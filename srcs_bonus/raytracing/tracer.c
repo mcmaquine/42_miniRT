@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:46 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/31 21:41:24 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ t_hit	all_intersections(t_window *win, t_ray ray)
 	t_hit	temp;
 	t_hit	hit;
 	int		i;
-	t_hit	(*intersections[4])(t_window *, t_ray);
+	static t_hit	(*intersections[3])(t_window *, t_ray) = {
+		intersect_bvh,
+		intersect_plane,
+		NULL
+	};
 
-	intersections[PLANE] = intersect_plane;
-	intersections[CYLINDER] = intersect_cylinder;
-	intersections[SPHERE] = intersect_sphere;
-	intersections[3] = NULL;
 	init_t_hit(&hit, DBL_MAX);
 	i = -1;
 	while (intersections[++i])

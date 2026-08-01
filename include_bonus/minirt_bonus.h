@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 17:33:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/31 21:47:51 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@
 # include "raytracer.h"
 # include "window.h"
 # include "threads.h"
+# include "bvh.h"
 
 #endif
