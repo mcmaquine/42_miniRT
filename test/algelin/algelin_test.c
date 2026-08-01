@@ -9,7 +9,6 @@
 #define RESET   "\033[0m"
 #define BOLD    "\033[1m"
 
-#define EPSILON 1e-9
 
 static int	g_passed = 0;
 static int	g_failed = 0;
