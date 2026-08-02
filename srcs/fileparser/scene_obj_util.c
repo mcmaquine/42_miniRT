@@ -6,11 +6,35 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 17:27:21 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 12:22:11 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static int	is_valid_number(const char *str)
+{
+	int	has_digit;
+	int	has_dot;
+
+	if (!str || !*str)
+		return (0);
+	has_digit = 0;
+	has_dot = 0;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str)
+	{
+		if (*str == '.' && !has_dot)
+			has_dot = 1;
+		else if (*str >= '0' && *str <= '9')
+			has_digit = 1;
+		else
+			return (0);
+		str++;
+	}
+	return (has_digit);
+}
 
 /*
 Free all memory allocated for t_scene_obj
@@ -46,6 +70,13 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 		ft_free_split(colors);
 		return (1);
 	}
+	if (!is_valid_number(colors[0]) || !is_valid_number(colors[1])
+		|| !is_valid_number(colors[2]))
+	{
+		print_error(obj, ERR_OUT_RANGE_COLOR, 0);
+		ft_free_split(colors);
+		return (1);
+	}
 	temp.red = ft_atoi(colors[0]);
 	temp.green = ft_atoi(colors[1]);
 	temp.blue = ft_atoi(colors[2]);
@@ -78,6 +109,13 @@ int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
 		ft_free_split(points);
 		return (1);
 	}
+	if (!is_valid_number(points[0]) || !is_valid_number(points[1])
+		|| !is_valid_number(points[2]))
+	{
+		print_error(obj, ERR_COORDS_INVALID, 0);
+		ft_free_split(points);
+		return (1);
+	}
 	point->x = ft_atod(points[0]);
 	point->y = ft_atod(points[1]);
 	point->z = ft_atod(points[2]);
@@ -93,6 +131,13 @@ int	fill_normalized(char *param, t_point *point, t_objs_type obj)
 	if (ft_sizeof_split(points) != 3)
 	{
 		print_error(obj, ERR_NO_PARAM_VEC, 0);
+		ft_free_split(points);
+		return (1);
+	}
+	if (!is_valid_number(points[0]) || !is_valid_number(points[1])
+		|| !is_valid_number(points[2]))
+	{
+		print_error(obj, ERR_COORDS_INVALID, 0);
 		ft_free_split(points);
 		return (1);
 	}
