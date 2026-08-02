@@ -114,12 +114,14 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)
 {
-    //TODO missing error message
-	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light )
-	{
-		free_scene_obj(scene_obj);
-		return (NULL);
-	}
+	if (!(*scene_obj)->amb)
+		print_error(OBJ_AMBIENT, ERR_NO_OBJECT, 0);
+	else if (!(*scene_obj)->cam)
+		print_error(OBJ_CAMERA, ERR_NO_OBJECT, 0);
+	else if (!(*scene_obj)->light)
+		print_error(OBJ_LIGHT, ERR_NO_OBJECT, 0);
 	else
 		return (*scene_obj);
+	free_scene_obj(scene_obj);
+	return (NULL);
 }
