@@ -99,7 +99,7 @@ static int	helper_parse_cylinder(char **params, t_cylinder	*cyl)
 	if (cyl->diam <= 0.0)
 		print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, 0);
 	else if (cyl->height <= 0.0)
-		print_error(OBJ_CYLINDER, ERR_NO_PARAM_HEIGHT, 0);
+		print_error(OBJ_CYLINDER, ERR_HEIGHT_NEGATIVE, 0);
 	else if (fill_coordinate(params[1], &(cyl->center), OBJ_CYLINDER)
 		|| fill_normalized(params[2], &(cyl->v_axis), OBJ_CYLINDER)
 		|| fill_color(params[5], &(cyl->color), OBJ_CYLINDER))

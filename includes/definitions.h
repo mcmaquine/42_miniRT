@@ -82,6 +82,7 @@ typedef enum e_error_option
 	ERR_OUT_RANGE_VEC,
 	ERR_COORDS_INVALID,
 	ERR_DIAMETER_NEGATIVE,
+	ERR_HEIGHT_NEGATIVE,
 	TOTAL_OPTIONS
 }	t_error_option;
 

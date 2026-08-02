@@ -45,6 +45,7 @@ static const char	*error_msg(t_error_option option)
 	[ERR_OUT_RANGE_VEC] = "normalized vector value out of range [-1, 1]",
 	[ERR_COORDS_INVALID] = "invalid coordinates value",
 	[ERR_DIAMETER_NEGATIVE] = "diameter value negative",
+	[ERR_HEIGHT_NEGATIVE] = "height value negative",
 	};
 
 	return (msgs[option]);
