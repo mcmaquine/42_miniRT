@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 17:25:28 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:42:26 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static int	helper_parse_cylinder(char **params, t_cylinder	*cyl);
 
-/*
-Parses a sphere object
-*/
 int	sphere_parser(char **params, t_scene *scene_obj)
 {
 	t_sphere	*sphere;
@@ -33,7 +30,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 	{
 		print_error(OBJ_SPHERE, ERR_DIAMETER_NEGATIVE, 0);
 		free(sphere);
-		return (1);	
+		return (1);
 	}
 	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE)
 		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE))

@@ -1,4 +1,14 @@
-//header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/02 18:29:36 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/08/02 18:32:37 by gabrgarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -14,20 +24,14 @@ void	free_window(t_window *win)
 	free_mlx(win->mlx, win->win, win->canva.img);
 }
 
-/* free_scene
-
-amb_light is alloc?
-cam is alloc?
-light is alloc?
-*/
 void	free_scene(t_scene *scene)
 {
-	int		i;
-	t_list	**lst;
-	void	(*ft[COUNT])(void *) = {
-	clear_sphere,
-	clear_plane,
-	clear_cylinder
+	int			i;
+	t_list		**lst;
+	static void	(*ft[COUNT])(void *) = {
+		clear_sphere,
+		clear_plane,
+		clear_cylinder
 	};
 
 	free(scene->amb);

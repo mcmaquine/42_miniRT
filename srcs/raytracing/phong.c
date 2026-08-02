@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:09:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 20:28:55 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:21:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_color	calculate_illumination(t_window *win, t_hit hit)
 	t_color	ambient;
 
 	if (hit.t < 0)
-		return ((t_color){0 ,0 ,0 ,0});
+		return ((t_color){0, 0, 0, 0});
 	if (!is_in_shadow(win, &hit))
 		diffuse = phong_diffuse_color(win, &hit);
 	else
@@ -96,11 +96,11 @@ int	is_in_shadow(t_window *win, t_hit *hit)
 	t_hit	shadow_hit;
 	REAL	dist_to_light;
 
-	light_dir = vec_normalize(vec_sub(win->scene_obj->light->coord,\
+	light_dir = vec_normalize(vec_sub(win->scene_obj->light->coord, \
 		hit->point));
 	shadow_ray.origin = vec_add(hit->point, vec_scale(light_dir, EPSILON));
 	shadow_ray.direction = light_dir;
-	dist_to_light = vec_magnitude(vec_sub(win->scene_obj->light->coord,\
+	dist_to_light = vec_magnitude(vec_sub(win->scene_obj->light->coord, \
 		shadow_ray.origin));
 	shadow_hit = all_intersections(win, shadow_ray);
 	if (shadow_hit.t > EPSILON && shadow_hit.t < dist_to_light)
@@ -108,4 +108,3 @@ int	is_in_shadow(t_window *win, t_hit *hit)
 	else
 		return (0);
 }
-

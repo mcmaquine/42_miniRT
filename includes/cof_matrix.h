@@ -6,15 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 18:15:21 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 18:16:39 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:29:26 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_COF_CONTEXT_H
-# define FT_COF_CONTEXT_H
+#ifndef COF_MATRIX_H
+# define COF_MATRIX_H
 
 /*
-Contexto para calculo de cofator
+Context for cofactor calculation
 */
 typedef struct s_cof_ctx
 {

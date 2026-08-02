@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 12:22:11 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:43:51 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ static int	is_valid_number(const char *str)
 	return (has_digit);
 }
 
-/*
-Free all memory allocated for t_scene_obj
-*/
 void	free_scene_obj(t_scene **scene_obj)
 {
 	int	i;
@@ -82,7 +79,7 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 	temp.blue = ft_atoi(colors[2]);
 	color->tpcy = 0.0;
 	ft_free_split(colors);
-	if ((temp.red < 0 || temp.red > 255) 
+	if ((temp.red < 0 || temp.red > 255)
 		|| (temp.green < 0 || temp.green > 255)
 		|| (temp.blue < 0 || temp.blue > 255))
 	{

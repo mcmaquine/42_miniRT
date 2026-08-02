@@ -6,22 +6,22 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/01 15:32:54 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:49:34 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 static int		valid_extension(char *filename, char *extension);
-static int		parser_line(char* line, t_scene *scene_obj);
+static int		parser_line(char *line, t_scene *scene_obj);
 static int		parse_obj(char **param, t_scene *scene_obj);
 static t_scene	*validate_unique_obj(t_scene **scene_obj);
 
-t_scene*	read_file(char *filename)
+t_scene	*read_file(char *filename)
 {
 	int		fd;
 	int		status;
-	char*	line;
+	char	*line;
 	t_scene	*scene_obj;
 
 	if (!valid_extension(filename, ".rt"))
@@ -41,7 +41,7 @@ t_scene*	read_file(char *filename)
 		{
 			free_scene_obj(&scene_obj);
 			free(line);
-			close (fd);
+			close(fd);
 			return (NULL);
 		}
 		free(line);
@@ -77,7 +77,7 @@ static int	valid_extension(char *file, char *extension)
 	return (1);
 }
 
-static int	parser_line(char* line, t_scene *scene_obj)
+static int	parser_line(char *line, t_scene *scene_obj)
 {
 	char	**params;
 	int		i;

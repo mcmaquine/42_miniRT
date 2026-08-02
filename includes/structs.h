@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 16:59:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:36:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ typedef struct s_hit
 	t_color		color;
 	t_scene_obj	*obj;
 }	t_hit;
-
 
 typedef struct s_window
 {

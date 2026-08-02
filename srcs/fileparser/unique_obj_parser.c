@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 17:30:20 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:51:59 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	amb_light_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 3)
 	{
 		print_error(OBJ_AMBIENT, ERR_NO_INFORMATION, 0);
-		return (1); // more params than the object can handle
+		return (1);
 	}
 	scene_obj->amb = ft_calloc(1, sizeof(t_amb_light));
 	if (!scene_obj->amb)
