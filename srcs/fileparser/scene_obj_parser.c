@@ -79,7 +79,10 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	int			error;
 
 	if (ft_sizeof_split(params) != 6)
+	{
+		print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, 0);
 		return (1);
+	}
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	cylinder->type.base = CYLINDER;
 	error = helper_parse_cylinder(params, cylinder);
