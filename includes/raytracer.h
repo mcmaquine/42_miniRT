@@ -25,7 +25,7 @@ t_color	phong_amb_color(t_window *w, t_hit *hit);
 t_color	calculate_illumination(t_window *win, t_hit hit);
 int		is_in_shadow(t_window *win, t_hit *hit);
 //utils
-REAL	roots(REAL a, REAL b, REAL c);
-void	init_t_hit(t_hit *hit, REAL t);
+double	roots(double a, double b, double c);
+void	init_t_hit(t_hit *hit, double t);
 
 #endif

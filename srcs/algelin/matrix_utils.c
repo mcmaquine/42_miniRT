@@ -25,12 +25,12 @@ void	*create_matrix(int rows, int cols)
 	m = ft_calloc(1, sizeof(t_matrix));
 	if (!m)
 		return (NULL);
-	m->a = ft_calloc(rows, sizeof(REAL *));
+	m->a = ft_calloc(rows, sizeof(double *));
 	if (!m->a)
 		return (NULL);
 	i = -1;
 	while (++i < rows)
-		m->a[i] = ft_calloc(cols, sizeof(REAL));
+		m->a[i] = ft_calloc(cols, sizeof(double));
 	m->col = cols;
 	m->row = rows;
 	return (m);

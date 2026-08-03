@@ -16,12 +16,12 @@
 	Calculate roots from 2nd degree equation, givens its constants a, b and c.
 	Returns the least root or (-1) if no real roots exists.
 */
-REAL	roots(REAL a, REAL b, REAL c)
+double	roots(double a, double b, double c)
 {
-	REAL	delta;
-	REAL	sqrt_delta;
-	REAL	t1;
-	REAL	t2;
+	double	delta;
+	double	sqrt_delta;
+	double	t1;
+	double	t2;
 
 	delta = b * b - 4 * a * c;
 	if (delta < 0.0)
@@ -37,7 +37,7 @@ REAL	roots(REAL a, REAL b, REAL c)
 		return (-1);
 }
 
-void	init_t_hit(t_hit *hit, REAL t)
+void	init_t_hit(t_hit *hit, double t)
 {
 	hit->color = (t_color){0, 0, 0, 0};
 	hit->normal = (t_point){0.0, 0.0, 0.0};

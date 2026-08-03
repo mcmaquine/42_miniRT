@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_point	fill_point(REAL x, REAL y, REAL z)
+t_point	fill_point(double x, double y, double z)
 {
 	t_point	p;
 

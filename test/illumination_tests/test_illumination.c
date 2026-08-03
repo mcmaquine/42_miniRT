@@ -8,14 +8,14 @@ typedef struct s_test
     char    *scene_file;
     int     expect_hit;
     int     check_color;
-    REAL    expected_red;
-    REAL    expected_green;
-    REAL    expected_blue;
-    REAL    tolerance;
+    double    expected_red;
+    double    expected_green;
+    double    expected_blue;
+    double    tolerance;
     int     check_normal;
-    REAL    expected_nx;
-    REAL    expected_ny;
-    REAL    expected_nz;
+    double    expected_nx;
+    double    expected_ny;
+    double    expected_nz;
 }   t_test;
 
 static char *build_path(char *argv0, char *scene_file)
@@ -63,12 +63,12 @@ static t_window setup_window(t_scene *scene)
     return (win);
 }
 
-static int color_approx(REAL got, REAL expected, REAL tol)
+static int color_approx(double got, double expected, double tol)
 {
     return (fabs(got - expected) <= tol);
 }
 
-static int normal_approx(t_point n, REAL nx, REAL ny, REAL nz, REAL tol)
+static int normal_approx(t_point n, double nx, double ny, double nz, double tol)
 {
     return (fabs(n.x - nx) <= tol
         && fabs(n.y - ny) <= tol

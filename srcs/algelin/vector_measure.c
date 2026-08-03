@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-REAL	vec_magnitude(t_point a)
+double	vec_magnitude(t_point a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
@@ -20,7 +20,7 @@ REAL	vec_magnitude(t_point a)
 t_point	vec_normalize(t_point a)
 {
 	t_point	p;
-	REAL	mag;
+	double	mag;
 
 	mag = vec_magnitude(a);
 	zero_point(&p);

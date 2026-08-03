@@ -18,10 +18,10 @@
 
 typedef struct s_color
 {
-	REAL	tpcy;
-	REAL	red;
-	REAL	green;
-	REAL	blue;
+	double	tpcy;
+	double	red;
+	double	green;
+	double	blue;
 }	t_color;
 
 typedef struct s_canva
@@ -35,14 +35,14 @@ typedef struct s_canva
 
 typedef struct s_point
 {
-	REAL	x;
-	REAL	y;
-	REAL	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_point;
 
 typedef struct s_matrix
 {
-	REAL	**a;
+	double	**a;
 	int		row;
 	int		col;
 }	t_matrix;
@@ -56,7 +56,7 @@ typedef struct s_amb_light
 {
 	t_scene_obj		type;
 	t_color			color;
-	REAL			light_rate;
+	double			light_rate;
 }	t_amb_light;
 
 typedef struct s_cam
@@ -64,7 +64,7 @@ typedef struct s_cam
 	t_scene_obj	type;
 	t_point		point;
 	t_point		orient;
-	REAL		fov;
+	double		fov;
 }	t_cam;
 
 typedef struct s_light
@@ -72,7 +72,7 @@ typedef struct s_light
 	t_scene_obj	type;
 	t_point		coord;
 	t_color		color;
-	REAL		bright_rate;
+	double		bright_rate;
 }	t_light;
 
 typedef struct s_sphere
@@ -80,8 +80,8 @@ typedef struct s_sphere
 	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
-	REAL		diam;
-	REAL		r_sq;
+	double		diam;
+	double		r_sq;
 }	t_sphere;
 
 typedef struct s_plane
@@ -100,11 +100,11 @@ typedef struct s_cylinder
 	t_point		center;
 	t_point		v_axis;
 	t_color		color;
-	REAL		diam;
-	REAL		height;
-	REAL		height_2;
-	REAL		radius;
-	REAL		r_sq;
+	double		diam;
+	double		height;
+	double		height_2;
+	double		radius;
+	double		r_sq;
 }	t_cylinder;
 
 typedef struct s_scene
@@ -123,7 +123,7 @@ typedef struct s_ray
 
 typedef struct s_hit
 {
-	REAL		t;
+	double		t;
 	t_point		point;
 	t_point		normal;
 	t_color		color;
