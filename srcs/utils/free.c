@@ -12,12 +12,6 @@
 
 #include "minirt.h"
 
-void	free_scene(t_scene *scene);
-void	clear_sphere(void *obj);
-void	clear_plane(void *obj);
-void	clear_cylinder(void *obj);
-void	free_mlx(void *mlx, void *win, void *img);
-
 void	free_window(t_window *win)
 {
 	free_scene(win->scene_obj);
@@ -45,30 +39,6 @@ void	free_scene(t_scene *scene)
 		i++;
 	}
 	free(scene);
-}
-
-void	clear_sphere(void *obj)
-{
-	t_sphere	*sphere;
-
-	sphere = (t_sphere *)obj;
-	free(sphere);
-}
-
-void	clear_plane(void *obj)
-{
-	t_plane	*plane;
-
-	plane = (t_plane *)obj;
-	free(plane);
-}
-
-void	clear_cylinder(void *obj)
-{
-	t_cylinder	*cylinder;
-
-	cylinder = (t_cylinder *)obj;
-	free(cylinder);
 }
 
 void	free_mlx(void *mlx, void *win, void *img)

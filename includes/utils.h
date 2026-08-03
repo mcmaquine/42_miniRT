@@ -18,5 +18,10 @@ typedef void	(*t_objs)(t_scene_obj *obj);
 REAL	to_radians(REAL degree);
 void	calc_components(t_scene *scene);
 void	free_window(t_window *win);
+void	free_scene(t_scene *scene);
+void	free_mlx(void *mlx, void *win, void *img);
+void	clear_sphere(void *obj);
+void	clear_plane(void *obj);
+void	clear_cylinder(void *obj);
 
 #endif

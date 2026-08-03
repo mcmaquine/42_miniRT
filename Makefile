@@ -54,7 +54,8 @@ CALC_SRCS = \
 
 UTILS_SRCS = \
 	utils/math_utils.c \
-	utils/free.c
+	utils/free.c \
+	utils/free_utils.c
 
 WINDOW_SRC = \
 	window/start_window.c \
@@ -62,7 +63,7 @@ WINDOW_SRC = \
 
 SRCS := $(MAIN_SRC) $(ALGELIN_SRC) $(PARSER_SRCS) $(RAYTRACING_SRCS) \
 	$(UTILS_SRCS) $(WINDOW_SRC) $(CALC_SRCS)
- 
+
 SRCS := $(addprefix srcs/, $(SRCS))
 
 OBJS_DIR = objs/
