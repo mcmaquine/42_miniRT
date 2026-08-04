@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 16:59:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/07/31 14:26:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,19 @@ typedef struct s_cylinder
 	REAL		r_sq;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_scene_obj	type;
+	t_plane		base;
+	t_point		vertex;
+	t_point		v_axis;
+	t_color		color;
+	REAL		theta;
+	REAL		height;
+	REAL		radius;
+	REAL		tan2;
+}	t_cone;
+
 typedef struct s_scene
 {
 	t_amb_light	*amb;
@@ -129,7 +142,6 @@ typedef struct s_hit
 	t_color		color;
 	t_scene_obj	*obj;
 }	t_hit;
-
 
 typedef struct s_window
 {

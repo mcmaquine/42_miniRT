@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static REAL	det2(t_matrix m);
 static REAL	det3(t_matrix m);

@@ -37,6 +37,7 @@ typedef enum e_obj_type
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	CONE,
 	COUNT,
 	LIGHT,
 	CAMERA,
@@ -50,7 +51,8 @@ enum	e_identifier
 	L,
 	sp,
 	pl,
-	cy
+	cy,
+	co
 };
 
 typedef enum e_objs_type
@@ -61,6 +63,7 @@ typedef enum e_objs_type
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
+	OBJ_CONE,
 	TOTAL
 }	t_objs_type;
 
@@ -75,11 +78,13 @@ typedef enum e_error_option
 	ERR_NO_PARAM_VEC,
 	ERR_NO_PARAM_DIAMETER,
 	ERR_NO_PARAM_HEIGHT,
+	ERR_NO_PARAM_ANGLE,
 	ERR_OUT_RANGE_FOV,
 	ERR_OUT_RANGE_RATIO,
 	ERR_OUT_RANGE_BRIGHT,
 	ERR_OUT_RANGE_COLOR,
 	ERR_OUT_RANGE_VEC,
+	ERR_OUT_RANGE_ANGLE,
 	ERR_COORDS_INVALID,
 	ERR_DIAMETER_NEGATIVE,
 	TOTAL_OPTIONS

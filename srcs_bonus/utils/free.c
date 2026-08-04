@@ -1,6 +1,6 @@
 //header
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	free_scene(t_scene *scene);
 void	clear_sphere(void *obj);

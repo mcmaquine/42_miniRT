@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 int	key_map(int keysym, t_window *win);
 int	close_program(t_window *win);

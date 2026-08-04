@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static int		valid_extension(char *filename, char *extension);
 static int		parser_line(char *line, t_scene *scene_obj);

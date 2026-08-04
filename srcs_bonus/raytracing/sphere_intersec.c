@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static	t_hit	full_intersection(t_sphere *sph, t_ray ray);
 

@@ -6,21 +6,21 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/06/27 16:11:20 by gabrgarc         ###   ########.fr        #
-#    Updated: 2026/05/15 15:07:36 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/08/04 16:05:00 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes -I./libft -I./minilibx-linux
+BONUS_INCLUDES = -I./include_bonus -I./includes -I./libft -I./minilibx-linux
 
 DIR_LIBFT = ./libft
 LIBFT = $(DIR_LIBFT)/libft.a
 
 DIR_LIBX = minilibx-linux/
 LIBX = $(DIR_LIBX)libmlx_Linux.a
-LIBS = -L$(MLX_DIR) -lmlx_Linux -lXext -Llibft -lX11 -lft -Lmlx -lm -lz
+LIBS = -L$(DIR_LIBX) -lmlx_Linux -lXext -lX11 -L$(DIR_LIBFT) -lft -lm -lz
 
 MAIN_SRC = main.c
 
@@ -69,15 +69,20 @@ OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIRS = $(sort $(dir $(OBJS)))
 
-BONUS_SRCS := $(filter-out srcs/main.c srcs/raytracing/phong.c \
-	srcs/fileparser/scene_obj_parser.c srcs/calc/calc_normals.c, $(SRCS))
-BONUS_SRCS += srcs/main_bonus.c \
-	srcs/raytracing/phong_bonus.c \
-	srcs/raytracing/texture_bonus.c \
-	srcs/raytracing/reflection_bonus.c \
-	srcs/fileparser/scene_obj_parser_bonus.c \
-	srcs/fileparser/material_parser_bonus.c \
-	srcs/calc/calc_normals_bonus.c
+BONUS_SRCS = \
+	srcs_bonus/main.c \
+	$(addprefix srcs_bonus/, $(ALGELIN_SRC)) \
+	srcs_bonus/fileparser/cone_parser.c \
+	srcs_bonus/fileparser/error_message.c \
+	srcs_bonus/fileparser/openfile.c \
+	srcs_bonus/fileparser/scene_obj_parser.c \
+	srcs_bonus/fileparser/scene_obj_util.c \
+	srcs_bonus/fileparser/unique_obj_parser.c \
+	$(addprefix srcs_bonus/, $(RAYTRACING_SRCS)) \
+	srcs_bonus/raytracing/cone_intersec.c \
+	srcs_bonus/calc/pre_calc.c \
+	$(addprefix srcs_bonus/, $(UTILS_SRCS)) \
+	$(addprefix srcs_bonus/, $(WINDOW_SRC))
 BONUS_OBJS_DIR = objs_bonus/
 BONUS_OBJS = $(addprefix $(BONUS_OBJS_DIR), $(BONUS_SRCS:.c=.o))
 BONUS_OBJS_DIRS = $(sort $(dir $(BONUS_OBJS)))
@@ -104,6 +109,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIRS)
 
 $(OBJS_DIR)%.o: %.c
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(BONUS_OBJS): | $(BONUS_OBJS_DIR)
@@ -113,7 +119,8 @@ $(BONUS_OBJS_DIR):
 	mkdir -p $(BONUS_OBJS_DIRS)
 
 $(BONUS_OBJS_DIR)%.o: %.c
-	$(CC) $(CFLAGS) -DBONUS $(INCLUDES) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -DBONUS $(BONUS_INCLUDES) -c $< -o $@
 
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static int	get_sign(int ci, int cj);
 static void	fill_row(t_cof_ctx *ctx, int row, int x);

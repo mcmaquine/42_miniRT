@@ -6,13 +6,63 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/30 10:28:47 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/04 15:37:52 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
-static t_ray	direction(t_point	to_normalize, t_point origin)
+static t_ray	direction(t_point to_normalize, t_point origin);
+static t_point	camera_right(t_point forward);
+static REAL		screen_coordinate(int pixel, int size);
+
+t_hit	all_intersections(t_window *win, t_ray ray)
+{
+	t_hit	temp;
+	t_hit	hit;
+
+	init_t_hit(&hit, DBL_MAX);
+	temp = intersect_sphere(win, ray);
+	if (temp.t > 0 && temp.t < hit.t)
+		hit = temp;
+	temp = intersect_plane(win, ray);
+	if (temp.t > 0 && temp.t < hit.t)
+		hit = temp;
+	temp = intersect_cylinder(win, ray);
+	if (temp.t > 0 && temp.t < hit.t)
+		hit = temp;
+	temp = intersect_cone(win, ray);
+	if (temp.t > 0 && temp.t < hit.t)
+		hit = temp;
+	if (hit.t == DBL_MAX)
+		init_t_hit(&hit, -1);
+	if (hit.t > 0)
+		calculate_normal(&hit, ray);
+	return (hit);
+}
+
+t_ray	generate_ray(t_window *win, int px, int py)
+{
+	t_point	forward;
+	t_point	right;
+	t_point	up;
+	REAL	half_width;
+	REAL	screen_x;
+
+	half_width = tan(win->scene_obj->cam->fov * 0.5);
+	forward = win->scene_obj->cam->orient;
+	right = camera_right(forward);
+	up = vec_normalize(vec_cross(forward, right));
+	screen_x = (2.0 * screen_coordinate(px, win->width) - 1.0)
+		* ((REAL)win->width / (REAL)win->height) * half_width;
+	right = vec_scale(right, screen_x);
+	up = vec_scale(up, (1.0 - 2.0 * screen_coordinate(py, win->height))
+			* half_width);
+	forward = vec_add(forward, vec_add(right, up));
+	return (direction(forward, win->scene_obj->cam->point));
+}
+
+static t_ray	direction(t_point to_normalize, t_point origin)
 {
 	t_ray	ray;
 
@@ -21,56 +71,18 @@ static t_ray	direction(t_point	to_normalize, t_point origin)
 	return (ray);
 }
 
-//tem que normionetear
-t_ray	generate_ray(t_window *win, int px, int py)
+static t_point	camera_right(t_point forward)
 {
-	t_point	forward;
 	t_point	world_up;
-	t_point	right;
-	t_point	up;
-	
-	REAL	half_width = tan(to_radians(win->scene_obj->cam->fov)/2.0);
-	REAL	aspect_ratio = (REAL)win->width / (REAL)win->height;
-	REAL	ndc_x = (px + 0.5) / win->width;
-	REAL	ndc_y = (py + 0.5) / win->height;
-	REAL	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
-	REAL	screen_y = (1 - 2.0 * ndc_y) * half_width;
-	forward = vec_normalize(win->scene_obj->cam->orient);
+
 	world_up = fill_point(0, 1, 0);
-	if (fabs(vec_dot(forward, world_up)) > .9999 )
+	if (fabs(vec_dot(forward, world_up)) > 0.9999)
 		world_up = fill_point(0, 0, 1);
-	right = vec_normalize(vec_cross(world_up, forward));
-	up = vec_normalize(vec_cross(forward, right));
-	return (direction(vec_add(forward, vec_add(vec_scale(right, screen_x),\
-		vec_scale(up, screen_y))), win->scene_obj->cam->point));
+	return (vec_normalize(vec_cross(world_up, forward)));
 }
 
-/*
-Return the least t value and object associated to it in which a ray intersect an 
-object.
-*/
-t_hit	all_intersections(t_window *win, t_ray ray)
+static REAL	screen_coordinate(int pixel, int size)
 {
-	t_hit	temp;
-	t_hit	hit;
-	int		i;
-	t_hit	(*intersections[4])(t_window *, t_ray);
-
-	intersections[PLANE] = intersect_plane;
-	intersections[CYLINDER] = intersect_cylinder;
-	intersections[SPHERE] = intersect_sphere;
-	intersections[3] = NULL;
-	init_t_hit(&hit, DBL_MAX);
-	i = -1;
-	while (intersections[++i])
-	{
-		temp = (intersections[i])(win, ray);
-		if (temp.t > 0 && temp.t < hit.t)
-			hit = temp;
-	}
-	if (hit.t == DBL_MAX)
-		init_t_hit(&hit, -1);
-	if (hit.t > 0)
-		calculate_normal(&hit, ray);
-	return (hit);
+	return (((REAL)pixel + 0.5) / (REAL)size);
 }
+
