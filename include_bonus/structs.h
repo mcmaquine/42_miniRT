@@ -16,6 +16,8 @@
 # include <ctype.h>
 # include "libft.h"
 
+typedef struct s_bvh_node	t_bvh_node;
+
 typedef struct s_color
 {
 	double	tpcy;
@@ -62,10 +64,10 @@ typedef struct s_material
 {
 	t_pattern	pattern;
 	t_color		checker_color;
-	REAL		checker_scale;
+	double		checker_scale;
 	char		*bump_path;
-	REAL		bump_strength;
-	REAL		reflection;
+	double		bump_strength;
+	double		reflection;
 }	t_material;
 
 typedef struct s_amb_light
@@ -97,8 +99,8 @@ typedef struct s_sphere
 	t_point		center;
 	t_color		color;
 	t_material	material;
-	REAL		diam;
-	REAL		r_sq;
+	double		diam;
+	double		r_sq;
 }	t_sphere;
 
 typedef struct s_plane
@@ -119,11 +121,11 @@ typedef struct s_cylinder
 	t_point		v_axis;
 	t_color		color;
 	t_material	material;
-	REAL		diam;
-	REAL		height;
-	REAL		height_2;
-	REAL		radius;
-	REAL		r_sq;
+	double		diam;
+	double		height;
+	double		height_2;
+	double		radius;
+	double		r_sq;
 }	t_cylinder;
 
 typedef struct s_cone
@@ -134,10 +136,10 @@ typedef struct s_cone
 	t_point		v_axis;
 	t_color		color;
 	t_material	material;
-	REAL		theta;
-	REAL		height;
-	REAL		radius;
-	REAL		tan2;
+	double		theta;
+	double		height;
+	double		radius;
+	double		tan2;
 }	t_cone;
 
 typedef struct s_scene

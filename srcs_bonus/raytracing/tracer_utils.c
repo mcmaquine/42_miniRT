@@ -16,7 +16,7 @@
 	Calculate roots from 2nd degree equation, givens its constants a, b and c.
 	Returns the least root or (-1) if no real roots exists.
 */
-double roots(double a, double b, double c)
+double	roots(double a, double b, double c)
 {
 	double	delta;
 	double	sqrt_delta;
@@ -49,12 +49,12 @@ void	init_t_hit(t_hit *hit, double t)
 /*
 Check if a ray intersects a circular plane.
 */
-t_hit	circular_plane_intersec(t_plane *p, REAL radius, t_ray r)
+t_hit	circular_plane_intersec(t_plane *p, double radius, t_ray r)
 {
 	t_point	pt;
 	t_hit	hit;
-	REAL	dot;
-	REAL	dist;
+	double	dot;
+	double	dist;
 
 	init_t_hit(&hit, -1);
 	if (!p)
@@ -65,7 +65,7 @@ t_hit	circular_plane_intersec(t_plane *p, REAL radius, t_ray r)
 	hit.t = -vec_dot(p->normal, vec_sub(r.origin, p->a_point)) / dot;
 	if (hit.t > 0)
 	{
-		pt = vec_add(r.origin , vec_scale(r.direction, hit.t));
+		pt = vec_add(r.origin, vec_scale(r.direction, hit.t));
 		dist = vec_magnitude(vec_sub(pt, p->a_point));
 		if (dist <= radius)
 		{

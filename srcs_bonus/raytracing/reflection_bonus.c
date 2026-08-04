@@ -16,8 +16,8 @@
 static t_ray	reflected_ray(t_hit *hit, t_ray incident)
 {
 	t_ray	reflected;
-	REAL	dot;
-	REAL	side;
+	double	dot;
+	double	side;
 
 	dot = vec_dot(incident.direction, hit->normal);
 	reflected.direction = vec_sub(incident.direction,
@@ -30,7 +30,7 @@ static t_ray	reflected_ray(t_hit *hit, t_ray incident)
 	return (reflected);
 }
 
-static t_color	blend_reflection(t_color local, t_color reflected, REAL rate)
+static t_color	blend_reflection(t_color local, t_color reflected, double rate)
 {
 	t_color	color;
 

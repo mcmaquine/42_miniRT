@@ -84,7 +84,7 @@ static void	cylinder_calc(t_scene_obj *obj)
 static void	cone_calc(t_scene_obj *obj)
 {
 	t_cone	*cone;
-	REAL	radian;
+	double	radian;
 
 	cone = (t_cone *)obj;
 	radian = to_radians(cone->theta) * 0.5;

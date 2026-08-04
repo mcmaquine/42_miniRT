@@ -55,7 +55,7 @@ static t_color	phong_specular_color(t_window *win, t_hit *hit)
 	t_point	light_dir;
 	t_point	view_dir;
 	t_point	reflect_dir;
-	REAL	factor;
+	double	factor;
 
 	ft_memset(&specular, 0, sizeof(t_color));
 	light_dir = vec_normalize(vec_sub(win->scene_obj->light->coord,
