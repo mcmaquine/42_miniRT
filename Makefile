@@ -87,6 +87,7 @@ BONUS_SRCS = \
 	srcs_bonus/raytracing/reflection_bonus.c \
 	srcs_bonus/calc/calc_normals_bonus.c \
 	$(addprefix srcs_bonus/, $(UTILS_SRCS)) \
+	srcs_bonus/utils/free_bonus.c \
 	$(addprefix srcs_bonus/, $(WINDOW_SRC))
 BONUS_OBJS_DIR = objs_bonus/
 BONUS_OBJS = $(addprefix $(BONUS_OBJS_DIR), $(BONUS_SRCS:.c=.o))

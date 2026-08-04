@@ -27,7 +27,8 @@ void	free_scene(t_scene *scene)
 	void	(*ft[COUNT])(void *) = {
 	clear_sphere,
 	clear_plane,
-	clear_cylinder
+	clear_cylinder,
+	clear_cone
 	};
 
 	free(scene->amb);
