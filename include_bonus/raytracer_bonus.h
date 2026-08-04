@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   raytracer_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 17:15:07 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 17:08:00 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/07/03 15:03:12 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-# define WINDOW_H
-# include "minirt_bonus.h"
+#ifndef RAYTRACER_BONUS_H
+# define RAYTRACER_BONUS_H
+# define MAX_REFLECTION_DEPTH 4
 
-int		start_window(t_window *win, int width, int height);
-void	events(t_window *win);
-void	paint_pixel(t_window *w, int x, int y, unsigned int color);
-void	clear_canva(t_window *w);
+void		apply_texture_bonus(t_hit *hit);
+t_material	*get_material_bonus(t_scene_obj *obj);
+t_color		trace_color_bonus(t_window *win, t_ray ray, int depth);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 18:50:29 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/04 15:59:01 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 #include "raytracer_bonus.h"
 
 t_color	phong_amb_color(t_window *win, t_hit *hit)

@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 00:00:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/04 17:08:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 #include "raytracer_bonus.h"
 
 static int	pixel_color(t_color color)
@@ -62,7 +62,8 @@ int	main(int argc, char **argv)
 	if (!scene.scene_obj)
 		return (1);
 	calc_components(scene.scene_obj);
-	start_window(&scene, WIDTH, HEIGHT);
+	if (start_window(&scene, WIDTH, HEIGHT))
+		return (1);
 	render_bonus(&scene);
 	mlx_loop(scene.mlx);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/04 16:05:00 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/04 17:02:00 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,17 +70,22 @@ OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIRS = $(sort $(dir $(OBJS)))
 
 BONUS_SRCS = \
-	srcs_bonus/main.c \
+	srcs_bonus/main_bonus.c \
 	$(addprefix srcs_bonus/, $(ALGELIN_SRC)) \
 	srcs_bonus/fileparser/cone_parser.c \
 	srcs_bonus/fileparser/error_message.c \
 	srcs_bonus/fileparser/openfile.c \
-	srcs_bonus/fileparser/scene_obj_parser.c \
+	srcs_bonus/fileparser/scene_obj_parser_bonus.c \
+	srcs_bonus/fileparser/material_parser_bonus.c \
 	srcs_bonus/fileparser/scene_obj_util.c \
 	srcs_bonus/fileparser/unique_obj_parser.c \
-	$(addprefix srcs_bonus/, $(RAYTRACING_SRCS)) \
+	$(filter-out srcs_bonus/raytracing/phong.c, \
+		$(addprefix srcs_bonus/, $(RAYTRACING_SRCS))) \
 	srcs_bonus/raytracing/cone_intersec.c \
-	srcs_bonus/calc/pre_calc.c \
+	srcs_bonus/raytracing/phong_bonus.c \
+	srcs_bonus/raytracing/texture_bonus.c \
+	srcs_bonus/raytracing/reflection_bonus.c \
+	srcs_bonus/calc/calc_normals_bonus.c \
 	$(addprefix srcs_bonus/, $(UTILS_SRCS)) \
 	$(addprefix srcs_bonus/, $(WINDOW_SRC))
 BONUS_OBJS_DIR = objs_bonus/

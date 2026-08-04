@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 21:32:00 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/04 16:46:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 # include "definitions.h"
 # include "structs.h"
 # include "fileparser.h"
+# include "fileparser_bonus.h"
 # include "algelin.h"
 # include "cof_matrix.h"
 # include "utils.h"
 # include "raytracer.h"
+# include "raytracer_bonus.h"
 # include "window.h"
 #endif

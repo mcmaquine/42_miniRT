@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 11:56:19 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/04 16:22:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define EPSILON 1e-4
+# define SPECULAR_STRENGTH 0.5
+# define SHININESS 32.0
 
 typedef enum e_obj_type
 {
