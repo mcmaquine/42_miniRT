@@ -6,28 +6,25 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/07/31 22:08:14 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/08/04 18:35:16 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME        = miniRT
 NAME_BONUS  = miniRT_bonus
 
 CC     = cc
 CFLAGS = -Wall -Wextra -Werror
+INCLUDES = -I./includes -I./libft -I./minilibx-linux
+BONUS_INCLUDES = -I./include_bonus -I./includes -I./libft -I./minilibx-linux
 
 DIR_LIBFT = ./libft
 LIBFT     = $(DIR_LIBFT)/libft.a
 
 DIR_LIBX = minilibx-linux/
-LIBX     = $(DIR_LIBX)libmlx_Linux.a
-LIBS     = -L$(DIR_LIBX) -lmlx_Linux -lXext -L$(DIR_LIBFT) -lX11 -lft -lm -lz
-
-# ----------------------------------------------------------------------------
-# Mandatory
-# ----------------------------------------------------------------------------
-
-INCLUDES = -I./includes -I./libft -I./minilibx-linux
+LIBX = $(DIR_LIBX)libmlx_Linux.a
+LIBS = -L$(DIR_LIBX) -lmlx_Linux -lXext -lX11 -L$(DIR_LIBFT) -lft -lm -lz
 
 MAIN_SRC = main.c
 
@@ -76,96 +73,45 @@ OBJS_DIR  = objs/
 OBJS      = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIRS = $(sort $(dir $(OBJS)))
 
-# ----------------------------------------------------------------------------
-# Bonus
-# ----------------------------------------------------------------------------
+BONUS_SRCS = \
+	srcs_bonus/main_bonus.c \
+	$(addprefix srcs_bonus/, $(ALGELIN_SRC)) \
+	srcs_bonus/fileparser/cone_parser.c \
+	srcs_bonus/fileparser/error_message.c \
+	srcs_bonus/fileparser/openfile.c \
+	srcs_bonus/fileparser/scene_obj_parser_bonus.c \
+	srcs_bonus/fileparser/material_parser_bonus.c \
+	srcs_bonus/fileparser/scene_obj_util.c \
+	srcs_bonus/fileparser/unique_obj_parser.c \
+	$(filter-out srcs_bonus/raytracing/phong.c, \
+		$(addprefix srcs_bonus/, $(RAYTRACING_SRCS))) \
+	srcs_bonus/raytracing/cone_intersec.c \
+	srcs_bonus/raytracing/phong_bonus.c \
+	srcs_bonus/raytracing/texture_bonus.c \
+	srcs_bonus/raytracing/reflection_bonus.c \
+	srcs_bonus/calc/calc_normals_bonus.c \
+	$(addprefix srcs_bonus/, $(UTILS_SRCS)) \
+	srcs_bonus/utils/free_bonus.c \
+	$(addprefix srcs_bonus/, $(WINDOW_SRC))
+BONUS_OBJS_DIR = objs_bonus/
+BONUS_OBJS = $(addprefix $(BONUS_OBJS_DIR), $(BONUS_SRCS:.c=.o))
+BONUS_OBJS_DIRS = $(sort $(dir $(BONUS_OBJS)))
+MANDATORY_STAMP = .mandatory
+BONUS_STAMP = .bonus
 
-INCLUDES_BONUS = -I./include_bonus -I./libft -I./minilibx-linux
-LIBS_BONUS = $(LIBS) -lpthread
+all: $(MANDATORY_STAMP)
 
-MAIN_SRC_BONUS = main_bonus.c
+$(MANDATORY_STAMP): $(OBJS) $(LIBFT) $(LIBX)
+	$(CC) $(CFLAGS) $(LIBS) $^ -o $(NAME) $(LIBS)
+	rm -f $(BONUS_STAMP)
+	touch $@
 
-ALGELIN_SRC_BONUS = \
-	algelin/cofator.c \
-	algelin/matrix_det.c \
-	algelin/matrix_ops.c \
-	algelin/matrix_utils.c \
-	algelin/vector_measure.c \
-	algelin/vector_utils.c \
-	algelin/vectorvector.c
+bonus: $(BONUS_STAMP)
 
-PARSER_SRCS_BONUS = \
-	fileparser/openfile.c \
-	fileparser/scene_obj_parser.c \
-	fileparser/scene_obj_util.c \
-	fileparser/unique_obj_parser.c \
-	fileparser/error_message.c
-
-RAYTRACING_SRCS_BONUS = \
-	raytracing/cyl_intersec.c \
-	raytracing/normals.c \
-	raytracing/phong.c \
-	raytracing/plane_intersec.c \
-	raytracing/sphere_intersec.c \
-	raytracing/tracer.c \
-	raytracing/tracer_utils.c
-
-BVH_SRCS_BONUS = \
-	bvh/add_box.c \
-	bvh/build_bvh.c \
-	bvh/compare_axis.c \
-	bvh/cylinder_box.c \
-	bvh/get_aabb.c \
-	bvh/group_box.c \
-	bvh/hit_box.c \
-	bvh/hit_bvh.c \
-	bvh/init_bvh.c \
-	bvh/intersect_bvh.c
-
-CALC_SRCS_BONUS = \
-	calc/calc_normals.c
-
-THREAD_SRCS_BONUS = \
-	threads/thread.c \
-	threads/thread_routine.c
-
-UTILS_SRCS_BONUS = \
-	utils/math_utils.c \
-	utils/free.c \
-	utils/num_threads.c \
-	utils/get_current_time.c \
-	utils/real_min.c \
-	utils/real_max.c \
-	utils/array_objs.c \
-	utils/count_objs.c
-
-WINDOW_SRC_BONUS = \
-	window/start_window.c \
-	window/events.c
-
-SRCS_BONUS := $(MAIN_SRC_BONUS) $(ALGELIN_SRC_BONUS) $(PARSER_SRCS_BONUS) \
-	$(RAYTRACING_SRCS_BONUS) $(UTILS_SRCS_BONUS) $(WINDOW_SRC_BONUS) \
-	$(CALC_SRCS_BONUS) $(THREAD_SRCS_BONUS) $(BVH_SRCS_BONUS)
-
-SRCS_BONUS := $(addprefix srcs_bonus/, $(SRCS_BONUS))
-
-OBJS_DIR_BONUS = objs_bonus/
-OBJS_BONUS      = $(addprefix $(OBJS_DIR_BONUS), $(SRCS_BONUS:.c=.o))
-OBJS_DIRS_BONUS = $(sort $(dir $(OBJS_BONUS)))
-
-# ----------------------------------------------------------------------------
-# Rules
-# ----------------------------------------------------------------------------
-
-all: $(NAME)
-
-bonus: $(NAME_BONUS)
-
-$(NAME): $(OBJS) $(LIBFT) $(LIBX)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBS)
-
-$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(LIBX)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) -o $@ $(LIBS_BONUS)
+$(BONUS_STAMP): $(BONUS_OBJS) $(LIBFT) $(LIBX)
+	$(CC) $(CFLAGS) $(LIBS) $^ -o $(NAME) $(LIBS)
+	rm -f $(MANDATORY_STAMP)
+	touch $@
 
 $(OBJS): | $(OBJS_DIR)
 
@@ -173,6 +119,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIRS)
 
 $(OBJS_DIR)%.o: %.c
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJS_BONUS): | $(OBJS_DIR_BONUS)
@@ -180,8 +127,9 @@ $(OBJS_BONUS): | $(OBJS_DIR_BONUS)
 $(OBJS_DIR_BONUS):
 	mkdir -p $(OBJS_DIRS_BONUS)
 
-$(OBJS_DIR_BONUS)%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
+$(BONUS_OBJS_DIR)%.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -DBONUS $(BONUS_INCLUDES) -c $< -o $@
 
 $(LIBFT): $(DIR_LIBFT)
 	$(MAKE) -C $< all

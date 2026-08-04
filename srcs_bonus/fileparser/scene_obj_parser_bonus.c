@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 #include "fileparser_bonus.h"
 
 static int	parse_cylinder_bonus(char **params, t_cylinder *cylinder);

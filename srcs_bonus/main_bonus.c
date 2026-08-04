@@ -5,55 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/31 21:54:25 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/08/04 18:35:45 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+#include "raytracer_bonus.h"
 
-int	main(int argc, char *argv[])
+static int	pixel_color(t_color color)
 {
-	t_window		scene;
-	t_render_queue	*queue;
-	t_thread		*threads;
-	int				num_threads;
-	int				i;
+	int	transparency;
+	int	red;
+	int	green;
+	int	blue;
+
+	transparency = color.tpcy;
+	red = (int)(color.red * 255.0);
+	green = (int)(color.green * 255.0);
+	blue = (int)(color.blue * 255.0);
+	return (transparency << 24 | red << 16 | green << 8 | blue);
+}
+
+static void	render_bonus(t_window *scene)
+{
+	int		x;
+	int		y;
+	int		*pixel;
+	t_ray	ray;
+
+	pixel = (int *)scene->canva.addr;
+	y = 0;
+	while (y < scene->height)
+	{
+		x = 0;
+		while (x < scene->width)
+		{
+			ray = generate_ray(scene, x, y);
+			*pixel = pixel_color(trace_color_bonus(scene, ray,
+						MAX_REFLECTION_DEPTH));
+			pixel++;
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(scene->mlx, scene->win, scene->canva.img, 0, 0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_window	scene;
 
 	if (argc != 2)
-		return (1); // message given a usage example
-	//TODO valid file extension
+		return (1);
 	scene.scene_obj = read_file(argv[1]);
-	calc_components(scene.scene_obj); // calculate normals
-	init_bvh(scene.scene_obj);
-	start_window(&scene, WIDTH, HEIGHT);
-	num_threads = get_num_thread();
-	queue = queue_init(WIDTH, HEIGHT, TILE_SIZE);
-	threads = thread_init(&scene, queue, num_threads);
-	i = 0;
-	long start = get_current_time();
-	while (i < num_threads)
-	{
-		pthread_create(&threads[i].thread_id, NULL, routine, &threads[i]);
-		i++;
-	}
-	i = 0;
-	while (i < num_threads)
-	{
-		pthread_join(threads[i].thread_id, NULL);
-		i++;
-	}
-	long end = get_current_time();
-	if (end - start > 1000)
-		printf("end calcs in %ld.%ld\n", ((end - start) / 1000), ((end - start) - ((end - start) / 1000 * 1000)));
-	else
-		printf("end calcs in %ld\n", end - start);
-	mlx_put_image_to_window(scene.mlx, scene.win, scene.canva.img, 0, 0);
+	if (!scene.scene_obj)
+		return (1);
+	calc_components(scene.scene_obj);
+	if (start_window(&scene, WIDTH, HEIGHT))
+		return (1);
+	render_bonus(&scene);
 	mlx_loop(scene.mlx);
-	pthread_mutex_destroy(&queue->lock);
-	free(queue->tiles);
-	free(queue);
-	free(threads);
-	// TODO destroy miniRT
 	return (0);
 }

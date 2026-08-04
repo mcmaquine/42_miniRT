@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_normals.c                                     :+:      :+:    :+:   */
+/*   pre_calc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:21:31 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/04 13:49:51 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/04 18:37:05 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_bonus.h"
+#include <minirt_bonus.h>
 
 static void	sphere_calc(t_scene_obj *obj);
 static void	plane_calc(t_scene_obj *obj);
 static void	cylinder_calc(t_scene_obj *obj);
+static void	cone_calc(t_scene_obj *obj);
 
 void	calc_components(t_scene *scene)
 {
-	t_objs	map[COUNT] = {
-		[SPHERE] = sphere_calc,
-		[PLANE] = plane_calc,
-		[CYLINDER] = cylinder_calc,
-	};
-	t_objs	ft;
 	t_list	*node;
 	int		i;
 
 	scene->cam->orient = vec_normalize(scene->cam->orient);
+	scene->cam->fov = to_radians(scene->cam->fov);
 	i = 0;
 	while (i < COUNT)
 	{
 		node = scene->objs[i];
 		while (node)
 		{
-			ft = map[i];
-			ft((t_scene_obj *)node->content);
+			if (i == SPHERE)
+				sphere_calc((t_scene_obj *)node->content);
+			else if (i == PLANE)
+				plane_calc((t_scene_obj *)node->content);
+			else if (i == CYLINDER)
+				cylinder_calc((t_scene_obj *)node->content);
+			else if (i == CONE)
+				cone_calc((t_scene_obj *)node->content);
 			node = node->next;
 		}
 		i++;
@@ -75,4 +77,21 @@ static void	cylinder_calc(t_scene_obj *obj)
 	cy->base.color = cy->color;
 	cy->top.type.base = PLANE;
 	cy->base.type.base = PLANE;
+}
+
+static void	cone_calc(t_scene_obj *obj)
+{
+	t_cone	*cone;
+	double	radian;
+
+	cone = (t_cone *)obj;
+	radian = to_radians(cone->theta) * 0.5;
+	cone->tan2 = tan(radian) * tan(radian);
+	cone->radius = cone->height * tan(radian);
+	cone->v_axis = vec_normalize(cone->v_axis);
+	cone->base.a_point = vec_add(cone->vertex,
+			vec_scale(cone->v_axis, cone->height));
+	cone->base.normal = cone->v_axis;
+	cone->base.color = cone->color;
+	cone->base.type.base = PLANE;
 }

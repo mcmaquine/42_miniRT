@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "minirt_bonus.h"
 
 void    print_scene(t_scene *scene);
 

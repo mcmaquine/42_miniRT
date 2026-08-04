@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/31 21:08:45 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/04 18:34:24 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,22 @@ typedef struct s_scene_obj
 	t_obj_type	base;
 }	t_scene_obj;
 
+typedef enum e_pattern
+{
+	PATTERN_NONE,
+	PATTERN_CHECKER
+}	t_pattern;
+
+typedef struct s_material
+{
+	t_pattern	pattern;
+	t_color		checker_color;
+	REAL		checker_scale;
+	char		*bump_path;
+	REAL		bump_strength;
+	REAL		reflection;
+}	t_material;
+
 typedef struct s_amb_light
 {
 	t_scene_obj		type;
@@ -80,8 +96,9 @@ typedef struct s_sphere
 	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
-	double		diam;
-	double		r_sq;
+	t_material	material;
+	REAL		diam;
+	REAL		r_sq;
 }	t_sphere;
 
 typedef struct s_plane
@@ -90,6 +107,7 @@ typedef struct s_plane
 	t_point		a_point;
 	t_point		normal;
 	t_color		color;
+	t_material	material;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -100,14 +118,27 @@ typedef struct s_cylinder
 	t_point		center;
 	t_point		v_axis;
 	t_color		color;
-	double		diam;
-	double		height;
-	double		height_2;
-	double		radius;
-	double		r_sq;
+	t_material	material;
+	REAL		diam;
+	REAL		height;
+	REAL		height_2;
+	REAL		radius;
+	REAL		r_sq;
 }	t_cylinder;
 
-typedef struct s_bvh_node	t_bvh_node;
+typedef struct s_cone
+{
+	t_scene_obj	type;
+	t_plane		base;
+	t_point		vertex;
+	t_point		v_axis;
+	t_color		color;
+	t_material	material;
+	REAL		theta;
+	REAL		height;
+	REAL		radius;
+	REAL		tan2;
+}	t_cone;
 
 typedef struct s_scene
 {
@@ -131,8 +162,8 @@ typedef struct s_hit
 	t_point		normal;
 	t_color		color;
 	t_scene_obj	*obj;
+	t_point		view_origin;
 }	t_hit;
-
 
 typedef struct s_window
 {

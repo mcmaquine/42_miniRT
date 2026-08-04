@@ -6,15 +6,16 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 00:00:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/04 17:31:07 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static void	sphere_calc(t_scene_obj *obj);
 static void	plane_calc(t_scene_obj *obj);
 static void	cylinder_calc(t_scene_obj *obj);
+static void	cone_calc(t_scene_obj *obj);
 
 void	calc_components(t_scene *scene)
 {
@@ -25,7 +26,9 @@ void	calc_components(t_scene *scene)
 	map[SPHERE] = sphere_calc;
 	map[PLANE] = plane_calc;
 	map[CYLINDER] = cylinder_calc;
+	map[CONE] = cone_calc;
 	scene->cam->orient = vec_normalize(scene->cam->orient);
+	scene->cam->fov = to_radians(scene->cam->fov);
 	i = 0;
 	while (i < COUNT)
 	{
@@ -76,4 +79,22 @@ static void	cylinder_calc(t_scene_obj *obj)
 	cylinder->base.material = cylinder->material;
 	cylinder->top.type.base = PLANE;
 	cylinder->base.type.base = PLANE;
+}
+
+static void	cone_calc(t_scene_obj *obj)
+{
+	t_cone	*cone;
+	REAL	radian;
+
+	cone = (t_cone *)obj;
+	radian = to_radians(cone->theta) * 0.5;
+	cone->tan2 = tan(radian) * tan(radian);
+	cone->radius = cone->height * tan(radian);
+	cone->v_axis = vec_normalize(cone->v_axis);
+	cone->base.a_point = vec_add(cone->vertex,
+			vec_scale(cone->v_axis, cone->height));
+	cone->base.normal = cone->v_axis;
+	cone->base.color = cone->color;
+	cone->base.material = cone->material;
+	cone->base.type.base = PLANE;
 }

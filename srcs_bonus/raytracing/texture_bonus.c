@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 #include "raytracer_bonus.h"
 
 t_material	*get_material_bonus(t_scene_obj *obj)

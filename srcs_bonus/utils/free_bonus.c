@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 17:15:07 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 18:35:24 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/08/04 16:56:33 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/08/04 17:09:26 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-# define WINDOW_H
-# include "minirt_bonus.h"
+#include "minirt_bonus.h"
 
-int		start_window(t_window *win, int width, int height);
-void	events(t_window *win);
-void	paint_pixel(t_window *w, int x, int y, unsigned int color);
-void	clear_canva(t_window *w);
-//memory clear functions
-void	clear_cone(void *obj);
+void	clear_cone(void *obj)
+{
+	t_cone *cone;
 
-#endif
+	cone = (t_cone *)obj;
+	free(cone);
+}

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 #include "raytracer_bonus.h"
 
 static t_ray	reflected_ray(t_hit *hit, t_ray incident)

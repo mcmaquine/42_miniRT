@@ -6,18 +6,18 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 18:50:29 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/04 18:39:23 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 #include "raytracer_bonus.h"
 
 t_color	phong_amb_color(t_window *win, t_hit *hit)
 {
 	t_color	color;
 	t_color	amb_color;
-	REAL	light_rate;
+	double	light_rate;
 
 	ft_memset(&color, 0, sizeof(t_color));
 	if (!win || !hit)
@@ -35,8 +35,8 @@ t_color	phong_diffuse_color(t_window *win, t_hit *hit)
 	t_color	diffuse;
 	t_light	light;
 	t_point	light_dir;
-	REAL	diff_factor;
-	REAL	rate;
+	double	diff_factor;
+	double	rate;
 
 	light = *(win->scene_obj->light);
 	light_dir = vec_normalize(vec_sub(light.coord, hit->point));
@@ -103,7 +103,7 @@ int	is_in_shadow(t_window *win, t_hit *hit)
 	t_point	light_dir;
 	t_ray	shadow_ray;
 	t_hit	shadow_hit;
-	REAL	dist_to_light;
+	double	dist_to_light;
 
 	light_dir = vec_normalize(vec_sub(win->scene_obj->light->coord,
 				hit->point));
