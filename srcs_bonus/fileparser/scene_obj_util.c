@@ -47,7 +47,7 @@ void	free_scene_obj(t_scene **scene_obj)
 		return ;
 	free((*scene_obj)->amb);
 	free((*scene_obj)->cam);
-	free((*scene_obj)->light);
+	ft_lstclear(&(*scene_obj)->light, free);
 	i = -1;
 	while (++i < COUNT)
 		ft_lstclear(&((*scene_obj)->objs)[i], free);
@@ -73,9 +73,8 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 	temp.red = ft_atoi(colors[0]);
 	temp.green = ft_atoi(colors[1]);
 	temp.blue = ft_atoi(colors[2]);
-	color->tpcy = 0.0;
 	ft_free_split(colors);
-	if ((temp.red < 0 || temp.red > 255) 
+	if ((temp.red < 0 || temp.red > 255)
 		|| (temp.green < 0 || temp.green > 255)
 		|| (temp.blue < 0 || temp.blue > 255))
 	{

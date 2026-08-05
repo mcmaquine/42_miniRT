@@ -25,7 +25,7 @@ t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray);
 t_color	phong_diffuse_color(t_window *win, t_hit *hit);
 t_color	phong_amb_color(t_window *w, t_hit *hit);
 t_color	calculate_illumination(t_window *win, t_hit hit);
-int		is_in_shadow(t_window *win, t_hit *hit);
+int		is_in_shadow(t_window *win, t_hit *hit, t_light *light);
 double	roots(double a, double b, double c);
 void	init_t_hit(t_hit *hit, double t);
 t_hit	circular_plane_intersec(t_plane *p, double radius, t_ray r);

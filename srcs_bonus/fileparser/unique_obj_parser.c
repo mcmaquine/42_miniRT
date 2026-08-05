@@ -12,6 +12,8 @@
 
 #include "minirt_bonus.h"
 
+static int	fill_camera(char **params, t_cam *cam);
+
 int	amb_light_parser(char **params, t_scene *scene_obj)
 {
 	if (scene_obj->amb != NULL)
@@ -22,7 +24,7 @@ int	amb_light_parser(char **params, t_scene *scene_obj)
 	if (ft_sizeof_split(params) != 3)
 	{
 		print_error(OBJ_AMBIENT, ERR_NO_INFORMATION, 0);
-		return (1); // more params than the object can handle
+		return (1);
 	}
 	scene_obj->amb = ft_calloc(1, sizeof(t_amb_light));
 	if (!scene_obj->amb)
@@ -54,16 +56,7 @@ int	cam_parser(char **params, t_scene *scene_obj)
 		return (1);
 	}
 	cam = ft_calloc(1, sizeof(t_cam));
-	cam->type.base = CAMERA;
-	cam->fov = ft_atod(params[3]);
-	if (cam->fov < 0.0 || cam->fov > 180)
-	{
-		print_error(OBJ_CAMERA, ERR_OUT_RANGE_FOV, 0);
-		free(cam);
-		return (1);
-	}
-	if (fill_coordinate(params[1], &(cam->point), OBJ_CAMERA)
-		|| fill_normalized(params[2], &(cam->orient), OBJ_CAMERA))
+	if (fill_camera(params, cam))
 	{
 		free(cam);
 		return (1);
@@ -72,15 +65,25 @@ int	cam_parser(char **params, t_scene *scene_obj)
 	return (0);
 }
 
+static int	fill_camera(char **params, t_cam *cam)
+{
+	cam->type.base = CAMERA;
+	cam->fov = ft_atod(params[3]);
+	if (cam->fov < 0.0 || cam->fov > 180)
+	{
+		print_error(OBJ_CAMERA, ERR_OUT_RANGE_FOV, 0);
+		return (1);
+	}
+	if (fill_coordinate(params[1], &(cam->point), OBJ_CAMERA)
+		|| fill_normalized(params[2], &(cam->orient), OBJ_CAMERA))
+		return (1);
+	return (0);
+}
+
 int	light_parser(char **params, t_scene *scene_obj)
 {
 	t_light	*light;
 
-	if (scene_obj->light != NULL)
-	{
-		print_error(OBJ_LIGHT, ERR_NO_UNIQUE, 0);
-		return (1);
-	}
 	if (ft_sizeof_split(params) != 4)
 	{
 		print_error(OBJ_LIGHT, ERR_NO_INFORMATION, 0);
@@ -101,6 +104,6 @@ int	light_parser(char **params, t_scene *scene_obj)
 		free(light);
 		return (1);
 	}
-	scene_obj->light = light;
+	ft_lstadd_back(&scene_obj->light, ft_lstnew(light));
 	return (0);
 }
