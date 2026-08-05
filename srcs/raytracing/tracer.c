@@ -53,10 +53,10 @@ t_hit	all_intersections(t_window *win, t_ray ray)
 	t_hit	temp;
 	t_hit	hit;
 	int		i;
-	static t_hit	(*intersections[4])(t_window *, t_ray) {
+	static t_hit	(*intersections[4])(t_window *, t_ray) = {
+	[SPHERE] = intersect_sphere,
 	[PLANE] = intersect_plane,
 	[CYLINDER] = intersect_cylinder,
-	[SPHERE] = intersect_sphere,
 	[3] = NULL
 	};
 
