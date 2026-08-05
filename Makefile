@@ -25,8 +25,6 @@ LIBS = -L$(MLX_DIR) -lmlx_Linux -lXext -Llibft -lX11 -lft -Lmlx -lm -lz
 MAIN_SRC = main.c
 
 ALGELIN_SRC = \
-	algelin/cofator.c \
-	algelin/matrix_det.c \
 	algelin/matrix_ops.c \
 	algelin/matrix_utils.c \
 	algelin/vector_measure.c \
@@ -35,6 +33,7 @@ ALGELIN_SRC = \
 
 PARSER_SRCS = \
 	fileparser/openfile.c \
+	fileparser/openfile_util.c \
 	fileparser/scene_obj_parser.c \
 	fileparser/scene_obj_util.c \
 	fileparser/unique_obj_parser.c \
