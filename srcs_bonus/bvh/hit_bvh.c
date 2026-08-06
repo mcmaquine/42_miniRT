@@ -18,6 +18,8 @@ t_hit	hit_bvh(t_bvh_node *node, t_ray ray)
 			hit = full_intersection_sphere((t_sphere *)node->obj, ray);
 		if (node->obj->base == CYLINDER)
 			hit = full_intersection_cylinder((t_cylinder *)node->obj, ray);
+		if (node->obj->base == CONE)
+			hit = full_intersection_cone((t_cone *)node->obj, ray);
 		if (hit.t > 0 && hit.t < DBL_MAX)
 			return (hit);
 		else
