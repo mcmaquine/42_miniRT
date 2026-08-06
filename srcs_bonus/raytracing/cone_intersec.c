@@ -14,7 +14,7 @@
 
 static	t_hit	full_intersection(t_cone *con, t_ray ray);
 static	t_hit	check_cone_intersec(t_cone *con, t_ray ray, t_point vo);
-static	t_hit	check_height_intersec(t_cone *con, t_ray r, REAL t);
+static	t_hit	check_height_intersec(t_cone *con, t_ray r, double t);
 
 t_hit	intersect_cone(t_window *win, t_ray ray)
 {
@@ -73,11 +73,11 @@ static	t_hit	check_cone_intersec(t_cone *con, t_ray ray, t_point vo)
 				2 * (votd - votv * dtv * k), vo_sq - votv * votv * k)));
 }
 
-static	t_hit	check_height_intersec(t_cone *con, t_ray r, REAL t)
+static	t_hit	check_height_intersec(t_cone *con, t_ray r, double t)
 {
 	t_point	point;
 	t_hit	hit;
-	REAL	h;
+	double	h;
 
 	init_t_hit(&hit, -1);
 	if (t < 0)

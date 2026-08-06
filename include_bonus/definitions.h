@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/05 23:49:52 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:00:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define WIDTH 1000
 # define HEIGHT 1000
 # define EPSILON 1e-4
+# define SHININESS 32.0
+# define SPECULAR_STRENGTH 0.5	
 
 typedef enum e_obj_type
 {
@@ -80,6 +82,7 @@ typedef enum e_error_option
 	ERR_OUT_RANGE_RATIO,
 	ERR_OUT_RANGE_BRIGHT,
 	ERR_OUT_RANGE_COLOR,
+	ERR_OUT_RANGE_ANGLE,
 	ERR_OUT_RANGE_VEC,
 	ERR_COORDS_INVALID,
 	ERR_DIAMETER_NEGATIVE,

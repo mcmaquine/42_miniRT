@@ -13,7 +13,7 @@
 #include "minirt_bonus.h"
 
 static	t_hit	full_intersection(t_cylinder *sph, t_ray ray);
-static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t);
+static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, double t);
 static	t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray, t_point co);
 
 t_hit	intersect_cylinder(t_window *win, t_ray ray)
@@ -61,10 +61,10 @@ static	t_hit	full_intersection(t_cylinder *cyl, t_ray ray)
 
 static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray, t_point co)
 {
-	REAL	dv_axis;
-	REAL	cov_axis;
-	REAL	co_sq;
-	REAL	dco;
+	double	dv_axis;
+	double	cov_axis;
+	double	co_sq;
+	double	dco;
 
 	if (!cyl)
 		return (check_height_intersec(cyl, ray, -1));
@@ -82,11 +82,11 @@ static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray, t_point co)
 /*
 Checks if tubes intersection goes beyond cylinder height
 */
-static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t)
+static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, double t)
 {
 	t_point	point;
 	t_hit	hit;
-	REAL	h;
+	double	h;
 
 	init_t_hit(&hit, -1);
 	if (t < 0)

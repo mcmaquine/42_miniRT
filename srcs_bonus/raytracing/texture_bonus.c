@@ -58,7 +58,7 @@ void	apply_texture_bonus(t_hit *hit)
 {
 	t_material	*material;
 	t_point		point;
-	REAL		cell;
+	double		cell;
 
 	if (!hit || !hit->obj)
 		return ;

@@ -61,7 +61,7 @@ static void	cone_normal(t_hit *hit)
 	t_point	p;
 	t_point	v;
 	t_cone	*cone;
-	REAL	h;
+	double	h;
 
 	if (!hit->obj)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/05 23:42:21 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:01:01 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_sphere
 	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
+	t_material	material;
 	double		diam;
 	double		r_sq;
 }	t_sphere;
@@ -106,6 +107,7 @@ typedef struct s_plane
 	t_point		a_point;
 	t_point		normal;
 	t_color		color;
+	t_material	material;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -116,6 +118,7 @@ typedef struct s_cylinder
 	t_point		center;
 	t_point		v_axis;
 	t_color		color;
+	t_material	material;
 	double		diam;
 	double		height;
 	double		height_2;

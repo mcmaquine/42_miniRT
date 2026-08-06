@@ -14,7 +14,7 @@
 
 static t_ray	direction(t_point to_normalize, t_point origin);
 static t_point	camera_right(t_point forward);
-static REAL		screen_coordinate(int pixel, int size);
+static double		screen_coordinate(int pixel, int size);
 
 t_hit	all_intersections(t_window *win, t_ray ray)
 {
@@ -46,15 +46,15 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	t_point	forward;
 	t_point	right;
 	t_point	up;
-	REAL	half_width;
-	REAL	screen_x;
+	double	half_width;
+	double	screen_x;
 
 	half_width = tan(win->scene_obj->cam->fov * 0.5);
 	forward = win->scene_obj->cam->orient;
 	right = camera_right(forward);
 	up = vec_normalize(vec_cross(forward, right));
 	screen_x = (2.0 * screen_coordinate(px, win->width) - 1.0)
-		* ((REAL)win->width / (REAL)win->height) * half_width;
+		* ((double)win->width / (double)win->height) * half_width;
 	right = vec_scale(right, screen_x);
 	up = vec_scale(up, (1.0 - 2.0 * screen_coordinate(py, win->height))
 			* half_width);
@@ -81,8 +81,8 @@ static t_point	camera_right(t_point forward)
 	return (vec_normalize(vec_cross(world_up, forward)));
 }
 
-static REAL	screen_coordinate(int pixel, int size)
+static double	screen_coordinate(int pixel, int size)
 {
-	return (((REAL)pixel + 0.5) / (REAL)size);
+	return (((double)pixel + 0.5) / (double)size);
 }
 

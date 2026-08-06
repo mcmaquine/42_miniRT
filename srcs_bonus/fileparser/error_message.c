@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:42:39 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:40 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/05 23:52:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static const char	*error_msg(t_error_option option)
 	[ERR_OUT_RANGE_RATIO] = "ratio out of range [0.0, 1.0]",
 	[ERR_OUT_RANGE_BRIGHT] = "brightness out of range [0.0,1.0]",
 	[ERR_OUT_RANGE_COLOR] = "color value out of range [0-255]",
+	[ERR_OUT_RANGE_ANGLE] = "angle out of range (1, 89)",
 	[ERR_OUT_RANGE_VEC] = "normalized vector value out of range [-1, 1]",
 	[ERR_COORDS_INVALID] = "invalid coordinates value",
 	[ERR_DIAMETER_NEGATIVE] = "diameter value negative",

@@ -6,12 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:57 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/05 23:49:05 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/05 23:57:01 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_TRACER_H
 # define RAY_TRACER_H
+# define MAX_REFLECTION_DEPTH 4
 
 t_hit	all_intersections(t_window *win, t_ray ray);
 t_ray	generate_ray(t_window *win, int px, int py);
@@ -25,6 +26,10 @@ t_color	phong_diffuse_color(t_window *win, t_hit *hit);
 t_color	phong_amb_color(t_window *w, t_hit *hit);
 t_color	calculate_illumination(t_window *win, t_hit hit);
 int		is_in_shadow(t_window *win, t_hit *hit);
+//	texture
+void		apply_texture_bonus(t_hit *hit);
+t_material	*get_material_bonus(t_scene_obj *obj);
+t_color		trace_color_bonus(t_window *win, t_ray ray, int depth);
 //utils
 double 	roots(double a, double b, double c);
 void	init_t_hit(t_hit *hit, double t);
