@@ -6,13 +6,12 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 20:35:06 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/03 17:53:59 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:31:35 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static	t_hit	full_intersection(t_cone *con, t_ray ray);
 static	t_hit	check_cone_intersec(t_cone *con, t_ray ray, t_point vo);
 static	t_hit	check_height_intersec(t_cone *con, t_ray r, double t);
 
@@ -29,7 +28,7 @@ t_hit	intersect_cone(t_window *win, t_ray ray)
 	hit.t = DBL_MAX;
 	while (con != NULL)
 	{
-		temp = full_intersection((t_cone *)con->content, ray);
+		temp = full_intersection_cone((t_cone *)con->content, ray);
 		if (temp.t >= 0 && temp.t < hit.t)
 			hit = temp;
 		con = con->next;
@@ -37,7 +36,7 @@ t_hit	intersect_cone(t_window *win, t_ray ray)
 	return (hit);
 }
 
-static	t_hit	full_intersection(t_cone *con, t_ray ray)
+t_hit	full_intersection_cone(t_cone *con, t_ray ray)
 {
 	t_hit	hit_base;
 	t_hit	hit_cone;

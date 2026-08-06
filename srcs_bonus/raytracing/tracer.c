@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 00:28:12 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:32:22 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_hit	all_intersections(t_window *win, t_ray ray)
 		NULL
 	};
 
+	i = 0;
 	init_t_hit(&hit, DBL_MAX);
 	while (ft[i])
 	{

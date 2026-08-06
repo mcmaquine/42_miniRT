@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:57 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 00:09:30 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:31:23 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_hit	intersect_sphere(t_window *win, t_ray ray);
 t_hit	intersect_cylinder(t_window *win, t_ray);
 t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray);
 t_hit	intersect_cone(t_window *win, t_ray ray);
+t_hit	full_intersection_cone(t_cone *con, t_ray ray);
 t_hit	full_intersection_sphere(t_sphere *sph, t_ray ray);
 void	calculate_normal(t_hit *hit, t_ray ray);
 // Phong
