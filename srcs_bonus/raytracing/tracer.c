@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 15:37:52 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:28:12 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,21 @@ t_hit	all_intersections(t_window *win, t_ray ray)
 {
 	t_hit	temp;
 	t_hit	hit;
+	int		i;
+	static	t_hit	(*ft[3])(t_window *, t_ray) = {
+		intersect_bvh,
+		intersect_plane,
+		NULL
+	};
 
 	init_t_hit(&hit, DBL_MAX);
-	temp = intersect_sphere(win, ray);
-	if (temp.t > 0 && temp.t < hit.t)
-		hit = temp;
-	temp = intersect_plane(win, ray);
-	if (temp.t > 0 && temp.t < hit.t)
-		hit = temp;
-	temp = intersect_cylinder(win, ray);
-	if (temp.t > 0 && temp.t < hit.t)
-		hit = temp;
-	temp = intersect_cone(win, ray);
-	if (temp.t > 0 && temp.t < hit.t)
-		hit = temp;
+	while (ft[i])
+	{
+		temp = (ft[i])(win, ray);
+		if (temp.t > 0 && temp.t < hit.t)
+			hit = temp;
+		i++;
+	}
 	if (hit.t == DBL_MAX)
 		init_t_hit(&hit, -1);
 	if (hit.t > 0)
