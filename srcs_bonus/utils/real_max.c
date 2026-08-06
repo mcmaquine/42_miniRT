@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   real_max.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/07 00:24:33 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/08/07 00:33:05 by mmaquine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt_bonus.h"
 
 double	real_max(double x, double y, double z)
 {
-	double bigger;
+	double	bigger;
 
 	bigger = x;
 	if (y > bigger)

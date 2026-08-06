@@ -24,6 +24,8 @@ int	main(int argc, char *argv[])
 	//TODO valid file extension
 	//TODO update scene_obj -> *scene_obj in header
 	scene.scene_obj = read_file(argv[1]);
+	if (!scene.scene_obj)
+		return (1);
 	calc_components(scene.scene_obj); // calculate normals
 	start_window(&scene, WIDTH, HEIGHT);
 	render(&scene);

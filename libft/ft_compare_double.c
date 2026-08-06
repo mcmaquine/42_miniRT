@@ -10,23 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static double abs_double(double x)
+static double	abs_double(double x)
 {
-    if (x < 0.0)
-        return (-x);
-    return (x);
+	if (x < 0.0)
+		return (-x);
+	return (x);
 }
 
 /*
 Return 0 if two doubles are equal (or their difference is less than tol), 1
 otherwise.
 */
-int ft_dcmp(double num1, double num2, double tol)
+int	ft_dcmp(double num1, double num2, double tol)
 {
-    double	diff;
+	double	diff;
 
-    diff = num1 - num2;
-    if (abs_double(diff) <= tol)
-        return (0);
-    return (1);
+	diff = num1 - num2;
+	if (abs_double(diff) <= tol)
+		return (0);
+	return (1);
 }

@@ -24,7 +24,10 @@ t_scene	*read_file(char *filename)
 	t_scene	*scene_obj;
 
 	if (!valid_extension(filename, ".rt"))
+	{
+		ft_putstr_fd("Error\nInvalid file extension\n", 2);
 		return (NULL);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
@@ -77,6 +80,11 @@ static int	parser_line(char *line, t_scene *scene_obj)
 	params = ft_strsplit_any(line, "\t\n\v\f\r ");
 	if (!params)
 		return (1);
+	if (!params[0] || params[0][0] == '#')
+	{
+		ft_free_split(params);
+		return (0);
+	}
 	if (ft_sizeof_split(params) == 1)
 	{
 		ft_free_split(params);
@@ -103,13 +111,20 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 		return (cilinder_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "co"))
 		return (cone_parser(params, scene_obj));
-	return (0);
+	ft_putstr_fd("Error\nUnknown object\n", 2);
+	return (1);
 }
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)
 {
 	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light)
 	{
+		if (!(*scene_obj)->amb)
+			print_error(OBJ_AMBIENT, ERR_NO_OBJECT, 0);
+		else if (!(*scene_obj)->cam)
+			print_error(OBJ_CAMERA, ERR_NO_OBJECT, 0);
+		else
+			print_error(OBJ_LIGHT, ERR_NO_OBJECT, 0);
 		free_scene_obj(scene_obj);
 		return (NULL);
 	}

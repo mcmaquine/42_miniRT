@@ -24,7 +24,10 @@ t_scene*	read_file(char *filename)
 	t_scene	*scene_obj;
 
 	if (!valid_extension(filename, ".rt"))
+	{
+		ft_putstr_fd("Error\nInvalid file extension\n", 2);
 		return (NULL);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
@@ -107,17 +110,22 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 		return (plane_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "cy"))
 		return (cilinder_parser(params, scene_obj));
+	ft_putstr_fd("Error\nUnknown object\n", 2);
 	return (1);
 }
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)
 {
-    //TODO missing error message
-	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light )
+	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light)
 	{
+		if (!(*scene_obj)->amb)
+			print_error(OBJ_AMBIENT, ERR_NO_OBJECT, 0);
+		else if (!(*scene_obj)->cam)
+			print_error(OBJ_CAMERA, ERR_NO_OBJECT, 0);
+		else
+			print_error(OBJ_LIGHT, ERR_NO_OBJECT, 0);
 		free_scene_obj(scene_obj);
 		return (NULL);
 	}
-	else
-		return (*scene_obj);
+	return (*scene_obj);
 }

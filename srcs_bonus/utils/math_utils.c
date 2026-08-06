@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 17:38:21 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:51 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:25:09 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 Converts degree to radians
 */
-double to_radians(double degree)
+double	to_radians(double degree)
 {
 	return (degree * (M_PI / 180.0));
 }

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:42:39 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/05 23:52:27 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 16:18:14 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ static const char	*error_msg(t_error_option option)
 
 void	print_error(t_objs_type obj, t_error_option option, int line)
 {
-	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option), line);
+	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option),
+		line);
 }

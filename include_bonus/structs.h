@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 00:01:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 21:46:44 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ typedef struct s_scene
 {
 	t_amb_light	*amb;
 	t_cam		*cam;
-	t_light		*light;
+	t_list		*light;
 	t_list		*objs[COUNT];
 	t_bvh_node	*tree;
 }	t_scene;

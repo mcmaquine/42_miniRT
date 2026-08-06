@@ -19,7 +19,7 @@ int	cone_parser(char **params, t_scene *scene_obj)
 	t_cone	*cone;
 	int		error;
 
-	if (ft_sizeof_split(params) != 6)
+	if (ft_sizeof_split(params) < 6)
 	{
 		print_error(OBJ_CONE, ERR_NO_INFORMATION, 0);
 		return (1);
@@ -48,7 +48,8 @@ static int	fill_cone(char **params, t_cone *cone)
 		print_error(OBJ_CONE, ERR_NO_PARAM_HEIGHT, 0);
 	else if (fill_coordinate(params[1], &(cone->vertex), OBJ_CONE)
 		|| fill_normalized(params[2], &(cone->v_axis), OBJ_CONE)
-		|| fill_color(params[5], &(cone->color), OBJ_CONE))
+		|| fill_color(params[5], &(cone->color), OBJ_CONE)
+		|| parse_material_bonus(params, 6, &cone->material, OBJ_CONE))
 		return (1);
 	else
 		return (0);

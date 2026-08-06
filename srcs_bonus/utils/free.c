@@ -1,11 +1,18 @@
-//header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/07 00:29:47 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/08/07 00:29:49 by mmaquine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
 void	free_scene(t_scene *scene);
-void	clear_sphere(void *obj);
-void	clear_plane(void *obj);
-void	clear_cylinder(void *obj);
 void	free_mlx(void *mlx, void *win, void *img);
 
 void	free_window(t_window *win)
@@ -24,47 +31,21 @@ void	free_scene(t_scene *scene)
 {
 	int		i;
 	t_list	**lst;
-	void	(*ft[COUNT])(void *) = {
-	clear_sphere,
-	clear_plane,
-	clear_cylinder
-	};
 
+	if (!scene)
+		return ;
+	free_bvh(scene->tree);
 	free(scene->amb);
 	free(scene->cam);
-	free(scene->light);
+	ft_lstclear(&(scene->light), free);
 	i = 0;
 	while (i < COUNT)
 	{
 		lst = &scene->objs[i];
-		ft_lstclear(lst, ft[i]);
+		ft_lstclear(lst, free);
 		i++;
 	}
 	free(scene);
-}
-
-void	clear_sphere(void *obj)
-{
-	t_sphere	*sphere;
-
-	sphere = (t_sphere *)obj;
-	free(sphere);
-}
-
-void	clear_plane(void *obj)
-{
-	t_plane	*plane;
-
-	plane = (t_plane *)obj;
-	free(plane);
-}
-
-void	clear_cylinder(void *obj)
-{
-	t_cylinder	*cylinder;
-
-	cylinder = (t_cylinder *)obj;
-	free(cylinder);
 }
 
 void	free_mlx(void *mlx, void *win, void *img)

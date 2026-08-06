@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/31 21:54:25 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 16:16:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char *argv[])
 		return (1); // message given a usage example
 	//TODO valid file extension
 	scene.scene_obj = read_file(argv[1]);
+	if (!scene.scene_obj)
+		return (1);
 	calc_components(scene.scene_obj); // calculate normals
 	init_bvh(scene.scene_obj);
 	start_window(&scene, WIDTH, HEIGHT);
@@ -49,11 +51,10 @@ int	main(int argc, char *argv[])
 	else
 		printf("end calcs in %ld\n", end - start);
 	mlx_put_image_to_window(scene.mlx, scene.win, scene.canva.img, 0, 0);
-	mlx_loop(scene.mlx);
 	pthread_mutex_destroy(&queue->lock);
 	free(queue->tiles);
 	free(queue);
 	free(threads);
-	// TODO destroy miniRT
+	mlx_loop(scene.mlx);
 	return (0);
 }
