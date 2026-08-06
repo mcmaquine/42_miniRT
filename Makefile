@@ -6,7 +6,11 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2026/08/04 18:35:16 by mmaquine         ###   ########.fr        #
+=======
+#    Updated: 2026/07/04 17:29:24 by gabrgarc         ###   ########.fr        #
+>>>>>>> parent of 81fe7a2 (add: BVH source files)
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,10 +112,71 @@ $(MANDATORY_STAMP): $(OBJS) $(LIBFT) $(LIBX)
 
 bonus: $(BONUS_STAMP)
 
+<<<<<<< HEAD
 $(BONUS_STAMP): $(BONUS_OBJS) $(LIBFT) $(LIBX)
 	$(CC) $(CFLAGS) $(LIBS) $^ -o $(NAME) $(LIBS)
 	rm -f $(MANDATORY_STAMP)
 	touch $@
+=======
+PARSER_SRCS_BONUS = \
+	fileparser/openfile.c \
+	fileparser/scene_obj_parser.c \
+	fileparser/scene_obj_util.c \
+	fileparser/unique_obj_parser.c \
+	fileparser/error_message.c
+
+RAYTRACING_SRCS_BONUS = \
+	raytracing/cyl_intersec.c \
+	raytracing/normals.c \
+	raytracing/phong.c \
+	raytracing/plane_intersec.c \
+	raytracing/sphere_intersec.c \
+	raytracing/tracer.c \
+	raytracing/tracer_utils.c
+
+CALC_SRCS_BONUS = \
+	calc/calc_normals.c
+
+THREAD_SRCS_BONUS = \
+	threads/thread.c \
+	threads/thread_routine.c
+
+UTILS_SRCS_BONUS = \
+	utils/math_utils.c \
+	utils/free.c \
+	utils/num_threads.c \
+	utils/get_current_time.c \
+	utils/real_min.c \
+	utils/real_max.c
+
+WINDOW_SRC_BONUS = \
+	window/start_window.c \
+	window/events.c
+
+SRCS_BONUS := $(MAIN_SRC_BONUS) $(ALGELIN_SRC_BONUS) $(PARSER_SRCS_BONUS) \
+	$(RAYTRACING_SRCS_BONUS) $(UTILS_SRCS_BONUS) $(WINDOW_SRC_BONUS) \
+	$(CALC_SRCS_BONUS) $(THREAD_SRCS_BONUS)
+
+SRCS_BONUS := $(addprefix srcs_bonus/, $(SRCS_BONUS))
+
+OBJS_DIR_BONUS = objs_bonus/
+OBJS_BONUS      = $(addprefix $(OBJS_DIR_BONUS), $(SRCS_BONUS:.c=.o))
+OBJS_DIRS_BONUS = $(sort $(dir $(OBJS_BONUS)))
+
+# ----------------------------------------------------------------------------
+# Rules
+# ----------------------------------------------------------------------------
+
+all: $(NAME)
+
+bonus: $(NAME_BONUS)
+
+$(NAME): $(OBJS) $(LIBFT) $(LIBX)
+	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBS)
+
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(LIBX)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) -o $@ $(LIBS_BONUS)
+>>>>>>> parent of 81fe7a2 (add: BVH source files)
 
 $(OBJS): | $(OBJS_DIR)
 
