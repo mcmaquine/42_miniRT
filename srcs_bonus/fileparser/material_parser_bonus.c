@@ -6,12 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 00:00:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 14:46:38 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-#include "fileparser_bonus.h"
 
 static int	material_error(t_objs_type obj)
 {
