@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_routine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 21:48:54 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/07 00:00:00 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 01:01:43 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	render_tile(t_window *scene, t_tile *tile)
 	int		px;
 	int		py;
 	int		*addr;
-	t_hit	hit;
 	t_color	color;
 	t_ray	ray;
 
@@ -63,8 +62,7 @@ void	render_tile(t_window *scene, t_tile *tile)
 		while (px < tile->width)
 		{
 			ray = generate_ray(scene, tile->x_start + px, tile->y_start + py);
-			hit = all_intersections(scene, ray);
-			color = calculate_illumination(scene, hit);
+			color = trace_color_bonus(scene, ray, MAX_REFLECTION_DEPTH);
 			addr[px] = pixel_color(color);
 			px++;
 		}
