@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 20:51:29 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/31 22:06:38 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/05 21:43:07 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,23 @@ t_scene_obj	**array_objs(t_list *objs[], int n)
 	if (!array)
 		return (NULL);
 	lst = objs[SPHERE];
-	i = 0;
+	i = -1;
 	while (lst)
 	{
-		array[i] = (t_scene_obj *)lst->content;
+		array[++i] = (t_scene_obj *)lst->content;
 		lst = lst->next;
-		i++;
 	}
 	lst = objs[CYLINDER];
 	while (lst)
 	{
-		array[i] = (t_scene_obj *)lst->content;
+		array[++i] = (t_scene_obj *)lst->content;
 		lst = lst->next;
-		i++;
+	}
+	lst = objs[CONE];
+	while (lst)
+	{
+		array[++i] = (t_scene_obj *)lst->content;
+		lst = lst->next;
 	}
 	return (array);
 }

@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/31 21:48:07 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/31 21:59:10 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/05 21:49:53 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_bvh_node
 }	t_bvh_node;
 
 
+t_aabb	cone_aabb(t_cone *cone);
 t_aabb	sphere_aabb(t_sphere *sphere);
 t_bvh_node	*build_bvh(t_scene_obj **objs, int n);
 int	compare_x(const void *a, const void *b);
