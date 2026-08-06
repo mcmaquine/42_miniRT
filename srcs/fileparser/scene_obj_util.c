@@ -12,6 +12,30 @@
 
 #include "minirt.h"
 
+int	is_valid_real(const char *str)
+{
+	size_t	i;
+
+	if (!str || !(*str))
+		return (0);
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (0);
+	while (ft_isdigit(str[i]))
+		i++;
+	if (str[i] == '.')
+	{
+		i++;
+		if (!ft_isdigit(str[i]))
+			return (0);
+		while (ft_isdigit(str[i]))
+			i++;
+	}
+	return (str[i] == '\0');
+}
+
 /*
 Free all memory allocated for t_scene_obj
 */

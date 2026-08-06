@@ -24,15 +24,19 @@ void	free_scene(t_scene *scene)
 {
 	int		i;
 	t_list	**lst;
-	void	(*ft[COUNT])(void *) = {
+	static void	(*ft[COUNT])(void *) = {
 	clear_sphere,
 	clear_plane,
-	clear_cylinder
+	clear_cylinder,
+	clear_cone
 	};
 
+	if (!scene)
+		return ;
+	free_bvh(scene->tree);
 	free(scene->amb);
 	free(scene->cam);
-	free(scene->light);
+	ft_lstclear(&(scene->light), free);
 	i = 0;
 	while (i < COUNT)
 	{

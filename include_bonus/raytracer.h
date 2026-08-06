@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:57 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 00:31:23 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 22:05:29 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	calculate_normal(t_hit *hit, t_ray ray);
 t_color	phong_diffuse_color(t_window *win, t_hit *hit);
 t_color	phong_amb_color(t_window *w, t_hit *hit);
 t_color	calculate_illumination(t_window *win, t_hit hit);
-int		is_in_shadow(t_window *win, t_hit *hit);
+int		is_in_shadow(t_window *win, t_hit *hit, t_light *light);
 //	texture
 void		apply_texture_bonus(t_hit *hit);
 t_material	*get_material_bonus(t_scene_obj *obj);

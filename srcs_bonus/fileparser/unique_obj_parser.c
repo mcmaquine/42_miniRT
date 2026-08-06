@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:42 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 22:08:19 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,6 @@ int	light_parser(char **params, t_scene *scene_obj)
 {
 	t_light	*light;
 
-	if (scene_obj->light != NULL)
-	{
-		print_error(OBJ_LIGHT, ERR_NO_UNIQUE, 0);
-		return (1);
-	}
 	if (ft_sizeof_split(params) != 4)
 	{
 		print_error(OBJ_LIGHT, ERR_NO_INFORMATION, 0);
@@ -101,6 +96,6 @@ int	light_parser(char **params, t_scene *scene_obj)
 		free(light);
 		return (1);
 	}
-	scene_obj->light = light;
+	ft_lstadd_back(&scene_obj->light, ft_lstnew(light));
 	return (0);
 }

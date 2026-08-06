@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/30 10:28:47 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 21:01:07 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ray	generate_ray(t_window *win, int px, int py)
 	t_point	right;
 	t_point	up;
 	
-	REAL	half_width = tan(to_radians(win->scene_obj->cam->fov)/2.0);
+	REAL	half_width = tan(win->scene_obj->cam->fov * 0.5);
 	REAL	aspect_ratio = (REAL)win->width / (REAL)win->height;
 	REAL	ndc_x = (px + 0.5) / win->width;
 	REAL	ndc_y = (py + 0.5) / win->height;

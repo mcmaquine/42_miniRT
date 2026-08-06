@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:21:31 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/06/27 15:23:22 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 21:00:50 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	calc_components(t_scene *scene)
 	int		i;
 
 	scene->cam->orient = vec_normalize(scene->cam->orient);
+	scene->cam->fov = to_radians(scene->cam->fov);
 	i = 0;
 	while (i < COUNT)
 	{
