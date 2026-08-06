@@ -6,12 +6,12 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 18:38:57 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/05 23:57:01 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:09:30 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_TRACER_H
-# define RAY_TRACER_H
+#ifndef RAYTRACER_H
+# define RAYTRACER_H
 # define MAX_REFLECTION_DEPTH 4
 
 t_hit	all_intersections(t_window *win, t_ray ray);
@@ -19,7 +19,9 @@ t_ray	generate_ray(t_window *win, int px, int py);
 t_hit	intersect_plane(t_window *win, t_ray ray);
 t_hit	intersect_sphere(t_window *win, t_ray ray);
 t_hit	intersect_cylinder(t_window *win, t_ray);
+t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray);
 t_hit	intersect_cone(t_window *win, t_ray ray);
+t_hit	full_intersection_sphere(t_sphere *sph, t_ray ray);
 void	calculate_normal(t_hit *hit, t_ray ray);
 // Phong
 t_color	phong_diffuse_color(t_window *win, t_hit *hit);

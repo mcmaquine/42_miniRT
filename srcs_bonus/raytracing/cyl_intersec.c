@@ -6,13 +6,12 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/31 15:53:45 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:09:55 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static	t_hit	full_intersection(t_cylinder *sph, t_ray ray);
 static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, double t);
 static	t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray, t_point co);
 
@@ -29,7 +28,7 @@ t_hit	intersect_cylinder(t_window *win, t_ray ray)
 	hit.t = DBL_MAX;
 	while (cyl != NULL)
 	{
-		temp = full_intersection((t_cylinder *)cyl->content, ray);
+		temp = full_intersection_cylinder((t_cylinder *)cyl->content, ray);
 		if (temp.t >= 0 && temp.t < hit.t)
 			hit = temp;
 		cyl = cyl->next;
@@ -37,7 +36,7 @@ t_hit	intersect_cylinder(t_window *win, t_ray ray)
 	return (hit);
 }
 
-static	t_hit	full_intersection(t_cylinder *cyl, t_ray ray)
+t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray)
 {
 	t_hit	hit_top;
 	t_hit	hit_base;

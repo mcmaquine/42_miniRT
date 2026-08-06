@@ -6,13 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 17:45:48 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:45 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:08:36 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-
-t_hit	full_intersection_sphere(t_sphere *sph, t_ray ray);
 
 t_hit	intersect_sphere(t_window *win, t_ray ray)
 {

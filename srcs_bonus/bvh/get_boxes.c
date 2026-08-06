@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_boxes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 20:30:16 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/05 20:59:24 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 00:14:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-t_aabb	sphere_aabb(t_sphere *sph)
+t_aabb	sphere_aabb(t_sphere *sphere)
 {
 	t_aabb	box;
 	double	r;
@@ -46,7 +46,6 @@ t_aabb	cone_aabb(t_cone *cone)
 {
 	t_aabb	box;
 	t_point	base;
-	t_point 
 	double	r;
 
 	base = cone->base.a_point;

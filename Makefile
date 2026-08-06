@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/05 23:46:06 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/06 00:15:35 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,11 +115,10 @@ RAYTRACING_SRCS_BONUS = \
 	raytracing/tracer_utils.c
 
 BVH_SRCS_BONUS = \
-	bvh/add_box.c \
 	bvh/build_bvh.c \
 	bvh/compare_axis.c \
-	bvh/cylinder_box.c \
 	bvh/get_aabb.c \
+	bvh/get_boxes.c \
 	bvh/group_box.c \
 	bvh/hit_box.c \
 	bvh/hit_bvh.c \
