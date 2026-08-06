@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_bonus.h"
+#include "minirt.h"
 #include "raytracer_bonus.h"
 
 t_material	*get_material_bonus(t_scene_obj *obj)
@@ -58,7 +58,7 @@ void	apply_texture_bonus(t_hit *hit)
 {
 	t_material	*material;
 	t_point		point;
-	double		cell;
+	REAL		cell;
 
 	if (!hit || !hit->obj)
 		return ;

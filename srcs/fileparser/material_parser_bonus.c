@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_bonus.h"
+#include "minirt.h"
 #include "fileparser_bonus.h"
 
 static int	material_error(t_objs_type obj)

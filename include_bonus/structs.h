@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 18:55:27 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/31 21:08:45 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # include "definitions.h"
 # include <ctype.h>
 # include "libft.h"
-
-typedef struct s_bvh_node	t_bvh_node;
 
 typedef struct s_color
 {
@@ -54,22 +52,6 @@ typedef struct s_scene_obj
 	t_obj_type	base;
 }	t_scene_obj;
 
-typedef enum e_pattern
-{
-	PATTERN_NONE,
-	PATTERN_CHECKER
-}	t_pattern;
-
-typedef struct s_material
-{
-	t_pattern	pattern;
-	t_color		checker_color;
-	double		checker_scale;
-	char		*bump_path;
-	double		bump_strength;
-	double		reflection;
-}	t_material;
-
 typedef struct s_amb_light
 {
 	t_scene_obj		type;
@@ -98,7 +80,6 @@ typedef struct s_sphere
 	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
-	t_material	material;
 	double		diam;
 	double		r_sq;
 }	t_sphere;
@@ -109,7 +90,6 @@ typedef struct s_plane
 	t_point		a_point;
 	t_point		normal;
 	t_color		color;
-	t_material	material;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -120,7 +100,6 @@ typedef struct s_cylinder
 	t_point		center;
 	t_point		v_axis;
 	t_color		color;
-	t_material	material;
 	double		diam;
 	double		height;
 	double		height_2;
@@ -128,25 +107,13 @@ typedef struct s_cylinder
 	double		r_sq;
 }	t_cylinder;
 
-typedef struct s_cone
-{
-	t_scene_obj	type;
-	t_plane		base;
-	t_point		vertex;
-	t_point		v_axis;
-	t_color		color;
-	t_material	material;
-	double		theta;
-	double		height;
-	double		radius;
-	double		tan2;
-}	t_cone;
+typedef struct s_bvh_node	t_bvh_node;
 
 typedef struct s_scene
 {
 	t_amb_light	*amb;
 	t_cam		*cam;
-	t_list		*light;
+	t_light		*light;
 	t_list		*objs[COUNT];
 	t_bvh_node	*tree;
 }	t_scene;
@@ -164,8 +131,8 @@ typedef struct s_hit
 	t_point		normal;
 	t_color		color;
 	t_scene_obj	*obj;
-	t_point		view_origin;
 }	t_hit;
+
 
 typedef struct s_window
 {

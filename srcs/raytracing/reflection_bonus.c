@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_bonus.h"
+#include "minirt.h"
 #include "raytracer_bonus.h"
 
 static t_ray	reflected_ray(t_hit *hit, t_ray incident)
 {
 	t_ray	reflected;
-	double	dot;
-	double	side;
+	REAL	dot;
+	REAL	side;
 
 	dot = vec_dot(incident.direction, hit->normal);
 	reflected.direction = vec_sub(incident.direction,
@@ -30,7 +30,7 @@ static t_ray	reflected_ray(t_hit *hit, t_ray incident)
 	return (reflected);
 }
 
-static t_color	blend_reflection(t_color local, t_color reflected, double rate)
+static t_color	blend_reflection(t_color local, t_color reflected, REAL rate)
 {
 	t_color	color;
 

@@ -6,14 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 18:38:05 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:43 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
 static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, double t);
-static	t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray, t_point co);
+static	t_hit	check_face_intersec(t_plane *p, double r_sq, t_ray r);
+static	t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray);
 
 t_hit	intersect_cylinder(t_window *win, t_ray ray)
 {
@@ -44,9 +45,9 @@ t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray)
 	t_hit	hit_small;
 
 	init_t_hit(&hit_small, DBL_MAX);
-	hit_top = circular_plane_intersec(&(cyl->top), cyl->radius, ray);
-	hit_base = circular_plane_intersec(&(cyl->base), cyl->radius, ray);
-	hit_tube = check_tube_intersec(cyl, ray, vec_sub(ray.origin, cyl->center));
+	hit_top = check_face_intersec(&(cyl->top), cyl->radius, ray);
+	hit_base = check_face_intersec(&(cyl->base), cyl->radius, ray);
+	hit_tube = check_tube_intersec(cyl, ray);
 	if (hit_base.t < hit_small.t && hit_base.t > 0)
 		hit_small = hit_base;
 	if (hit_top.t < hit_small.t && hit_top.t > 0)
@@ -58,24 +59,32 @@ t_hit	full_intersection_cylinder(t_cylinder *cyl, t_ray ray)
 	return (hit_small);
 }
 
-static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray, t_point co)
+static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray)
 {
 	double	dv_axis;
 	double	cov_axis;
 	double	co_sq;
 	double	dco;
+	t_hit	hit;
 
+	init_t_hit(&hit, -1);
 	if (!cyl)
-		return (check_height_intersec(cyl, ray, -1));
+		return (hit);
+	hit.t = DBL_MAX;
 	dv_axis = vec_dot(ray.direction, cyl->v_axis);
-	cov_axis = vec_dot(co, cyl->v_axis);
-	dco = vec_dot(co, ray.direction);
-	co_sq = vec_magnitude(co);
+	cov_axis = vec_dot(vec_sub(ray.origin, cyl->center), cyl->v_axis);
+	dco = vec_dot(vec_sub(ray.origin, cyl->center), ray.direction);
+	co_sq = vec_magnitude(vec_sub(ray.origin, cyl->center));
 	co_sq = co_sq * co_sq;
-	return (check_height_intersec(cyl, ray,
-			roots(1.0 - dv_axis * dv_axis,
-				2 * (dco - dv_axis * cov_axis),
-				co_sq - cov_axis * cov_axis - cyl->r_sq)));
+	hit.t = roots(1.0 - dv_axis*dv_axis, 2*(dco - dv_axis*cov_axis),\
+	co_sq - cov_axis*cov_axis - cyl->r_sq);
+	if (hit.t > 0)
+	{
+		hit.obj = (t_scene_obj *)cyl;
+		hit.color = cyl->color;
+	}
+	hit = check_height_intersec(cyl, ray, hit.t);
+	return (hit);
 }
 
 /*
@@ -99,6 +108,35 @@ static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, double t)
 		hit.t = t;
 		hit.obj = (t_scene_obj *)cyl;
 		hit.color = cyl->color;
+	}
+	return (hit);
+}
+
+static t_hit	check_face_intersec(t_plane *p, double radius, t_ray r)
+{
+	t_point	pt;
+	t_hit	hit;
+	double	dot;
+	double	dist;
+
+	init_t_hit(&hit, -1);
+	if (!p)
+		return (hit);
+	dot = vec_dot(p->normal, r.direction);
+	if (!ft_dcmp(dot, 0.0, 1e-5))
+		return (hit);
+	hit.t = -vec_dot(p->normal, vec_sub(r.origin, p->a_point)) / dot;
+	if (hit.t > 0)
+	{
+		pt = vec_add(r.origin , vec_scale(r.direction, hit.t));
+		dist = vec_magnitude(vec_sub(pt, p->a_point));
+		if (dist <= radius)
+		{
+			hit.obj = (t_scene_obj *)p;
+			hit.color = p->color;
+		}
+		else
+			hit.t = -1;
 	}
 	return (hit);
 }

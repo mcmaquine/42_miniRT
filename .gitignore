@@ -61,9 +61,8 @@ dkms.conf
 .vscode
 
 # extra
-minirt_subject.pdf
 miniRT
 .mandatory
 .bonus
 tags
-.swp
+*.swp

@@ -21,7 +21,6 @@ static const char	*obj_name(t_objs_type obj)
 	[OBJ_SPHERE] = "Sphere",
 	[OBJ_PLANE] = "Plane",
 	[OBJ_CYLINDER] = "Cylinder",
-	[OBJ_CONE] = "Cone",
 	};
 
 	return (names[obj]);
@@ -39,13 +38,11 @@ static const char	*error_msg(t_error_option option)
 	[ERR_NO_PARAM_VEC] = "missing orientation vector parameter",
 	[ERR_NO_PARAM_DIAMETER] = "missing diameter parameter",
 	[ERR_NO_PARAM_HEIGHT] = "missing height parameter",
-	[ERR_NO_PARAM_ANGLE] = "missing angle parameter",
 	[ERR_OUT_RANGE_FOV] = "fov out of range [0, 180]",
 	[ERR_OUT_RANGE_RATIO] = "ratio out of range [0.0, 1.0]",
 	[ERR_OUT_RANGE_BRIGHT] = "brightness out of range [0.0,1.0]",
 	[ERR_OUT_RANGE_COLOR] = "color value out of range [0-255]",
 	[ERR_OUT_RANGE_VEC] = "normalized vector value out of range [-1, 1]",
-	[ERR_OUT_RANGE_ANGLE] = "angle out of range (1, 89)",
 	[ERR_COORDS_INVALID] = "invalid coordinates value",
 	[ERR_DIAMETER_NEGATIVE] = "diameter value negative",
 	};
@@ -55,6 +52,5 @@ static const char	*error_msg(t_error_option option)
 
 void	print_error(t_objs_type obj, t_error_option option, int line)
 {
-	printf("miniRT: %s: %s (line %d)\n", obj_name(obj),
-		error_msg(option), line);
+	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option), line);
 }

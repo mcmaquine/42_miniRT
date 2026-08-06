@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 16:35:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/29 15:34:49 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_bonus.h"
+#include "minirt.h"
 
 void render(t_window *scene);
 static int pixel_color(t_color color);
@@ -36,6 +36,7 @@ void render(t_window *scene)
 	int		px;
 	int		py;
 	int		*ptr;
+	t_hit	hit;
 	t_color	color;
 	t_ray	ray;
 
@@ -47,7 +48,8 @@ void render(t_window *scene)
 		while (px < WIDTH)
 		{
 			ray = generate_ray(scene, px, py);
-			color = trace_color_bonus(scene, ray, MAX_REFLECTION_DEPTH);
+			hit = all_intersections(scene, ray);
+			color = calculate_illumination(scene, hit);
 			*ptr = pixel_color(color);
 			ptr++;
 			px++;

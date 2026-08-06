@@ -1,4 +1,4 @@
-#include "minirt_bonus.h"
+#include "../includes/minirt.h"
 
 void    print_scene(t_scene *scene);
 
@@ -26,22 +26,6 @@ static void print_cam(t_cam *cam)
     printf(" orient:");
     print_point(cam->orient);
     printf(" fov:%.4f\n", cam->fov);
-}
-
-static void print_lights(t_list *lights)
-{
-	t_light	*light;
-
-	while (lights)
-	{
-		light = (t_light *)lights->content;
-		printf("  [LIGHT] coord:");
-		print_point(light->coord);
-		printf(" bright:%.4f color:", light->bright_rate);
-		print_color(light->color);
-		printf("\n");
-		lights = lights->next;
-	}
 }
 
 static void print_objs(t_list *objs[])
@@ -104,6 +88,10 @@ void    print_scene(t_scene *scene)
     }
     print_amb(scene->amb);
     print_cam(scene->cam);
-    print_lights(scene->light);
+    printf("  [LIGHT] coord:");
+    print_point(scene->light->coord);
+    printf(" bright:%.4f color:", scene->light->bright_rate);
+    print_color(scene->light->color);
+    printf("\n");
     print_objs(scene->objs);
 }

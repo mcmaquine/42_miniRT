@@ -6,35 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 18:37:23 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/07/04 13:47:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-
-int	is_valid_real(const char *str)
-{
-	size_t	i;
-
-	if (!str || !(*str))
-		return (0);
-	i = 0;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	if (!ft_isdigit(str[i]))
-		return (0);
-	while (ft_isdigit(str[i]))
-		i++;
-	if (str[i] == '.')
-	{
-		i++;
-		if (!ft_isdigit(str[i]))
-			return (0);
-		while (ft_isdigit(str[i]))
-			i++;
-	}
-	return (str[i] == '\0');
-}
 
 /*
 Free all memory allocated for t_scene_obj
@@ -47,7 +23,7 @@ void	free_scene_obj(t_scene **scene_obj)
 		return ;
 	free((*scene_obj)->amb);
 	free((*scene_obj)->cam);
-	ft_lstclear(&(*scene_obj)->light, free);
+	free((*scene_obj)->light);
 	i = -1;
 	while (++i < COUNT)
 		ft_lstclear(&((*scene_obj)->objs)[i], free);
@@ -73,8 +49,9 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 	temp.red = ft_atoi(colors[0]);
 	temp.green = ft_atoi(colors[1]);
 	temp.blue = ft_atoi(colors[2]);
+	color->tpcy = 0.0;
 	ft_free_split(colors);
-	if ((temp.red < 0 || temp.red > 255)
+	if ((temp.red < 0 || temp.red > 255) 
 		|| (temp.green < 0 || temp.green > 255)
 		|| (temp.blue < 0 || temp.blue > 255))
 	{
@@ -98,13 +75,6 @@ int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
 	if (ft_sizeof_split(points) != 3)
 	{
 		print_error(obj, ERR_NO_PARAM_COORDS, 0);
-		ft_free_split(points);
-		return (1);
-	}
-	if (!is_valid_real(points[0]) || !is_valid_real(points[1])
-		|| !is_valid_real(points[2]))
-	{
-		print_error(obj, ERR_COORDS_INVALID, 0);
 		ft_free_split(points);
 		return (1);
 	}
