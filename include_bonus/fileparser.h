@@ -6,13 +6,19 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 17:04:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/05 23:02:05 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILEPARSER_H
 # define FILEPARSER_H
 
+# define CHECKER_ID "c"
+# define BUMP_ID "t"
+# define REFLECTION_ID "r"
+
+int	parse_material_bonus(char **params, int index, t_material *material,
+		t_objs_type obj);
 t_scene	*read_file(char *filename);
 int		sphere_parser(char **params, t_scene *scene_obj);
 int		plane_parser(char **params, t_scene *scene_obj);
