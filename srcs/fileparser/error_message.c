@@ -53,5 +53,6 @@ static const char	*error_msg(t_error_option option)
 
 void	print_error(t_objs_type obj, t_error_option option, int line)
 {
+	ft_printf("Error\n");
 	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option), line);
 }
