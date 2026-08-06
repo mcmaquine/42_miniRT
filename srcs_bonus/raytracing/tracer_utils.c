@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 14:15:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:46 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/04 15:10:11 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 	Calculate roots from 2nd degree equation, givens its constants a, b and c.
 	Returns the least root or (-1) if no real roots exists.
 */
-double roots(double a, double b, double c)
+REAL roots(REAL a, REAL b, REAL c)
 {
-	double	delta;
-	double	sqrt_delta;
-	double	t1;
-	double	t2;
+	REAL	delta;
+	REAL	sqrt_delta;
+	REAL	t1;
+	REAL	t2;
 
 	delta = b * b - 4 * a * c;
 	if (delta < 0.0)
@@ -37,11 +37,43 @@ double roots(double a, double b, double c)
 		return (-1);
 }
 
-void	init_t_hit(t_hit *hit, double t)
+void	init_t_hit(t_hit *hit, REAL t)
 {
 	hit->color = (t_color){0, 0, 0, 0};
 	hit->normal = (t_point){0.0, 0.0, 0.0};
 	hit->point = hit->normal;
 	hit->t = t;
 	hit->obj = NULL;
+}
+
+/*
+Check if a ray intersects a circular plane.
+*/
+t_hit	circular_plane_intersec(t_plane *p, REAL radius, t_ray r)
+{
+	t_point	pt;
+	t_hit	hit;
+	REAL	dot;
+	REAL	dist;
+
+	init_t_hit(&hit, -1);
+	if (!p)
+		return (hit);
+	dot = vec_dot(p->normal, r.direction);
+	if (!ft_dcmp(dot, 0.0, 1e-5))
+		return (hit);
+	hit.t = -vec_dot(p->normal, vec_sub(r.origin, p->a_point)) / dot;
+	if (hit.t > 0)
+	{
+		pt = vec_add(r.origin , vec_scale(r.direction, hit.t));
+		dist = vec_magnitude(vec_sub(pt, p->a_point));
+		if (dist <= radius)
+		{
+			hit.obj = (t_scene_obj *)p;
+			hit.color = p->color;
+		}
+		else
+			hit.t = -1;
+	}
+	return (hit);
 }
