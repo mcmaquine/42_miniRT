@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/04 17:02:00 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/06 00:42:54 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ BONUS_SRCS = \
 	$(filter-out srcs_bonus/raytracing/phong.c, \
 		$(addprefix srcs_bonus/, $(RAYTRACING_SRCS))) \
 	srcs_bonus/raytracing/cone_intersec.c \
-	srcs_bonus/raytracing/phong_bonus.c \
+	srcs_bonus/raytracing/phong.c \
 	srcs_bonus/raytracing/texture_bonus.c \
 	srcs_bonus/raytracing/reflection_bonus.c \
 	srcs_bonus/calc/calc_normals_bonus.c \
