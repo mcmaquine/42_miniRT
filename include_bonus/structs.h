@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/31 21:08:45 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/05 23:42:21 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,22 @@ typedef struct s_scene_obj
 {
 	t_obj_type	base;
 }	t_scene_obj;
+
+typedef enum e_pattern
+{
+	PATTERN_NONE,
+	PATTERN_CHECKER
+}	t_pattern;
+
+typedef struct s_material
+{
+	t_pattern	pattern;
+	t_color		checker_color;
+	double		checker_scale;
+	char		*bump_path;
+	double		bump_strength;
+	double		reflection;
+}	t_material;
 
 typedef struct s_amb_light
 {
@@ -107,6 +123,20 @@ typedef struct s_cylinder
 	double		r_sq;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_scene_obj	type;
+	t_plane		base;
+	t_point		vertex;
+	t_point		v_axis;
+	t_color		color;
+	t_material	material;
+	double		theta;
+	double		height;
+	double		radius;
+	double		tan2;
+}	t_cone;
+
 typedef struct s_bvh_node	t_bvh_node;
 
 typedef struct s_scene
@@ -131,8 +161,8 @@ typedef struct s_hit
 	t_point		normal;
 	t_color		color;
 	t_scene_obj	*obj;
+	t_point		view_origin;
 }	t_hit;
-
 
 typedef struct s_window
 {

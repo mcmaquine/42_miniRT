@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 17:42:10 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/05 23:49:52 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef enum e_obj_type
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	CONE,
 	COUNT,
 	LIGHT,
 	CAMERA,
@@ -60,6 +61,7 @@ typedef enum e_objs_type
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
+	OBJ_CONE,
 	TOTAL
 }	t_objs_type;
 

@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/07/31 22:08:14 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/08/05 23:46:06 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ ALGELIN_SRC_BONUS = \
 
 PARSER_SRCS_BONUS = \
 	fileparser/openfile.c \
+	fileparser/cone_parser.c \
 	fileparser/scene_obj_parser.c \
 	fileparser/scene_obj_util.c \
 	fileparser/unique_obj_parser.c \
@@ -108,6 +109,9 @@ RAYTRACING_SRCS_BONUS = \
 	raytracing/plane_intersec.c \
 	raytracing/sphere_intersec.c \
 	raytracing/tracer.c \
+	raytracing/cone_intersec.c \
+	raytracing/reflection_bonus.c \
+	raytracing/texture_bonus.c \
 	raytracing/tracer_utils.c
 
 BVH_SRCS_BONUS = \
