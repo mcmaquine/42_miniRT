@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   unique_obj_parser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 22:48:33 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/06 22:48:38 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:39:16 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minirt.h"
 

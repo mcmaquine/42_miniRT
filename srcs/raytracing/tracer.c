@@ -6,11 +6,15 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 18:26:07 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:41:11 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static t_ray	direction(t_point to_normalize, t_point origin);
+static t_point	camera_right(t_point forward);
+static double	screen_coordinate(int pixel, int size);
 
 static t_ray	direction(t_point to_normalize, t_point origin)
 {
@@ -24,24 +28,22 @@ static t_ray	direction(t_point to_normalize, t_point origin)
 t_ray	generate_ray(t_window *win, int px, int py)
 {
 	t_point	forward;
-	t_point	world_up;
 	t_point	right;
 	t_point	up;
+	double	half_width;
+	double	screen_x;
 
-	double	half_width = tan(to_radians(win->scene_obj->cam->fov)/2.0);
-	double	aspect_ratio = (double)win->width / (double)win->height;
-	double	ndc_x = (px + 0.5) / win->width;
-	double	ndc_y = (py + 0.5) / win->height;
-	double	screen_x = (2 * ndc_x - 1)*aspect_ratio * half_width;
-	double	screen_y = (1 - 2.0 * ndc_y) * half_width;
-	forward = vec_normalize(win->scene_obj->cam->orient);
-	world_up = fill_point(0, 1, 0);
-	if (fabs(vec_dot(forward, world_up)) > .9999 )
-		world_up = fill_point(0, 0, 1);
-	right = vec_normalize(vec_cross(world_up, forward));
+	half_width = tan(win->scene_obj->cam->fov * 0.5);
+	forward = win->scene_obj->cam->orient;
+	right = camera_right(forward);
 	up = vec_normalize(vec_cross(forward, right));
-	return (direction(vec_add(forward, vec_add(vec_scale(right, screen_x),\
-		vec_scale(up, screen_y))), win->scene_obj->cam->point));
+	screen_x = (2.0 * screen_coordinate(px, win->width) - 1.0)
+		* ((double)win->width / (double)win->height) * half_width;
+	right = vec_scale(right, screen_x);
+	up = vec_scale(up, (1.0 - 2.0 * screen_coordinate(py, win->height))
+			* half_width);
+	forward = vec_add(forward, vec_add(right, up));
+	return (direction(forward, win->scene_obj->cam->point));
 }
 
 /*
@@ -50,9 +52,9 @@ object.
 */
 t_hit	all_intersections(t_window *win, t_ray ray)
 {
-	t_hit	temp;
-	t_hit	hit;
-	int		i;
+	t_hit			temp;
+	t_hit			hit;
+	int				i;
 	static t_hit	(*intersections[4])(t_window *, t_ray) = {
 	[SPHERE] = intersect_sphere,
 	[PLANE] = intersect_plane,
@@ -73,4 +75,19 @@ t_hit	all_intersections(t_window *win, t_ray ray)
 	if (hit.t > 0)
 		calculate_normal(&hit, ray);
 	return (hit);
+}
+
+static t_point	camera_right(t_point forward)
+{
+	t_point	world_up;
+
+	world_up = fill_point(0, 1, 0);
+	if (fabs(vec_dot(forward, world_up)) > 0.9999)
+		world_up = fill_point(0, 0, 1);
+	return (vec_normalize(vec_cross(world_up, forward)));
+}
+
+static double	screen_coordinate(int pixel, int size)
+{
+	return (((double)pixel + 0.5) / (double)size);
 }

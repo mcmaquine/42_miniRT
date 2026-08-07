@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 18:29:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/02 18:32:37 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:43:27 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,8 @@ void	free_window(t_window *win)
 
 void	free_scene(t_scene *scene)
 {
-	int			i;
-	t_list		**lst;
-	static void	(*ft[COUNT])(void *) = {
-		clear_sphere,
-		clear_plane,
-		clear_cylinder
-	};
+	int		i;
+	t_list	**lst;
 
 	free(scene->amb);
 	free(scene->cam);
@@ -35,7 +30,7 @@ void	free_scene(t_scene *scene)
 	while (i < COUNT)
 	{
 		lst = &scene->objs[i];
-		ft_lstclear(lst, ft[i]);
+		ft_lstclear(lst, free);
 		i++;
 	}
 	free(scene);
