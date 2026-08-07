@@ -13,20 +13,23 @@
 #include "minirt.h"
 
 /* TODO error messages */
-void	start_window(t_window *win, int width, int height)
+int	start_window(t_window *win, int width, int height)
 {
 	win->mlx = mlx_init();
 	if (!win->mlx)
-		return ;
+		return (1);
 	win->win = mlx_new_window(win->mlx, width, height, "miniRT");
 	if (!win->win)
-		return ;
+		return (1);
 	win->canva.img = mlx_new_image(win->mlx, width, height);
 	if (!win->canva.img)
-		return ;
+		return (1);
 	win->canva.addr = mlx_get_data_addr(win->canva.img, \
 &win->canva.bits_per_pixel, &win->canva.line_length, &win->canva.endian);
+	if (!win->canva.addr)
+		return (1);
 	win->width = WIDTH;
 	win->height = HEIGHT;
 	events(win);
+	return (0);
 }

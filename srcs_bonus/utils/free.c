@@ -59,5 +59,4 @@ void	free_mlx(void *mlx, void *win, void *img)
 		mlx_destroy_display(mlx);
 		free(mlx);
 	}
-	exit(0);
 }

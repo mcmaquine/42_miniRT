@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 00:48:42 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 12:55:14 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_scene_obj(t_scene **scene_obj)
 		return ;
 	free((*scene_obj)->amb);
 	free((*scene_obj)->cam);
-	free((*scene_obj)->light);
+	ft_lstclear(&(*scene_obj)->light, free);
 	i = -1;
 	while (++i < COUNT)
 		ft_lstclear(&((*scene_obj)->objs)[i], free);

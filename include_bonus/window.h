@@ -14,7 +14,7 @@
 # define WINDOW_H
 # include "minirt_bonus.h"
 
-void	start_window(t_window *win, int width, int height);
+int		start_window(t_window *win, int width, int height);
 void	events(t_window *win);
 void	paint_pixel(t_window *w, int x, int y, unsigned int color);
 void	clear_canva(t_window *w);

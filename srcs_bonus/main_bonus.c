@@ -12,10 +12,10 @@
 
 #include "minirt_bonus.h"
 
-static void	init_scene(t_window *scene, char *filename);
+static int	init_scene(t_window *scene, char *filename);
 static void	print_render_time(long start, long end);
 static void	render_scene(t_window *scene, t_thread *threads, int num_threads);
-static void	free_all(t_window *scene, t_render_queue *queue, t_thread *threads);
+static void	free_render(t_render_queue *queue, t_thread *threads);
 
 int	main(int argc, char *argv[])
 {
@@ -24,24 +24,33 @@ int	main(int argc, char *argv[])
 	t_thread		*threads;
 	int				num_threads;
 
+	scene = (t_window){0};
 	if (argc != 2)
 		return (1);
-	init_scene(&scene, argv[1]);
+	if (init_scene(&scene, argv[1]))
+		return (1);
 	num_threads = get_num_thread();
 	queue = queue_init(WIDTH, HEIGHT, TILE_SIZE);
 	threads = thread_init(&scene, queue, num_threads);
 	render_scene(&scene, threads, num_threads);
+	free_render(queue, threads);
 	mlx_loop(scene.mlx);
-	free_all(&scene, queue, threads);
 	return (0);
 }
 
-static void	init_scene(t_window *scene, char *filename)
+static int	init_scene(t_window *scene, char *filename)
 {
 	scene->scene_obj = read_file(filename);
+	if (!scene->scene_obj)
+		return (1);
 	calc_components(scene->scene_obj);
 	init_bvh(scene->scene_obj);
-	start_window(scene, WIDTH, HEIGHT);
+	if (start_window(scene, WIDTH, HEIGHT))
+	{
+		free_window(scene);
+		return (1);
+	}
+	return (0);
 }
 
 static void	print_render_time(long start, long end)
@@ -80,11 +89,10 @@ static void	render_scene(t_window *scene, t_thread *threads, int num_threads)
 	mlx_put_image_to_window(scene->mlx, scene->win, scene->canva.img, 0, 0);
 }
 
-static void	free_all(t_window *scene, t_render_queue *queue, t_thread *threads)
+static void	free_render(t_render_queue *queue, t_thread *threads)
 {
 	pthread_mutex_destroy(&queue->lock);
 	free(queue->tiles);
 	free(queue);
 	free(threads);
-	free_window(scene);
 }
