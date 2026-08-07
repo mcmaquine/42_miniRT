@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/06 21:08:23 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/07 00:27:44 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,6 @@ INCLUDES = -I./includes -I./libft -I./minilibx-linux
 MAIN_SRC = main.c
 
 ALGELIN_SRC = \
-	algelin/cofator.c \
-	algelin/matrix_det.c \
-	algelin/matrix_ops.c \
-	algelin/matrix_utils.c \
 	algelin/vector_measure.c \
 	algelin/vector_utils.c \
 	algelin/vectorvector.c
@@ -86,10 +82,6 @@ LIBS_BONUS = $(LIBS) -lpthread
 MAIN_SRC_BONUS = main_bonus.c
 
 ALGELIN_SRC_BONUS = \
-	algelin/cofator.c \
-	algelin/matrix_det.c \
-	algelin/matrix_ops.c \
-	algelin/matrix_utils.c \
 	algelin/vector_measure.c \
 	algelin/vector_utils.c \
 	algelin/vectorvector.c
