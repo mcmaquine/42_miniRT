@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:09:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 00:05:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:21:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,21 @@ t_color	calculate_illumination(t_window *win, t_hit hit)
 	t_color	ambient;
 
 	if (hit.t < 0)
-		return ((t_color){0, 0 ,0, 0});
+		return ((t_color){0, 0, 0, 0});
 	if (!is_in_shadow(win, &hit))
 		diffuse = phong_diffuse_color(win, &hit);
 	else
 		ft_memset(&diffuse, 0, sizeof(t_color));
 	ambient = phong_amb_color(win, &hit);
-	final_color.red = fmin(1, diffuse.red + ambient.red);
-	final_color.green = fmin(1, diffuse.green + ambient.green);
-	final_color.blue = fmin(1, diffuse.blue + ambient.blue);
+	final_color.red = diffuse.red + ambient.red;
+	final_color.green = diffuse.green + ambient.green;
+	final_color.blue = diffuse.blue + ambient.blue;
+	if (final_color.red > 1.0)
+		final_color.red = 1.0;
+	if (final_color.green > 1.0)
+		final_color.green = 1.0;
+	if (final_color.blue > 1.0)
+		final_color.blue = 1.0;
 	return (final_color);
 }
 
@@ -90,16 +96,15 @@ int	is_in_shadow(t_window *win, t_hit *hit)
 	t_hit	shadow_hit;
 	double	dist_to_light;
 
-	light_dir = vec_normalize(vec_sub(win->scene_obj->light->coord,\
-		hit->point));
+	light_dir = vec_normalize(vec_sub(win->scene_obj->light->coord, \
+hit->point));
 	shadow_ray.origin = vec_add(hit->point, vec_scale(light_dir, EPSILON));
 	shadow_ray.direction = light_dir;
-	dist_to_light = vec_magnitude(vec_sub(win->scene_obj->light->coord,\
-		shadow_ray.origin));
+	dist_to_light = vec_magnitude(vec_sub(win->scene_obj->light->coord, \
+shadow_ray.origin));
 	shadow_hit = all_intersections(win, shadow_ray);
 	if (shadow_hit.t > EPSILON && shadow_hit.t < dist_to_light)
 		return (1);
 	else
 		return (0);
 }
-

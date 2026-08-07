@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:41:54 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/25 22:13:08 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:27:42 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray)
 	dco = vec_dot(vec_sub(ray.origin, cyl->center), ray.direction);
 	co_sq = vec_magnitude(vec_sub(ray.origin, cyl->center));
 	co_sq = co_sq * co_sq;
-	hit.t = roots(1.0 - dv_axis*dv_axis, 2*(dco - dv_axis*cov_axis),\
-	co_sq - cov_axis*cov_axis - cyl->r_sq);
+	hit.t = roots(1.0 - dv_axis * dv_axis, 2 * (dco - dv_axis * cov_axis), \
+	co_sq - cov_axis * cov_axis - cyl->r_sq);
 	if (hit.t > 0)
 	{
 		hit.obj = (t_scene_obj *)cyl;
@@ -129,7 +129,7 @@ static t_hit	check_face_intersec(t_plane *p, double radius, t_ray r)
 	hit.t = -vec_dot(p->normal, vec_sub(r.origin, p->a_point)) / dot;
 	if (hit.t > 0)
 	{
-		pt = vec_add(r.origin , vec_scale(r.direction, hit.t));
+		pt = vec_add(r.origin, vec_scale(r.direction, hit.t));
 		dist = vec_magnitude(vec_sub(pt, p->a_point));
 		if (dist <= radius)
 		{

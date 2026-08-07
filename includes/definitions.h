@@ -6,12 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 23:55:54 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/06/29 11:56:19 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINITIONS_H
 # define DEFINITIONS_H
+
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
@@ -30,8 +31,6 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define EPSILON 1e-4
-# define SPECULAR_STRENGTH 0.5
-# define SHININESS 32.0
 
 typedef enum e_obj_type
 {
@@ -71,7 +70,6 @@ typedef enum e_error_option
 	ERR_NO_OBJECT,
 	ERR_NO_UNIQUE,
 	ERR_NO_PARAM_RATIO,
-	ERR_RATIO_INVALID,
 	ERR_NO_PARAM_COLOR,
 	ERR_NO_PARAM_COORDS,
 	ERR_NO_PARAM_VEC,
@@ -84,6 +82,7 @@ typedef enum e_error_option
 	ERR_OUT_RANGE_VEC,
 	ERR_COORDS_INVALID,
 	ERR_DIAMETER_NEGATIVE,
+	ERR_HEIGHT_NEGATIVE,
 	TOTAL_OPTIONS
 }	t_error_option;
 

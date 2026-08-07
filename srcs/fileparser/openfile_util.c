@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 21:14:01 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/07 00:41:57 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 21:14:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	valid_extension(char *file, char *extension)
 	}
 	if (*ptr_dot)
 	{
-		ft_printf("Error\nminiRT: file: Invalid extension\n");
+		ft_printf("miniRT: file: Invalid extension\n");
 		return (0);
 	}
 	return (1);

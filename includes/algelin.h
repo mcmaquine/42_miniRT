@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:05:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/03 15:01:23 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:31:40 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	zero_point(t_point *p);
 t_point	fill_point(double x, double y, double z);
 void	*create_matrix(int rows, int cols);
 void	free_matrix(t_matrix *m);
+
 #endif

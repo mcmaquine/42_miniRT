@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:10:05 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 11:22:57 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:25:26 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void cylinder_normal(t_hit *hit);
+static void	cylinder_normal(t_hit *hit);
 
 /*
 Compute normal vector to a point P on t
@@ -23,7 +23,7 @@ void	calculate_normal(t_hit *hit, t_ray ray)
 		return ;
 	hit->point = vec_add(ray.origin, vec_scale(ray.direction, hit->t));
 	if (hit->obj->base == SPHERE)
-		hit->normal = vec_normalize(vec_sub(hit->point,\
+		hit->normal = vec_normalize(vec_sub(hit->point, \
 			((t_sphere *)hit->obj)->center));
 	else if (hit->obj->base == PLANE)
 		hit->normal = ((t_plane *)hit->obj)->normal;
@@ -31,7 +31,7 @@ void	calculate_normal(t_hit *hit, t_ray ray)
 		cylinder_normal(hit);
 }
 
-static void cylinder_normal(t_hit *hit)
+static void	cylinder_normal(t_hit *hit)
 {
 	t_point		p;
 	t_point		v;

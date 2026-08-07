@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 01:06:21 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:49:34 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ t_scene	*read_file(char *filename)
 	t_scene	*scene_obj;
 
 	if (!valid_extension(filename, ".rt"))
-	{
-		ft_putstr_fd("Error\nInvalid file extension\n", 2);
 		return (NULL);
-	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
@@ -94,8 +91,7 @@ static int	parse_obj(char **params, t_scene *scene_obj)
 		return (plane_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "cy"))
 		return (cilinder_parser(params, scene_obj));
-	ft_putstr_fd("Error\nUnknown object\n", 2);
-	return (1);
+	return (0);
 }
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)

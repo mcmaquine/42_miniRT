@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/27 16:59:14 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:36:08 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,6 @@ typedef struct s_color
 	double	green;
 	double	blue;
 }	t_color;
-
-typedef enum e_pattern
-{
-	PATTERN_NONE,
-	PATTERN_CHECKER
-}	t_pattern;
-
-typedef struct s_material
-{
-	t_pattern	pattern;
-	t_color		checker_color;
-	double		checker_scale;
-	char		*bump_path;
-	double		bump_strength;
-	double		reflection;
-}	t_material;
 
 typedef struct s_canva
 {
@@ -96,7 +80,6 @@ typedef struct s_sphere
 	t_scene_obj	type;
 	t_point		center;
 	t_color		color;
-	t_material	material;
 	double		diam;
 	double		r_sq;
 }	t_sphere;
@@ -107,7 +90,6 @@ typedef struct s_plane
 	t_point		a_point;
 	t_point		normal;
 	t_color		color;
-	t_material	material;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -118,7 +100,6 @@ typedef struct s_cylinder
 	t_point		center;
 	t_point		v_axis;
 	t_color		color;
-	t_material	material;
 	double		diam;
 	double		height;
 	double		height_2;
@@ -144,7 +125,6 @@ typedef struct s_hit
 {
 	double		t;
 	t_point		point;
-	t_point		view_origin;
 	t_point		normal;
 	t_color		color;
 	t_scene_obj	*obj;

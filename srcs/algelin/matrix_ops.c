@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 14:30:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/13 14:52:59 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/02 17:56:04 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_matrix	*matadd(t_matrix a, t_matrix b)
 {
-	t_matrix *add;
-	int	i;
-	int	j;
+	t_matrix	*add;
+	int			i;
+	int			j;
 
 	if ((a.row != b.row) && (a.col == b.col))
 		return (NULL);
@@ -31,13 +31,11 @@ t_matrix	*matadd(t_matrix a, t_matrix b)
 	return (add);
 }
 
-/*
-*/
 t_matrix	*matsub(t_matrix a, t_matrix b)
 {
-	t_matrix *add;
-	int	i;
-	int	j;
+	t_matrix	*add;
+	int			i;
+	int			j;
 
 	if ((a.row != b.row) && (a.col == b.col))
 		return (NULL);
