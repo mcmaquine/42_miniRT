@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   real_max.c                                         :+:      :+:    :+:   */
+/*   list_of_objs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/07 00:24:33 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 01:18:57 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/08/07 00:23:39 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/08/07 00:23:40 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-double	real_max(double x, double y, double z)
+t_list	*list_of_objs(t_list *objs[])
 {
-	double	bigger;
+	t_list	*head;
+	t_list	*last;
 
-	bigger = x;
-	if (y > bigger)
-		bigger = y;
-	if (z > bigger)
-		bigger = z;
-	return (bigger);
+	if (objs[0])
+		head = objs[0];
+	else
+		return (objs[2]);
+	last = ft_lstlast(head);
+	if (objs[2])
+		last->next = objs[2];
+	return (head);
 }

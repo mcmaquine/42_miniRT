@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:41:36 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 00:32:22 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:45:14 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_ray	direction(t_point to_normalize, t_point origin);
 static t_point	camera_right(t_point forward);
-static double		screen_coordinate(int pixel, int size);
+static double	screen_coordinate(int pixel, int size);
 
 t_hit	all_intersections(t_window *win, t_ray ray)
 {
-	t_hit	temp;
-	t_hit	hit;
-	int		i;
-	static	t_hit	(*ft[3])(t_window *, t_ray) = {
+	t_hit			temp;
+	t_hit			hit;
+	int				i;
+	static t_hit	(*ft[3])(t_window *, t_ray) = {
 		intersect_bvh,
 		intersect_plane,
 		NULL
@@ -87,4 +87,3 @@ static double	screen_coordinate(int pixel, int size)
 {
 	return (((double)pixel + 0.5) / (double)size);
 }
-

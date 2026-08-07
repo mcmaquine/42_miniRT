@@ -13,7 +13,7 @@
 #include "libft.h"
 
 static double	solve_right(char *str, char **param);
-static double	power_ten(size_t i );
+static double	power_ten(size_t i);
 static size_t	sizeof_split(char **arr);
 static double	solve_for_point(const char *str, char *split, char **param);
 
@@ -21,13 +21,13 @@ static double	solve_for_point(const char *str, char *split, char **param);
 Converts float number represented in a string and convert it to double.
 The separator must be.
 */
- double	ft_atod(const char *nptr)
+double	ft_atod(const char *nptr)
 {
 	char	**parts;
 	double	left;
 	double	right;
 
-	left  = 0.0;
+	left = 0.0;
 	if (ft_strchr(nptr, '.'))
 	{
 		parts = ft_split(nptr, '.');
@@ -67,7 +67,7 @@ static double	solve_right(char *str, char **param)
 		i++;
 	while (str[i] && (str[i] > '0' && str[i] <= '9'))
 	{
-		result = result + ((double)(str[i] - '0'))/power_ten(i + 1);
+		result = result + ((double)(str[i] - '0')) / power_ten(i + 1);
 		i++;
 	}
 	ft_free_split(param);
@@ -76,7 +76,7 @@ static double	solve_right(char *str, char **param)
 
 static double	power_ten(size_t i)
 {
-	double tens;
+	double	tens;
 
 	tens = 1;
 	if (!i)
@@ -96,7 +96,7 @@ static size_t	sizeof_split(char **arr)
 	if (!arr)
 		return (0);
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 		i++;
 	return (i);
 }

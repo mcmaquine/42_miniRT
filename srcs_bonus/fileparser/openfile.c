@@ -23,7 +23,10 @@ t_scene	*read_file(char *filename)
 	t_scene	*scene_obj;
 
 	if (!valid_extension(filename, ".rt"))
+	{
+		ft_putstr_fd("Error\nInvalid file extension\n", 2);
 		return (NULL);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{

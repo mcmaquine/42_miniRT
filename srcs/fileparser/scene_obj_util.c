@@ -3,39 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   scene_obj_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 22:48:03 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/06 22:48:05 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:10:00 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	is_valid_number(const char *str)
-{
-	int	has_digit;
-	int	has_dot;
-
-	if (!str || !*str)
-		return (0);
-	has_digit = 0;
-	has_dot = 0;
-	if (*str == '+' || *str == '-')
-		str++;
-	while (*str)
-	{
-		if (*str == '.' && !has_dot)
-			has_dot = 1;
-		else if (*str >= '0' && *str <= '9')
-			has_digit = 1;
-		else
-			return (0);
-		str++;
-	}
-	return (has_digit);
-}
-
+/*
+Free all memory allocated for t_scene_obj
+*/
 void	free_scene_obj(t_scene **scene_obj)
 {
 	int	i;

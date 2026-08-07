@@ -13,8 +13,8 @@
 #include "minirt.h"
 
 static	t_hit	full_intersection(t_cylinder *sph, t_ray ray);
-static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t);
-static	t_hit	check_face_intersec(t_plane *p, REAL r_sq, t_ray r);
+static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, double t);
+static	t_hit	check_face_intersec(t_plane *p, double r_sq, t_ray r);
 static	t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray);
 
 t_hit	intersect_cylinder(t_window *win, t_ray ray)
@@ -62,10 +62,10 @@ static	t_hit	full_intersection(t_cylinder *cyl, t_ray ray)
 
 static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray)
 {
-	REAL	dv_axis;
-	REAL	cov_axis;
-	REAL	co_sq;
-	REAL	dco;
+	double	dv_axis;
+	double	cov_axis;
+	double	co_sq;
+	double	dco;
 	t_hit	hit;
 
 	init_t_hit(&hit, -1);
@@ -91,11 +91,11 @@ static t_hit	check_tube_intersec(t_cylinder *cyl, t_ray ray)
 /*
 Checks if tubes intersection goes beyond cylinder height
 */
-static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t)
+static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, double t)
 {
 	t_point	point;
 	t_hit	hit;
-	REAL	h;
+	double	h;
 
 	init_t_hit(&hit, -1);
 	if (t < 0)
@@ -113,12 +113,12 @@ static	t_hit	check_height_intersec(t_cylinder *cyl, t_ray r, REAL t)
 	return (hit);
 }
 
-static t_hit	check_face_intersec(t_plane *p, REAL radius, t_ray r)
+static t_hit	check_face_intersec(t_plane *p, double radius, t_ray r)
 {
 	t_point	pt;
 	t_hit	hit;
-	REAL	dot;
-	REAL	dist;
+	double	dot;
+	double	dist;
 
 	init_t_hit(&hit, -1);
 	if (!p)

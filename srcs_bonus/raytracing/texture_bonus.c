@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 23:27:12 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:16:07 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_material	*get_material_bonus(t_scene_obj *obj)
 		return (&((t_plane *)obj)->material);
 	if (obj->base == CYLINDER)
 		return (&((t_cylinder *)obj)->material);
+	if (obj->base == CONE)
+		return (&((t_cone *)obj)->material);
 	return (NULL);
 }
 
@@ -50,6 +52,8 @@ static t_point	local_point(t_hit *hit)
 		return (plane_point(hit));
 	if (hit->obj->base == CYLINDER)
 		return (vec_sub(hit->point, ((t_cylinder *)hit->obj)->center));
+	if (hit->obj->base == CONE)
+		return (vec_sub(hit->point, ((t_cone *)hit->obj)->vertex));
 	return (hit->point);
 }
 

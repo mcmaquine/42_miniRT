@@ -6,13 +6,14 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 15:07:45 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:15:18 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
 static int	parse_cylinder_bonus(char **params, t_cylinder *cylinder);
+static int	fill_sphere_diameter(char *param, t_sphere *sphere);
 
 /*
 Parses a sphere object
@@ -28,15 +29,10 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 	}
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	sphere->type.base = SPHERE;
-	if (!is_valid_real(params[2]))
-		sphere->diam = -1;
-	else
-		sphere->diam = ft_atod(params[2]);
-	if (sphere->diam <= 0.0)
+	if (fill_sphere_diameter(params[2], sphere))
 	{
-		print_error(OBJ_SPHERE, ERR_DIAMETER_NEGATIVE, 0);
 		free(sphere);
-		return (1);	
+		return (1);
 	}
 	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE)
 		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE)
@@ -46,6 +42,20 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 		return (1);
 	}
 	ft_lstadd_back(&(scene_obj->objs)[SPHERE], ft_lstnew(sphere));
+	return (0);
+}
+
+static int	fill_sphere_diameter(char *param, t_sphere *sphere)
+{
+	if (!is_valid_real(param))
+		sphere->diam = -1;
+	else
+		sphere->diam = ft_atod(param);
+	if (sphere->diam <= 0.0)
+	{
+		print_error(OBJ_SPHERE, ERR_DIAMETER_NEGATIVE, 0);
+		return (1);
+	}
 	return (0);
 }
 

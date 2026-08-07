@@ -24,6 +24,5 @@ size_t	ft_sizeof_split(char **params)
 	size = 0;
 	while (params[size])
 		size++;
-	return (size);	
+	return (size);
 }
-

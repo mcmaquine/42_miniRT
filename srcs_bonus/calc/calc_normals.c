@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:21:31 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/06 23:51:07 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:14:16 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static void	cone_calc(t_scene_obj *obj);
 
 void	calc_components(t_scene *scene)
 {
+	t_objs			ft;
+	t_list			*node;
+	int				i;
 	static t_objs	map[COUNT] = {
 	[SPHERE] = sphere_calc,
 	[PLANE] = plane_calc,
 	[CYLINDER] = cylinder_calc,
 	[CONE] = cone_calc
 	};
-	t_objs			ft;
-	t_list			*node;
-	int				i;
 
 	scene->cam->orient = vec_normalize(scene->cam->orient);
 	scene->cam->fov = to_radians(scene->cam->fov);

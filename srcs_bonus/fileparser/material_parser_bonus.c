@@ -18,9 +18,27 @@ static int	material_error(t_objs_type obj)
 	return (1);
 }
 
+static int	is_checker_id(char *param)
+{
+	if (!ft_strcmp(param, CHECKER_ID))
+		return (1);
+	if (!ft_strcmp(param, "check"))
+		return (1);
+	return (0);
+}
+
 static int	parse_checker(char **params, int *index, t_material *material,
 		t_objs_type obj)
 {
+	if (!ft_strcmp(params[*index], "check")
+		&& (!params[*index + 1] || !params[*index + 2]))
+	{
+		fill_color("255,255,255", &material->checker_color, obj);
+		material->checker_scale = 1.0;
+		material->pattern = PATTERN_CHECKER;
+		*index += 1;
+		return (0);
+	}
 	if (!params[*index + 1] || !params[*index + 2])
 		return (material_error(obj));
 	if (fill_color(params[*index + 1], &material->checker_color, obj))
@@ -55,7 +73,7 @@ int	parse_material_bonus(char **params, int index, t_material *material,
 	material->reflection = 0.0;
 	while (params[index])
 	{
-		if (!ft_strcmp(params[index], CHECKER_ID))
+		if (is_checker_id(params[index]))
 		{
 			if (parse_checker(params, &index, material, obj))
 				return (1);

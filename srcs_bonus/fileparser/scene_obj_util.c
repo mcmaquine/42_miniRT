@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 14:53:34 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:48:42 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 	temp.blue = ft_atoi(colors[2]);
 	color->tpcy = 0.0;
 	ft_free_split(colors);
-	if ((temp.red < 0 || temp.red > 255) 
-		|| (temp.green < 0 || temp.green > 255)
+	if ((temp.red < 0 || temp.red > 255) || (temp.green < 0 || temp.green > 255)
 		|| (temp.blue < 0 || temp.blue > 255))
 	{
 		print_error(obj, ERR_OUT_RANGE_COLOR, 0);

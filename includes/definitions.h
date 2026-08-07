@@ -6,13 +6,12 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 18:51:02 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:55:54 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINITIONS_H
 # define DEFINITIONS_H
-# define REAL double
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif

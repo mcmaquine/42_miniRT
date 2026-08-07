@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 14:15:59 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/04 15:10:11 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:44:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Calculate roots from 2nd degree equation, givens its constants a, b and c.
 	Returns the least root or (-1) if no real roots exists.
 */
-double roots(double a, double b, double c)
+double	roots(double a, double b, double c)
 {
 	double	delta;
 	double	sqrt_delta;
@@ -65,7 +65,7 @@ t_hit	circular_plane_intersec(t_plane *p, double radius, t_ray r)
 	hit.t = -vec_dot(p->normal, vec_sub(r.origin, p->a_point)) / dot;
 	if (hit.t > 0)
 	{
-		pt = vec_add(r.origin , vec_scale(r.direction, hit.t));
+		pt = vec_add(r.origin, vec_scale(r.direction, hit.t));
 		dist = vec_magnitude(vec_sub(pt, p->a_point));
 		if (dist <= radius)
 		{

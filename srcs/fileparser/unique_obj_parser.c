@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unique_obj_parser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 22:48:33 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/06 22:48:38 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:10:41 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,8 @@ int	cam_parser(char **params, t_scene *scene_obj)
 {
 	t_cam	*cam;
 
-	if (scene_obj->cam != NULL)
-	{
-		print_error(OBJ_CAMERA, ERR_NO_UNIQUE, 0);
+	if (check_unique(scene_obj->cam, params, OBJ_CAMERA, 4))
 		return (1);
-	}
-	if (ft_sizeof_split(params) != 4)
-	{
-		print_error(OBJ_CAMERA, ERR_NO_INFORMATION, 0);
-		return (1);
-	}
 	cam = ft_calloc(1, sizeof(t_cam));
 	if (!cam)
 		return (1);
@@ -70,16 +62,8 @@ int	light_parser(char **params, t_scene *scene_obj)
 {
 	t_light	*light;
 
-	if (scene_obj->light != NULL)
-	{
-		print_error(OBJ_LIGHT, ERR_NO_UNIQUE, 0);
+	if (check_unique(scene_obj->light, params, OBJ_LIGHT, 4))
 		return (1);
-	}
-	if (ft_sizeof_split(params) != 4)
-	{
-		print_error(OBJ_LIGHT, ERR_NO_INFORMATION, 0);
-		return (1);
-	}
 	light = ft_calloc(1, sizeof(t_light));
 	if (!light)
 		return (1);

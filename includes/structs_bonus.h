@@ -23,10 +23,10 @@ typedef struct s_material
 {
 	t_pattern	pattern;
 	t_color		checker_color;
-	REAL		checker_scale;
+	double		checker_scale;
 	char		*bump_path;
-	REAL		bump_strength;
-	REAL		reflection;
+	double		bump_strength;
+	double		reflection;
 }	t_material;
 
 #endif
