@@ -6,17 +6,18 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/31 21:47:51 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:26:04 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <float.h>
+# include <stdlib.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <pthread.h>
@@ -28,7 +29,6 @@
 # include "structs.h"
 # include "fileparser.h"
 # include "algelin.h"
-# include "cof_matrix.h"
 # include "utils.h"
 # include "raytracer.h"
 # include "window.h"

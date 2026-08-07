@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   box.c                                              :+:      :+:    :+:   */
+/*   hit_box.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 15:26:26 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/12 17:48:11 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:47:15 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	swap_real(double *a, double *b);
 
 int	hit_box(t_ray ray, t_aabb box)
 {
-	t_point axis_min;
-	t_point axis_max;
+	t_point	axis_min;
+	t_point	axis_max;
 	double	entry;
 	double	exit;
 
@@ -48,7 +48,7 @@ static void	slab_test(t_point *min, t_point *max, t_ray ray, t_aabb box)
 
 static void	swap_real(double *a, double *b)
 {
-	double temp;
+	double	temp;
 
 	temp = *a;
 	*a = *b;

@@ -6,12 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 00:00:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:27:12 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-#include "raytracer_bonus.h"
 
 t_material	*get_material_bonus(t_scene_obj *obj)
 {

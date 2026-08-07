@@ -6,12 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/01 00:00:00 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:26:51 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-#include "raytracer_bonus.h"
 
 static t_ray	reflected_ray(t_hit *hit, t_ray incident)
 {

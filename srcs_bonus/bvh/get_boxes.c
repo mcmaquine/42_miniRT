@@ -6,20 +6,22 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 20:30:16 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/06 00:14:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:45:48 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-t_aabb	sphere_aabb(t_sphere *sphere)
+t_aabb	sphere_aabb(t_sphere *sph)
 {
 	t_aabb	box;
+	t_point	center;
 	double	r;
 
-	r = sphere->diam * 0.5;
-	box.min = fill_point(sphere->center.x - r, sphere->center.y - r, sphere->center.z - r);
-	box.max = fill_point(sphere->center.x + r, sphere->center.y + r, sphere->center.z + r);
+	r = sph->diam * 0.5;
+	center = sph->center;
+	box.min = fill_point(center.x - r, center.y - r, center.z - r);
+	box.max = fill_point(center.x + r, center.y + r, center.z + r);
 	return (box);
 }
 

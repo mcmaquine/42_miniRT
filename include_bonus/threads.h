@@ -6,7 +6,7 @@
 /*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 21:30:22 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/07/04 16:40:41 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:37:35 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct s_thread
 
 /* thread.c */
 t_render_queue	*queue_init(int width, int height, int tile_size);
-t_thread		*thread_init(t_window *win, t_render_queue *queue, int num_threads);
+t_thread		*thread_init(t_window *win, t_render_queue *queue, \
+					int num_threads);
 
 /* thread_routine.c */
 void			*routine(void *arg);

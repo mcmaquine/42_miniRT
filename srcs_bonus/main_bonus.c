@@ -6,11 +6,16 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 16:16:54 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:09:26 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+static void	init_scene(t_window *scene, char *filename);
+static void	print_render_time(long start, long end);
+static void	render_scene(t_window *scene, t_thread *threads, int num_threads);
+static void	free_all(t_window *scene, t_render_queue *queue, t_thread *threads);
 
 int	main(int argc, char *argv[])
 {
@@ -18,22 +23,47 @@ int	main(int argc, char *argv[])
 	t_render_queue	*queue;
 	t_thread		*threads;
 	int				num_threads;
-	int				i;
 
 	if (argc != 2)
-		return (1); // message given a usage example
-	//TODO valid file extension
-	scene.scene_obj = read_file(argv[1]);
-	if (!scene.scene_obj)
 		return (1);
-	calc_components(scene.scene_obj); // calculate normals
-	init_bvh(scene.scene_obj);
-	start_window(&scene, WIDTH, HEIGHT);
+	init_scene(&scene, argv[1]);
 	num_threads = get_num_thread();
 	queue = queue_init(WIDTH, HEIGHT, TILE_SIZE);
 	threads = thread_init(&scene, queue, num_threads);
+	render_scene(&scene, threads, num_threads);
+	mlx_loop(scene.mlx);
+	free_all(&scene, queue, threads);
+	return (0);
+}
+
+static void	init_scene(t_window *scene, char *filename)
+{
+	scene->scene_obj = read_file(filename);
+	calc_components(scene->scene_obj);
+	init_bvh(scene->scene_obj);
+	start_window(scene, WIDTH, HEIGHT);
+}
+
+static void	print_render_time(long start, long end)
+{
+	long	elapsed;
+
+	elapsed = end - start;
+	if (elapsed > 1000)
+		printf("end calcs in %ld.%ld\n", (elapsed / 1000),
+			(elapsed - (elapsed / 1000 * 1000)));
+	else
+		printf("end calcs in %ld\n", elapsed);
+}
+
+static void	render_scene(t_window *scene, t_thread *threads, int num_threads)
+{
+	int		i;
+	long	start;
+	long	end;
+
 	i = 0;
-	long start = get_current_time();
+	start = get_current_time();
 	while (i < num_threads)
 	{
 		pthread_create(&threads[i].thread_id, NULL, routine, &threads[i]);
@@ -45,16 +75,16 @@ int	main(int argc, char *argv[])
 		pthread_join(threads[i].thread_id, NULL);
 		i++;
 	}
-	long end = get_current_time();
-	if (end - start > 1000)
-		printf("end calcs in %ld.%ld\n", ((end - start) / 1000), ((end - start) - ((end - start) / 1000 * 1000)));
-	else
-		printf("end calcs in %ld\n", end - start);
-	mlx_put_image_to_window(scene.mlx, scene.win, scene.canva.img, 0, 0);
+	end = get_current_time();
+	print_render_time(start, end);
+	mlx_put_image_to_window(scene->mlx, scene->win, scene->canva.img, 0, 0);
+}
+
+static void	free_all(t_window *scene, t_render_queue *queue, t_thread *threads)
+{
 	pthread_mutex_destroy(&queue->lock);
 	free(queue->tiles);
 	free(queue);
 	free(threads);
-	mlx_loop(scene.mlx);
-	return (0);
+	free_window(scene);
 }

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:07:51 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/04 13:47:34 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:42:58 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_point	vec_add(t_point a, t_point b)
 
 t_point	vec_sub(t_point a, t_point b)
 {
-	t_point p;
+	t_point	p;
 
 	p.x = a.x - b.x;
 	p.y = a.y - b.y;
@@ -52,7 +52,7 @@ t_point	vec_cross(t_point a, t_point b)
 	return (p);
 }
 
-double vec_dot(t_point a, t_point b)
+double	vec_dot(t_point a, t_point b)
 {
 	double	dot;
 
