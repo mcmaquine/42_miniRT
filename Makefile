@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/06/27 16:11:20 by gabrgarc         ###   ########.fr        #
+#    Updated: 2026/08/06 22:33:02 by gabrgarc         ###   ########.fr        #
 #    Updated: 2026/05/15 15:07:36 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -32,12 +32,14 @@ ALGELIN_SRC = \
 	algelin/vectorvector.c
 
 PARSER_SRCS = \
+	fileparser/error_message.c \
 	fileparser/openfile.c \
 	fileparser/openfile_util.c \
+	fileparser/scene_fill_utils.c \
 	fileparser/scene_obj_parser.c \
 	fileparser/scene_obj_util.c \
 	fileparser/unique_obj_parser.c \
-	fileparser/error_message.c
+	fileparser/unique_obj_parser_utils.c
 
 RAYTRACING_SRCS = \
 	raytracing/cyl_intersec.c \
