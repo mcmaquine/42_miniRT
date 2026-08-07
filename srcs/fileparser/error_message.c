@@ -33,7 +33,6 @@ static const char	*error_msg(t_error_option option)
 	[ERR_NO_OBJECT] = "missing object declaration in scene file",
 	[ERR_NO_UNIQUE] = "not a unique object in scene",
 	[ERR_NO_PARAM_RATIO] = "missing ratio parameter",
-	[ERR_RATIO_INVALID] = "invalid ratio value",
 	[ERR_NO_PARAM_COLOR] = "missing color parameter",
 	[ERR_NO_PARAM_COORDS] = "missing coordinates parameter",
 	[ERR_NO_PARAM_VEC] = "missing orientation vector parameter",
@@ -46,6 +45,7 @@ static const char	*error_msg(t_error_option option)
 	[ERR_OUT_RANGE_VEC] = "normalized vector value out of range [-1, 1]",
 	[ERR_COORDS_INVALID] = "invalid coordinates value",
 	[ERR_DIAMETER_NEGATIVE] = "diameter value negative",
+	[ERR_HEIGHT_NEGATIVE] = "height value negative",
 	};
 
 	return (msgs[option]);
@@ -53,5 +53,6 @@ static const char	*error_msg(t_error_option option)
 
 void	print_error(t_objs_type obj, t_error_option option, int line)
 {
+	ft_printf("Error\n");
 	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option), line);
 }

@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/06/29 21:51:53 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:49:06 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static int		valid_extension(char *filename, char *extension);
+static int		process_line(int fd, t_scene *scene_obj);
 static int		parser_line(char *line, t_scene *scene_obj);
 static int		parse_obj(char **param, t_scene *scene_obj);
 static t_scene	*validate_unique_obj(t_scene **scene_obj);
@@ -20,56 +20,43 @@ static t_scene	*validate_unique_obj(t_scene **scene_obj);
 t_scene	*read_file(char *filename)
 {
 	int		fd;
-	char	*line;
 	t_scene	*scene_obj;
 
 	if (!valid_extension(filename, ".rt"))
-	{
-		ft_putstr_fd("Error\nInvalid file extension\n", 2);
 		return (NULL);
-	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		ft_printf("miniRT: %s: No such file or directory\n", filename);
 		return (NULL);
+	}
 	scene_obj = ft_calloc(1, sizeof(t_scene));
+	if (process_line(fd, scene_obj))
+		return (NULL);
+	return (validate_unique_obj(&scene_obj));
+}
+
+int	process_line(int fd, t_scene *scene_obj)
+{
+	char	*line;
+	int		status;
+
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (parser_line(line, scene_obj))
+		status = parser_line(line, scene_obj);
+		if (status)
 		{
 			free_scene_obj(&scene_obj);
 			free(line);
 			close(fd);
-			return (NULL);
+			return (1);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (validate_unique_obj(&scene_obj));
-}
-
-static int	valid_extension(char *file, char *extension)
-{
-	size_t	len_file;
-	size_t	len_ext;
-	char	*ptr_dot;
-
-	if (!file || !extension)
-		return (0);
-	len_file = ft_strlen(file);
-	len_ext = ft_strlen(extension);
-	if (len_ext == 0 || len_ext > len_file)
-		return (0);
-	ptr_dot = &file[len_file - len_ext];
-	while (*extension && *ptr_dot == *extension)
-	{
-		ptr_dot++;
-		extension++;
-	}
-	if (*ptr_dot)
-		return (0);
-	return (1);
+	return (0);
 }
 
 static int	parser_line(char *line, t_scene *scene_obj)

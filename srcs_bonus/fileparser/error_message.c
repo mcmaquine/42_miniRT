@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:42:39 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/06 16:18:14 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 00:37:35 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static const char	*obj_name(t_objs_type obj)
 	[OBJ_SPHERE] = "Sphere",
 	[OBJ_PLANE] = "Plane",
 	[OBJ_CYLINDER] = "Cylinder",
+	[OBJ_CONE] = "Cone",
 	};
 
 	return (names[obj]);
@@ -46,6 +47,7 @@ static const char	*error_msg(t_error_option option)
 	[ERR_OUT_RANGE_VEC] = "normalized vector value out of range [-1, 1]",
 	[ERR_COORDS_INVALID] = "invalid coordinates value",
 	[ERR_DIAMETER_NEGATIVE] = "diameter value negative",
+	[ERR_HEIGHT_NEGATIVE] = "height value negative",
 	};
 
 	return (msgs[option]);
@@ -53,6 +55,7 @@ static const char	*error_msg(t_error_option option)
 
 void	print_error(t_objs_type obj, t_error_option option, int line)
 {
+	ft_putstr_fd("Error\n", 1);
 	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option),
 		line);
 }

@@ -3,42 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   scene_obj_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 10:24:04 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 14:53:27 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/08/06 22:48:03 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/08/06 22:48:05 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	is_valid_real(const char *str)
+int	is_valid_number(const char *str)
 {
-	size_t	i;
+	int	has_digit;
+	int	has_dot;
 
-	if (!str || !(*str))
+	if (!str || !*str)
 		return (0);
-	i = 0;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	if (!ft_isdigit(str[i]))
-		return (0);
-	while (ft_isdigit(str[i]))
-		i++;
-	if (str[i] == '.')
+	has_digit = 0;
+	has_dot = 0;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str)
 	{
-		i++;
-		if (!ft_isdigit(str[i]))
+		if (*str == '.' && !has_dot)
+			has_dot = 1;
+		else if (*str >= '0' && *str <= '9')
+			has_digit = 1;
+		else
 			return (0);
-		while (ft_isdigit(str[i]))
-			i++;
+		str++;
 	}
-	return (str[i] == '\0');
+	return (has_digit);
 }
 
-/*
-Free all memory allocated for t_scene_obj
-*/
 void	free_scene_obj(t_scene **scene_obj)
 {
 	int	i;
@@ -56,39 +53,6 @@ void	free_scene_obj(t_scene **scene_obj)
 }
 
 /*
-Fill struct point and checks its params.
-*/
-int	fill_color(char *param, t_color *color, t_objs_type obj)
-{
-	char	**colors;
-	t_color	temp;
-
-	colors = ft_split(param, ',');
-	if (ft_sizeof_split(colors) != 3)
-	{
-		print_error(obj, ERR_NO_PARAM_COLOR, 0);
-		ft_free_split(colors);
-		return (1);
-	}
-	temp.red = ft_atoi(colors[0]);
-	temp.green = ft_atoi(colors[1]);
-	temp.blue = ft_atoi(colors[2]);
-	color->tpcy = 0.0;
-	ft_free_split(colors);
-	if ((temp.red < 0 || temp.red > 255) 
-		|| (temp.green < 0 || temp.green > 255)
-		|| (temp.blue < 0 || temp.blue > 255))
-	{
-		print_error(obj, ERR_OUT_RANGE_COLOR, 0);
-		return (1);
-	}
-	color->red = temp.red / 255.0;
-	color->green = temp.green / 255.0;
-	color->blue = temp.blue / 255.0;
-	return (0);
-}
-
-/*
 Fill point struct and validate if every coordinate is in range [min,max]
 */
 int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
@@ -102,8 +66,8 @@ int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
 		ft_free_split(points);
 		return (1);
 	}
-	if (!is_valid_real(points[0]) || !is_valid_real(points[1])
-		|| !is_valid_real(points[2]))
+	if (!is_valid_number(points[0]) || !is_valid_number(points[1])
+		|| !is_valid_number(points[2]))
 	{
 		print_error(obj, ERR_COORDS_INVALID, 0);
 		ft_free_split(points);
@@ -113,30 +77,5 @@ int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
 	point->y = ft_atod(points[1]);
 	point->z = ft_atod(points[2]);
 	ft_free_split(points);
-	return (0);
-}
-
-int	fill_normalized(char *param, t_point *point, t_objs_type obj)
-{
-	char	**points;
-
-	points = ft_split(param, ',');
-	if (ft_sizeof_split(points) != 3)
-	{
-		print_error(obj, ERR_NO_PARAM_VEC, 0);
-		ft_free_split(points);
-		return (1);
-	}
-	point->x = ft_atod(points[0]);
-	point->y = ft_atod(points[1]);
-	point->z = ft_atod(points[2]);
-	ft_free_split(points);
-	if ((point->x < -1.0 || point->x > 1.0)
-		|| (point->y < -1.0 || point->y > 1.0)
-		|| (point->z < -1.0 || point->z > 1.0))
-	{
-		print_error(obj, ERR_OUT_RANGE_VEC, 0);
-		return (1);
-	}
 	return (0);
 }
