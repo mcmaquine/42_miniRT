@@ -31,5 +31,5 @@ int	key_map(int keysym, t_window *win)
 int	close_program(t_window *win)
 {
 	free_window(win);
-	return (0);
+	exit(0);
 }
