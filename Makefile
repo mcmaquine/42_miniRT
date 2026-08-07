@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/07 01:29:42 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/07 01:45:59 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,12 @@ ALGELIN_SRC = \
 
 PARSER_SRCS = \
 	fileparser/openfile.c \
+	fileparser/openfile_util.c \
 	fileparser/scene_obj_parser.c \
 	fileparser/scene_obj_util.c \
+	fileparser/scene_fill_utils.c \
 	fileparser/unique_obj_parser.c \
+	fileparser/unique_obj_parser_utils.c \
 	fileparser/error_message.c
 
 RAYTRACING_SRCS = \
