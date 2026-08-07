@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 17:35:44 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/06 23:04:09 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ int		fill_color(char *param, t_color *color, t_objs_type obj);
 void	print_error(t_objs_type obj, t_error_option option, int line);
 int		fill_coordinate(char *param, t_point *point, t_objs_type obj);
 int		fill_normalized(char *param, t_point *point, t_objs_type obj);
+int		is_valid_number(const char *str);
+int		fill_cam(char **params, t_cam *cam);
+int		fill_light(char **params, t_light *light);
 
 #endif
