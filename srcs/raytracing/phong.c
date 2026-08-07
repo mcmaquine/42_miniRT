@@ -97,11 +97,11 @@ int	is_in_shadow(t_window *win, t_hit *hit)
 	double	dist_to_light;
 
 	light_dir = vec_normalize(vec_sub(win->scene_obj->light->coord, \
-		hit->point));
+hit->point));
 	shadow_ray.origin = vec_add(hit->point, vec_scale(light_dir, EPSILON));
 	shadow_ray.direction = light_dir;
 	dist_to_light = vec_magnitude(vec_sub(win->scene_obj->light->coord, \
-		shadow_ray.origin));
+shadow_ray.origin));
 	shadow_hit = all_intersections(win, shadow_ray);
 	if (shadow_hit.t > EPSILON && shadow_hit.t < dist_to_light)
 		return (1);
