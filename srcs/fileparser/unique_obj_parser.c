@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   unique_obj_parser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 17:51:59 by gabrgarc         ###   ########.fr       */
+/*   Created: 2026/08/06 22:48:33 by gabrgarc          #+#    #+#             */
+/*   Updated: 2026/08/06 22:48:38 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minirt.h"
 
@@ -54,16 +55,9 @@ int	cam_parser(char **params, t_scene *scene_obj)
 		return (1);
 	}
 	cam = ft_calloc(1, sizeof(t_cam));
-	cam->type.base = CAMERA;
-	cam->fov = ft_atod(params[3]);
-	if (cam->fov < 0.0 || cam->fov > 180)
-	{
-		print_error(OBJ_CAMERA, ERR_OUT_RANGE_FOV, 0);
-		free(cam);
+	if (!cam)
 		return (1);
-	}
-	if (fill_coordinate(params[1], &(cam->point), OBJ_CAMERA)
-		|| fill_normalized(params[2], &(cam->orient), OBJ_CAMERA))
+	if (fill_cam(params, cam))
 	{
 		free(cam);
 		return (1);
@@ -87,16 +81,9 @@ int	light_parser(char **params, t_scene *scene_obj)
 		return (1);
 	}
 	light = ft_calloc(1, sizeof(t_light));
-	light->type.base = LIGHT;
-	light->bright_rate = ft_atod(params[2]);
-	if (light->bright_rate < 0.0 || light->bright_rate > 1.0)
-	{
-		print_error(OBJ_LIGHT, ERR_OUT_RANGE_BRIGHT, 0);
-		free(light);
+	if (!light)
 		return (1);
-	}
-	if (fill_coordinate(params[1], &(light->coord), OBJ_LIGHT)
-		|| fill_color(params[3], &(light->color), OBJ_LIGHT))
+	if (fill_light(params, light))
 	{
 		free(light);
 		return (1);
