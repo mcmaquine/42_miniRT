@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/07 01:04:00 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/07 01:29:42 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ ALGELIN_SRC_BONUS = \
 
 PARSER_SRCS_BONUS = \
 	fileparser/openfile.c \
+	fileparser/openfile_util.c \
 	fileparser/cone_parser.c \
 	fileparser/scene_obj_parser.c \
 	fileparser/scene_obj_util.c \
@@ -128,7 +129,6 @@ THREAD_SRCS_BONUS = \
 UTILS_SRCS_BONUS = \
 	utils/math_utils.c \
 	utils/free.c \
-	utils/also_free.c \
 	utils/num_threads.c \
 	utils/get_current_time.c \
 	utils/real_min.c \

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 00:00:09 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/07 01:24:47 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef enum e_error_option
 	ERR_OUT_RANGE_VEC,
 	ERR_COORDS_INVALID,
 	ERR_DIAMETER_NEGATIVE,
+	ERR_HEIGHT_NEGATIVE,
 	TOTAL_OPTIONS
 }	t_error_option;
 
