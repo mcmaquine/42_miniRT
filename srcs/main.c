@@ -39,7 +39,6 @@ void	render(t_window *scene)
 	int		*ptr;
 	t_hit	hit;
 	t_color	color;
-	t_ray	ray;
 
 	ptr = (int *)scene->canva.addr;
 	py = 0;
@@ -48,8 +47,7 @@ void	render(t_window *scene)
 		px = 0;
 		while (px < WIDTH)
 		{
-			ray = generate_ray(scene, px, py);
-			hit = all_intersections(scene, ray);
+			hit = all_intersections(scene, generate_ray(scene, px, py));
 			color = calculate_illumination(scene, hit);
 			*ptr = pixel_color(color);
 			ptr++;
