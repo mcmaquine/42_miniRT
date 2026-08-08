@@ -6,34 +6,33 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 17:42:26 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/08 12:33:48 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	helper_parse_cylinder(char **params, t_cylinder	*cyl);
+static int	helper_parse_cylinder(char **params, t_cylinder	*cyl, int line);
 
 int	sphere_parser(char **params, t_scene *scene_obj)
 {
 	t_sphere	*sphere;
+	int			line;
 
+	line = scene_obj->line;
 	if (ft_sizeof_split(params) != 4)
-	{
-		print_error(OBJ_SPHERE, ERR_NO_INFORMATION, 0);
-		return (1);
-	}
+		return (print_error(OBJ_SPHERE, ERR_NO_INFORMATION, scene_obj->line));
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	sphere->type.base = SPHERE;
 	sphere->diam = ft_atod(params[2]);
 	if (sphere->diam <= 0.0)
 	{
-		print_error(OBJ_SPHERE, ERR_DIAMETER_NEGATIVE, 0);
 		free(sphere);
-		return (1);
+		return (print_error(OBJ_SPHERE, ERR_DIAMETER_NEGATIVE,
+				scene_obj->line));
 	}
-	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE)
-		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE))
+	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE, line)
+		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE, line))
 	{
 		free(sphere);
 		return (1);
@@ -51,14 +50,17 @@ int	plane_parser(char **params, t_scene *scene_obj)
 
 	if (ft_sizeof_split(params) != 4)
 	{
-		print_error(OBJ_PLANE, ERR_NO_INFORMATION, 0);
+		print_error(OBJ_PLANE, ERR_NO_INFORMATION, scene_obj->line);
 		return (1);
 	}
 	plane = ft_calloc(1, sizeof(t_plane));
 	plane->type.base = PLANE;
-	if (fill_coordinate(params[1], &(plane->a_point), OBJ_PLANE)
-		|| fill_normalized(params[2], &(plane->normal), OBJ_PLANE)
-		|| fill_color(params[3], &(plane->color), OBJ_PLANE))
+	if (fill_coordinate(params[1], &(plane->a_point), OBJ_PLANE,
+			scene_obj->line)
+		|| fill_normalized(params[2], &(plane->normal), OBJ_PLANE,
+			scene_obj->line)
+		|| fill_color(params[3], &(plane->color), OBJ_PLANE,
+			scene_obj->line))
 	{
 		free(plane);
 		return (1);
@@ -77,12 +79,12 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 
 	if (ft_sizeof_split(params) != 6)
 	{
-		print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, 0);
+		print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, scene_obj->line);
 		return (1);
 	}
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	cylinder->type.base = CYLINDER;
-	error = helper_parse_cylinder(params, cylinder);
+	error = helper_parse_cylinder(params, cylinder, scene_obj->line);
 	if (error)
 	{
 		free(cylinder);
@@ -92,17 +94,17 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	return (0);
 }
 
-static int	helper_parse_cylinder(char **params, t_cylinder	*cyl)
+static int	helper_parse_cylinder(char **params, t_cylinder	*cyl, int line)
 {
 	cyl->diam = ft_atod(params[3]);
 	cyl->height = ft_atod(params[4]);
 	if (cyl->diam <= 0.0)
-		print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, 0);
+		print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, line);
 	else if (cyl->height <= 0.0)
-		print_error(OBJ_CYLINDER, ERR_HEIGHT_NEGATIVE, 0);
-	else if (fill_coordinate(params[1], &(cyl->center), OBJ_CYLINDER)
-		|| fill_normalized(params[2], &(cyl->v_axis), OBJ_CYLINDER)
-		|| fill_color(params[5], &(cyl->color), OBJ_CYLINDER))
+		print_error(OBJ_CYLINDER, ERR_HEIGHT_NEGATIVE, line);
+	else if (fill_coordinate(params[1], &(cyl->center), OBJ_CYLINDER, line)
+		|| fill_normalized(params[2], &(cyl->v_axis), OBJ_CYLINDER, line)
+		|| fill_color(params[5], &(cyl->color), OBJ_CYLINDER, line))
 		return (1);
 	else
 		return (0);

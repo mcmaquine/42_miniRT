@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrgarc <gabrgarc@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:42:39 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/05/16 15:08:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/08 12:31:02 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static const char	*obj_name(t_objs_type obj)
 	[OBJ_SPHERE] = "Sphere",
 	[OBJ_PLANE] = "Plane",
 	[OBJ_CYLINDER] = "Cylinder",
+	[OBJ_SCENE] = "Scene",
 	};
 
 	return (names[obj]);
@@ -46,13 +47,15 @@ static const char	*error_msg(t_error_option option)
 	[ERR_COORDS_INVALID] = "invalid coordinates value",
 	[ERR_DIAMETER_NEGATIVE] = "diameter value negative",
 	[ERR_HEIGHT_NEGATIVE] = "height value negative",
+	[ERR_UNKNOWN_OBJECT] = "unknown object declaration in scene file",
 	};
 
 	return (msgs[option]);
 }
 
-void	print_error(t_objs_type obj, t_error_option option, int line)
+int	print_error(t_objs_type obj, t_error_option option, int line)
 {
 	ft_printf("Error\n");
 	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option), line);
+	return (1);
 }

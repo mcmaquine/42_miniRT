@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:35:40 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 17:49:34 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/08 11:55:22 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ int	process_line(int fd, t_scene *scene_obj)
 	char	*line;
 	int		status;
 
+	scene_obj->line = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
+		scene_obj->line++;
 		status = parser_line(line, scene_obj);
 		if (status)
 		{
@@ -67,7 +69,7 @@ static int	parser_line(char *line, t_scene *scene_obj)
 	params = ft_strsplit_any(line, "\t\n\v\f\r ");
 	if (!params)
 		return (1);
-	if (ft_sizeof_split(params) == 1)
+	if (!params[0] || params[0][0] == '#')
 	{
 		ft_free_split(params);
 		return (0);
@@ -91,17 +93,17 @@ static int	parse_obj(char **params, t_scene *scene_obj)
 		return (plane_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "cy"))
 		return (cilinder_parser(params, scene_obj));
-	return (0);
+	return (print_error(OBJ_SCENE, ERR_UNKNOWN_OBJECT, scene_obj->line));
 }
 
 static t_scene	*validate_unique_obj(t_scene **scene_obj)
 {
 	if (!(*scene_obj)->amb)
-		print_error(OBJ_AMBIENT, ERR_NO_OBJECT, 0);
+		print_error(OBJ_AMBIENT, ERR_NO_OBJECT, (*scene_obj)->line);
 	else if (!(*scene_obj)->cam)
-		print_error(OBJ_CAMERA, ERR_NO_OBJECT, 0);
+		print_error(OBJ_CAMERA, ERR_NO_OBJECT, (*scene_obj)->line);
 	else if (!(*scene_obj)->light)
-		print_error(OBJ_LIGHT, ERR_NO_OBJECT, 0);
+		print_error(OBJ_LIGHT, ERR_NO_OBJECT, (*scene_obj)->line);
 	else
 		return (*scene_obj);
 	free_scene_obj(scene_obj);

@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:04:28 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 17:36:08 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/08 11:32:10 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_scene
 	t_cam		*cam;
 	t_light		*light;
 	t_list		*objs[COUNT];
+	int			line;
 }	t_scene;
 
 typedef struct s_ray

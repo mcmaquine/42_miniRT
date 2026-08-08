@@ -61,6 +61,7 @@ typedef enum e_objs_type
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
+	OBJ_SCENE,
 	TOTAL
 }	t_objs_type;
 
@@ -83,6 +84,7 @@ typedef enum e_error_option
 	ERR_COORDS_INVALID,
 	ERR_DIAMETER_NEGATIVE,
 	ERR_HEIGHT_NEGATIVE,
+	ERR_UNKNOWN_OBJECT,
 	TOTAL_OPTIONS
 }	t_error_option;
 

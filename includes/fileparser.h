@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 18:34:03 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 01:42:17 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 12:31:56 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	calc_components(t_scene *scene);
 //utils
 int		valid_extension(char *filename, char *extension);
 void	free_scene_obj(t_scene **scene_obj);
-int		fill_color(char *param, t_color *color, t_objs_type obj);
-void	print_error(t_objs_type obj, t_error_option option, int line);
-int		fill_coordinate(char *param, t_point *point, t_objs_type obj);
-int		fill_normalized(char *param, t_point *point, t_objs_type obj);
+int		fill_color(char *param, t_color *color, t_objs_type obj, int line);
+int		print_error(t_objs_type obj, t_error_option option, int line);
+int		fill_coordinate(char *param, t_point *point, t_objs_type obj, int line);
+int		fill_normalized(char *param, t_point *point, t_objs_type obj, int line);
 int		is_valid_number(const char *str);
-int		fill_cam(char **params, t_cam *cam);
-int		fill_light(char **params, t_light *light);
+int		fill_cam(char **params, t_cam *cam, int line);
+int		fill_light(char **params, t_light *light, int line);
 
 #endif
