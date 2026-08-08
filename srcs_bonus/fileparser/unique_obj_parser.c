@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:22:38 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 22:08:19 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 14:32:40 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ int	light_parser(char **params, t_scene *scene_obj)
 	t_light	*light;
 
 	if (ft_sizeof_split(params) != 4)
-	{
-		print_error(OBJ_LIGHT, ERR_NO_INFORMATION, scene_obj->line);
-		return (1);
-	}
+		return (print_error(OBJ_LIGHT, ERR_NO_INFORMATION, scene_obj->line));
 	light = ft_calloc(1, sizeof(t_light));
 	light->type.base = LIGHT;
 	light->bright_rate = ft_atod(params[2]);

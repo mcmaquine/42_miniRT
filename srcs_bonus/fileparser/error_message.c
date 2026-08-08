@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:42:39 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/07 01:14:56 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 14:27:30 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ static const char	*error_msg(t_error_option option)
 	return (msgs[option]);
 }
 
-void	print_error(t_objs_type obj, t_error_option option, int line)
+int	print_error(t_objs_type obj, t_error_option option, int line)
 {
 	ft_putstr_fd("Error\n", 1);
 	printf("miniRT: %s: %s (line %d)\n", obj_name(obj), error_msg(option),
 		line);
+	return (1);
 }

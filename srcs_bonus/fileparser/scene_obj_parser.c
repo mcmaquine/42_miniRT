@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 01:15:18 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 14:33:24 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 	t_sphere	*sphere;
 
 	if (ft_sizeof_split(params) < 4)
-	{
-		print_error(OBJ_SPHERE, ERR_NO_INFORMATION, scene_obj->line);
-		return (1);
-	}
+		return (print_error(OBJ_SPHERE, ERR_NO_INFORMATION, scene_obj->line));
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	sphere->type.base = SPHERE;
 	if (fill_sphere_diameter(params[2], sphere, scene_obj->line))
