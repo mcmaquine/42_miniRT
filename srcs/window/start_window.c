@@ -6,13 +6,12 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:05:56 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 18:34:40 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/08 15:31:07 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* TODO error messages */
 int	start_window(t_window *win, int width, int height)
 {
 	win->mlx = mlx_init();

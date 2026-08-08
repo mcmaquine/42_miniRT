@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/02 18:37:01 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/08 15:53:09 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,29 @@
 void		render(t_window *scene);
 static int	pixel_color(t_color color);
 
-/* TODO error message when there are two parameters */
 int	main(int argc, char *argv[])
 {
 	t_window	scene;
 
 	scene = (t_window){0};
-	if (argc != 2)
+	if (argc > 2)
+	{
+		ft_printf("Error\nminiRT: params: too many arguments\n");
 		return (1);
-	scene.scene_obj = read_file(argv[1]);
-	if (!scene.scene_obj)
-		return (1);
-	calc_components(scene.scene_obj);
+	}
 	if (start_window(&scene, WIDTH, HEIGHT))
 	{
 		free_window(&scene);
 		return (1);
 	}
-	render(&scene);
+	if (argc == 2)
+	{
+		scene.scene_obj = read_file(argv[1]);
+		if (!scene.scene_obj)
+			return (1);
+		calc_components(scene.scene_obj);
+		render(&scene);
+	}
 	mlx_loop(scene.mlx);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:00:55 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 01:12:24 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 16:12:32 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static int	init_scene(t_window *scene, char *filename);
+static int	init_scene(t_window *scene, char *filename, int argc);
 static void	print_render_time(long start, long end);
 static void	render_scene(t_window *scene, t_thread *threads, int num_threads);
 static void	free_render(t_render_queue *queue, t_thread *threads);
@@ -25,30 +25,39 @@ int	main(int argc, char *argv[])
 	int				num_threads;
 
 	scene = (t_window){0};
-	if (argc != 2)
+	if (argc > 2)
+	{
+		ft_printf("Error\nminiRT: params: too many arguments\n");
 		return (1);
-	if (init_scene(&scene, argv[1]))
+	}
+	if (init_scene(&scene, argv[1], argc))
 		return (1);
-	num_threads = get_num_thread();
-	queue = queue_init(WIDTH, HEIGHT, TILE_SIZE);
-	threads = thread_init(&scene, queue, num_threads);
-	render_scene(&scene, threads, num_threads);
-	free_render(queue, threads);
+	if (argc == 2)
+	{
+		num_threads = get_num_thread();
+		queue = queue_init(WIDTH, HEIGHT, TILE_SIZE);
+		threads = thread_init(&scene, queue, num_threads);
+		render_scene(&scene, threads, num_threads);
+		free_render(queue, threads);
+	}
 	mlx_loop(scene.mlx);
 	return (0);
 }
 
-static int	init_scene(t_window *scene, char *filename)
+static int	init_scene(t_window *scene, char *filename, int argc)
 {
-	scene->scene_obj = read_file(filename);
-	if (!scene->scene_obj)
-		return (1);
-	calc_components(scene->scene_obj);
-	init_bvh(scene->scene_obj);
 	if (start_window(scene, WIDTH, HEIGHT))
 	{
 		free_window(scene);
 		return (1);
+	}
+	if (argc == 2)
+	{
+		scene->scene_obj = read_file(filename);
+		if (!scene->scene_obj)
+			return (1);
+		calc_components(scene->scene_obj);
+		init_bvh(scene->scene_obj);
 	}
 	return (0);
 }

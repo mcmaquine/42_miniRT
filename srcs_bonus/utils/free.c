@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 00:29:47 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/07 01:18:21 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 16:13:56 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,11 @@ void	free_mlx(void *mlx, void *win, void *img);
 
 void	free_window(t_window *win)
 {
-	free_scene(win->scene_obj);
+	if (win->scene_obj)
+		free_scene(win->scene_obj);
 	free_mlx(win->mlx, win->win, win->canva.img);
 }
 
-/* free_scene
-
-amb_light is alloc?
-cam is alloc?
-light is alloc?
-*/
 void	free_scene(t_scene *scene)
 {
 	int		i;

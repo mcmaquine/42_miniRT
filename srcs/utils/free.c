@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 18:29:36 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/07 01:43:27 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 15:46:01 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	free_window(t_window *win)
 {
-	free_scene(win->scene_obj);
+	if (win->scene_obj)
+		free_scene(win->scene_obj);
 	free_mlx(win->mlx, win->win, win->canva.img);
 }
 
