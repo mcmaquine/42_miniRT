@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_normals.c                                     :+:      :+:    :+:   */
+/*   calc_normals_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:21:31 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/07 01:14:16 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 16:57:16 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	cylinder_calc(t_scene_obj *obj)
 	cy->radius = cy->diam * 0.5;
 	cy->r_sq = cy->diam * cy->diam * 0.25;
 	cy->v_axis = vec_normalize(cy->v_axis);
-	cy->height_2 = cy->height / 2;
+	cy->height_2 = cy->height * 0.5;
 	cy->top.normal = cy->v_axis;
 	cy->base.normal = cy->v_axis;
 	cy->top.a_point = vec_add(cy->center, vec_scale(cy->v_axis, cy->height_2));

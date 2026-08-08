@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/08 15:57:03 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/08 17:23:22 by gabrgarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,63 +85,63 @@ LIBS_BONUS = $(LIBS) -lpthread
 MAIN_SRC_BONUS = main_bonus.c
 
 ALGELIN_SRC_BONUS = \
-	algelin/vector_measure.c \
-	algelin/vector_utils.c \
-	algelin/vectorvector.c
+	algelin/vector_measure_bonus.c \
+	algelin/vector_utils_bonus.c \
+	algelin/vectorvector_bonus.c
 
 PARSER_SRCS_BONUS = \
-	fileparser/openfile.c \
-	fileparser/openfile_util.c \
-	fileparser/cone_parser.c \
-	fileparser/scene_obj_parser.c \
-	fileparser/scene_obj_util.c \
-	fileparser/unique_obj_parser.c \
+	fileparser/openfile_bonus.c \
+	fileparser/cone_parser_bonus.c \
+	fileparser/scene_obj_parser_bonus.c \
+	fileparser/scene_obj_util_bonus.c \
+	fileparser/unique_obj_parser_bonus.c \
 	fileparser/material_parser_bonus.c \
-	fileparser/error_message.c
+	fileparser/error_message_bonus.c
 
 RAYTRACING_SRCS_BONUS = \
-	raytracing/cyl_intersec.c \
-	raytracing/normals.c \
-	raytracing/phong.c \
-	raytracing/plane_intersec.c \
-	raytracing/sphere_intersec.c \
-	raytracing/tracer.c \
-	raytracing/cone_intersec.c \
+	raytracing/cyl_intersec_bonus.c \
+	raytracing/normals_bonus.c \
+	raytracing/phong_bonus.c \
+	raytracing/plane_intersec_bonus.c \
+	raytracing/sphere_intersec_bonus.c \
+	raytracing/tracer_bonus.c \
+	raytracing/cone_intersec_bonus.c \
 	raytracing/reflection_bonus.c \
 	raytracing/texture_bonus.c \
-	raytracing/tracer_utils.c
+	raytracing/tracer_utils_bonus.c
 
 BVH_SRCS_BONUS = \
-	bvh/build_bvh.c \
-	bvh/compare_axis.c \
-	bvh/get_aabb.c \
-	bvh/get_boxes.c \
-	bvh/group_box.c \
-	bvh/hit_box.c \
-	bvh/hit_bvh.c \
-	bvh/init_bvh.c \
-	bvh/intersect_bvh.c
+	bvh/build_bvh_bonus.c \
+	bvh/compare_axis_bonus.c \
+	bvh/get_aabb_bonus.c \
+	bvh/get_boxes_bonus.c \
+	bvh/group_box_bonus.c \
+	bvh/hit_box_bonus.c \
+	bvh/hit_bvh_bonus.c \
+	bvh/init_bvh_bonus.c \
+	bvh/intersect_bvh_bonus.c
 
 CALC_SRCS_BONUS = \
-	calc/calc_normals.c
+	calc/calc_normals_bonus.c
 
 THREAD_SRCS_BONUS = \
-	threads/thread.c \
-	threads/thread_routine.c
+	threads/thread_bonus.c \
+	threads/thread_routine_bonus.c
 
 UTILS_SRCS_BONUS = \
-	utils/math_utils.c \
-	utils/free.c \
-	utils/num_threads.c \
-	utils/get_current_time.c \
-	utils/real_min.c \
-	utils/real_max.c \
-	utils/array_objs.c \
-	utils/count_objs.c
+	utils/math_utils_bonus.c \
+	utils/free_bonus.c \
+	utils/num_threads_bonus.c \
+	utils/get_current_time_bonus.c \
+	utils/real_min_bonus.c \
+	utils/real_max_bonus.c \
+	utils/array_objs_bonus.c \
+	utils/valid_extension_bonus.c \
+	utils/count_objs_bonus.c
 
 WINDOW_SRC_BONUS = \
-	window/start_window.c \
-	window/events.c
+	window/start_window_bonus.c \
+	window/events_bonus.c
 
 SRCS_BONUS := $(MAIN_SRC_BONUS) $(ALGELIN_SRC_BONUS) $(PARSER_SRCS_BONUS) \
 	$(RAYTRACING_SRCS_BONUS) $(UTILS_SRCS_BONUS) $(WINDOW_SRC_BONUS) \
@@ -188,14 +188,6 @@ $(LIBFT): $(DIR_LIBFT)
 
 $(LIBX): $(DIR_LIBX)
 	$(MAKE) -C $< all
-
-val:
-	@valgrind -q --leak-check=full --track-origins=yes \
-	--track-fds=yes --show-leak-kinds=all ./$(NAME)
-
-val_bonus:
-	@valgrind -q --leak-check=full --track-origins=yes \
-	--track-fds=yes --show-leak-kinds=all ./$(NAME_BONUS)
 
 debug: CFLAGS += -g
 debug: re
