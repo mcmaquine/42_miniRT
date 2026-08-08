@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 18:23:37 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/07/31 10:13:20 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 15:43:16 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int	cone_parser(char **params, t_scene *scene_obj)
 
 static int	fill_cone(char **params, t_cone *cone, int line)
 {
+	int	idx_line[2];
+
+	idx_line[0] = 6;
+	idx_line[1] = line;
 	cone->theta = ft_atod(params[3]);
 	cone->height = ft_atod(params[4]);
 	if (cone->theta <= 1.0 || cone->theta >= 89.0)
@@ -49,8 +53,7 @@ static int	fill_cone(char **params, t_cone *cone, int line)
 	else if (fill_coordinate(params[1], &(cone->vertex), OBJ_CONE, line)
 		|| fill_normalized(params[2], &(cone->v_axis), OBJ_CONE, line)
 		|| fill_color(params[5], &(cone->color), OBJ_CONE, line)
-		|| parse_material_bonus(params, 6, &cone->material, OBJ_CONE,
-			line))
+		|| parse_material_bonus(params, idx_line, &cone->material, OBJ_CONE))
 		return (1);
 	else
 		return (0);

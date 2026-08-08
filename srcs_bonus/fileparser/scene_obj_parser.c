@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 13:31:18 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/08 14:33:24 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 15:44:56 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,30 @@ Parses a sphere object
 */
 int	sphere_parser(char **params, t_scene *scene_obj)
 {
-	t_sphere	*sphere;
+	t_sphere	*sph;
+	int			idx_line[2];
 
+	idx_line[0] = 4;
+	idx_line[1] = scene_obj->line;
 	if (ft_sizeof_split(params) < 4)
 		return (print_error(OBJ_SPHERE, ERR_NO_INFORMATION, scene_obj->line));
-	sphere = ft_calloc(1, sizeof(t_sphere));
-	sphere->type.base = SPHERE;
-	if (fill_sphere_diameter(params[2], sphere, scene_obj->line))
+	sph = ft_calloc(1, sizeof(t_sphere));
+	sph->type.base = SPHERE;
+	if (fill_sphere_diameter(params[2], sph, scene_obj->line))
 	{
-		free(sphere);
+		free(sph);
 		return (1);
 	}
-	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE,
+	if (fill_coordinate(params[1], &(sph->center), OBJ_SPHERE,
 			scene_obj->line)
-		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE,
+		|| fill_color(params[3], &(sph->color), OBJ_SPHERE,
 			scene_obj->line)
-		|| parse_material_bonus(params, 4, &sphere->material, OBJ_SPHERE,
-			scene_obj->line))
+		|| parse_material_bonus(params, idx_line, &sph->material, OBJ_SPHERE))
 	{
-		free(sphere);
+		free(sph);
 		return (1);
 	}
-	ft_lstadd_back(&(scene_obj->objs)[SPHERE], ft_lstnew(sphere));
+	ft_lstadd_back(&(scene_obj->objs)[SPHERE], ft_lstnew(sph));
 	return (0);
 }
 
@@ -65,7 +67,10 @@ Parse a plane object
 int	plane_parser(char **params, t_scene *scene_obj)
 {
 	t_plane	*plane;
+	int		idx_line[2];
 
+	idx_line[0] = 4;
+	idx_line[1] = scene_obj->line;
 	if (ft_sizeof_split(params) < 4)
 	{
 		print_error(OBJ_PLANE, ERR_NO_INFORMATION, scene_obj->line);
@@ -79,8 +84,7 @@ int	plane_parser(char **params, t_scene *scene_obj)
 			scene_obj->line)
 		|| fill_color(params[3], &(plane->color), OBJ_PLANE,
 			scene_obj->line)
-		|| parse_material_bonus(params, 4, &plane->material, OBJ_PLANE,
-			scene_obj->line))
+		|| parse_material_bonus(params, idx_line, &plane->material, OBJ_PLANE))
 	{
 		free(plane);
 		return (1);
@@ -97,10 +101,7 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	t_cylinder	*cylinder;
 
 	if (ft_sizeof_split(params) < 6)
-	{
-		print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, scene_obj->line);
-		return (1);
-	}
+		return (print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, scene_obj->line));
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	cylinder->type.base = CYLINDER;
 	if (parse_cylinder_bonus(params, cylinder, scene_obj->line))
@@ -114,29 +115,24 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 
 static int	parse_cylinder_bonus(char **params, t_cylinder *cylinder, int line)
 {
+	int	idx_line[2];
+
+	idx_line[0] = 6;
+	idx_line[1] = line;
 	if (!is_valid_real(params[3]) || !is_valid_real(params[4]))
-	{
-		print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, line);
-		return (1);
-	}
+		return (print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, line));
 	cylinder->diam = ft_atod(params[3]);
 	cylinder->height = ft_atod(params[4]);
 	if (cylinder->diam <= 0.0)
-	{
-		print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, line);
-		return (1);
-	}
+		return (print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, line));
 	if (cylinder->height <= 0.0)
-	{
-		print_error(OBJ_CYLINDER, ERR_NO_PARAM_HEIGHT, line);
-		return (1);
-	}
+		return (print_error(OBJ_CYLINDER, ERR_NO_PARAM_HEIGHT, line));
 	if (fill_coordinate(params[1], &cylinder->center, OBJ_CYLINDER, line)
 		|| fill_normalized(params[2], &cylinder->v_axis, OBJ_CYLINDER,
 			line)
 		|| fill_color(params[5], &cylinder->color, OBJ_CYLINDER, line)
-		|| parse_material_bonus(params, 6, &cylinder->material,
-			OBJ_CYLINDER, line))
+		|| parse_material_bonus(params, idx_line, &cylinder->material,
+			OBJ_CYLINDER))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 14:33:20 by gabrgarc          #+#    #+#              #
-#    Updated: 2026/08/07 01:45:59 by mmaquine         ###   ########.fr        #
+#    Updated: 2026/08/08 15:57:03 by mmaquine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME        = miniRT
 NAME_BONUS  = miniRT_bonus
 
 CC     = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 
 DIR_LIBFT = ./libft
 LIBFT     = $(DIR_LIBFT)/libft.a

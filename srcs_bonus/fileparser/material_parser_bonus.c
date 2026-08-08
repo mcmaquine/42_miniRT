@@ -6,7 +6,7 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 00:00:00 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/08/06 14:46:38 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/08/08 15:34:52 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,64 +27,71 @@ static int	is_checker_id(char *param)
 	return (0);
 }
 
-static int	parse_checker(char **params, int *index, t_material *material,
-		t_objs_type obj, int line)
+static int	parse_checker(char **params, int *idx_line, t_material *material,
+		t_objs_type obj)
 {
-	if (!ft_strcmp(params[*index], "check")
-		&& (!params[*index + 1] || !params[*index + 2]))
+	if (!ft_strcmp(params[idx_line[0]], "check")
+		&& (!params[idx_line[0] + 1] || !params[idx_line[0] + 2]))
 	{
-		fill_color("255,255,255", &material->checker_color, obj, line);
+		fill_color("255,255,255", &material->checker_color, obj, idx_line[1]);
 		material->checker_scale = 1.0;
 		material->pattern = PATTERN_CHECKER;
-		*index += 1;
+		idx_line[0] += 1;
 		return (0);
 	}
-	if (!params[*index + 1] || !params[*index + 2])
-		return (material_error(obj, line));
-	if (fill_color(params[*index + 1], &material->checker_color, obj, line))
+	if (!params[idx_line[0] + 1] || !params[idx_line[0] + 2])
 		return (1);
-	if (!is_valid_real(params[*index + 2]))
-		return (material_error(obj, line));
-	material->checker_scale = ft_atod(params[*index + 2]);
+	if (fill_color(params[idx_line[0] + 1], &material->checker_color, obj,
+			idx_line[1]))
+		return (2);
+	if (!is_valid_real(params[idx_line[0] + 2]))
+		return (1);
+	material->checker_scale = ft_atod(params[idx_line[0] + 2]);
 	if (material->checker_scale <= 0.0)
-		return (material_error(obj, line));
+		return (1);
 	material->pattern = PATTERN_CHECKER;
-	*index += 3;
+	idx_line[0] += 3;
 	return (0);
 }
 
-static int	parse_reflection(char **params, int *index, t_material *material,
-		t_objs_type obj, int line)
+static int	parse_reflection(char **params, int *idx_line, t_material *material,
+		t_objs_type obj)
 {
-	if (!params[*index + 1] || !is_valid_real(params[*index + 1]))
-		return (material_error(obj, line));
-	material->reflection = ft_atod(params[*index + 1]);
+	(void)obj;
+	if (!params[idx_line[0] + 1] || !is_valid_real(params[idx_line[0] + 1]))
+		return (1);
+	material->reflection = ft_atod(params[idx_line[0] + 1]);
 	if (material->reflection < 0.0 || material->reflection > 1.0)
-		return (material_error(obj, line));
-	*index += 2;
+		return (1);
+	idx_line[0] += 2;
 	return (0);
 }
 
-int	parse_material_bonus(char **params, int index, t_material *material,
-		t_objs_type obj, int line)
+int	parse_material_bonus(char **params, int *idx_line, t_material *material,
+		t_objs_type obj)
 {
+	int	error;
+
 	material->pattern = PATTERN_NONE;
 	material->checker_scale = 1.0;
 	material->reflection = 0.0;
-	while (params[index])
+	while (params[idx_line[0]])
 	{
-		if (is_checker_id(params[index]))
+		if (is_checker_id(params[idx_line[0]]))
 		{
-			if (parse_checker(params, &index, material, obj, line))
+			error = parse_checker(params, idx_line, material, obj);
+			if (error == 2)
 				return (1);
+			if (error)
+				return (material_error(obj, idx_line[1]));
 		}
-		else if (!ft_strcmp(params[index], REFLECTION_ID))
+		else if (!ft_strcmp(params[idx_line[0]], REFLECTION_ID))
 		{
-			if (parse_reflection(params, &index, material, obj, line))
-				return (1);
+			if (parse_reflection(params, idx_line, material, obj))
+				return (material_error(obj, idx_line[1]));
 		}
 		else
-			return (material_error(obj, line));
+			return (material_error(obj, idx_line[1]));
 	}
 	return (0);
 }
