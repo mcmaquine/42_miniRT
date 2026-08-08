@@ -6,11 +6,11 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:21:31 by gabrgarc          #+#    #+#             */
-/*   Updated: 2026/08/02 18:11:37 by gabrgarc         ###   ########.fr       */
+/*   Updated: 2026/08/08 16:41:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "minirt.h"
 
 static void	sphere_calc(t_scene_obj *obj);
 static void	plane_calc(t_scene_obj *obj);
@@ -28,6 +28,7 @@ void	calc_components(t_scene *scene)
 	int				i;
 
 	scene->cam->orient = vec_normalize(scene->cam->orient);
+	scene->cam->fov = to_radians(scene->cam->fov);
 	i = 0;
 	while (i < COUNT)
 	{
