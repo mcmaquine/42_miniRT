@@ -44,9 +44,11 @@ int	process_line(int fd, t_scene *scene_obj)
 	char	*line;
 	int		status;
 
+	scene_obj->line = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
+		scene_obj->line++;
 		status = parser_line(line, scene_obj);
 		if (status)
 		{
@@ -75,11 +77,6 @@ static int	parser_line(char *line, t_scene *scene_obj)
 		ft_free_split(params);
 		return (0);
 	}
-	if (ft_sizeof_split(params) == 1)
-	{
-		ft_free_split(params);
-		return (0);
-	}
 	i = parse_obj(params, scene_obj);
 	ft_free_split(params);
 	return (i);
@@ -101,7 +98,7 @@ static int	parse_obj(char	**params, t_scene *scene_obj)
 		return (cilinder_parser(params, scene_obj));
 	if (!ft_strcmp(params[0], "co"))
 		return (cone_parser(params, scene_obj));
-	ft_putstr_fd("Error\nUnknown object\n", 2);
+	print_error(OBJ_SCENE, ERR_UNKNOWN_OBJECT, scene_obj->line);
 	return (1);
 }
 
@@ -110,11 +107,11 @@ static t_scene	*validate_unique_obj(t_scene **scene_obj)
 	if (!(*scene_obj)->amb || !(*scene_obj)->cam || !(*scene_obj)->light)
 	{
 		if (!(*scene_obj)->amb)
-			print_error(OBJ_AMBIENT, ERR_NO_OBJECT, 0);
+			print_error(OBJ_AMBIENT, ERR_NO_OBJECT, (*scene_obj)->line);
 		else if (!(*scene_obj)->cam)
-			print_error(OBJ_CAMERA, ERR_NO_OBJECT, 0);
+			print_error(OBJ_CAMERA, ERR_NO_OBJECT, (*scene_obj)->line);
 		else
-			print_error(OBJ_LIGHT, ERR_NO_OBJECT, 0);
+			print_error(OBJ_LIGHT, ERR_NO_OBJECT, (*scene_obj)->line);
 		free_scene_obj(scene_obj);
 		return (NULL);
 	}

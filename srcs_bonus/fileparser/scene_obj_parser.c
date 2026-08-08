@@ -12,8 +12,8 @@
 
 #include "minirt_bonus.h"
 
-static int	parse_cylinder_bonus(char **params, t_cylinder *cylinder);
-static int	fill_sphere_diameter(char *param, t_sphere *sphere);
+static int	parse_cylinder_bonus(char **params, t_cylinder *cylinder, int line);
+static int	fill_sphere_diameter(char *param, t_sphere *sphere, int line);
 
 /*
 Parses a sphere object
@@ -24,19 +24,22 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 
 	if (ft_sizeof_split(params) < 4)
 	{
-		print_error(OBJ_SPHERE, ERR_NO_INFORMATION, 0);
+		print_error(OBJ_SPHERE, ERR_NO_INFORMATION, scene_obj->line);
 		return (1);
 	}
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	sphere->type.base = SPHERE;
-	if (fill_sphere_diameter(params[2], sphere))
+	if (fill_sphere_diameter(params[2], sphere, scene_obj->line))
 	{
 		free(sphere);
 		return (1);
 	}
-	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE)
-		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE)
-		|| parse_material_bonus(params, 4, &sphere->material, OBJ_SPHERE))
+	if (fill_coordinate(params[1], &(sphere->center), OBJ_SPHERE,
+			scene_obj->line)
+		|| fill_color(params[3], &(sphere->color), OBJ_SPHERE,
+			scene_obj->line)
+		|| parse_material_bonus(params, 4, &sphere->material, OBJ_SPHERE,
+			scene_obj->line))
 	{
 		free(sphere);
 		return (1);
@@ -45,7 +48,7 @@ int	sphere_parser(char **params, t_scene *scene_obj)
 	return (0);
 }
 
-static int	fill_sphere_diameter(char *param, t_sphere *sphere)
+static int	fill_sphere_diameter(char *param, t_sphere *sphere, int line)
 {
 	if (!is_valid_real(param))
 		sphere->diam = -1;
@@ -53,7 +56,7 @@ static int	fill_sphere_diameter(char *param, t_sphere *sphere)
 		sphere->diam = ft_atod(param);
 	if (sphere->diam <= 0.0)
 	{
-		print_error(OBJ_SPHERE, ERR_DIAMETER_NEGATIVE, 0);
+		print_error(OBJ_SPHERE, ERR_DIAMETER_NEGATIVE, line);
 		return (1);
 	}
 	return (0);
@@ -68,15 +71,19 @@ int	plane_parser(char **params, t_scene *scene_obj)
 
 	if (ft_sizeof_split(params) < 4)
 	{
-		print_error(OBJ_PLANE, ERR_NO_INFORMATION, 0);
+		print_error(OBJ_PLANE, ERR_NO_INFORMATION, scene_obj->line);
 		return (1);
 	}
 	plane = ft_calloc(1, sizeof(t_plane));
 	plane->type.base = PLANE;
-	if (fill_coordinate(params[1], &(plane->a_point), OBJ_PLANE)
-		|| fill_normalized(params[2], &(plane->normal), OBJ_PLANE)
-		|| fill_color(params[3], &(plane->color), OBJ_PLANE)
-		|| parse_material_bonus(params, 4, &plane->material, OBJ_PLANE))
+	if (fill_coordinate(params[1], &(plane->a_point), OBJ_PLANE,
+			scene_obj->line)
+		|| fill_normalized(params[2], &(plane->normal), OBJ_PLANE,
+			scene_obj->line)
+		|| fill_color(params[3], &(plane->color), OBJ_PLANE,
+			scene_obj->line)
+		|| parse_material_bonus(params, 4, &plane->material, OBJ_PLANE,
+			scene_obj->line))
 	{
 		free(plane);
 		return (1);
@@ -93,10 +100,13 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	t_cylinder	*cylinder;
 
 	if (ft_sizeof_split(params) < 6)
+	{
+		print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, scene_obj->line);
 		return (1);
+	}
 	cylinder = ft_calloc(1, sizeof(t_cylinder));
 	cylinder->type.base = CYLINDER;
-	if (parse_cylinder_bonus(params, cylinder))
+	if (parse_cylinder_bonus(params, cylinder, scene_obj->line))
 	{
 		free(cylinder);
 		return (1);
@@ -105,27 +115,31 @@ int	cilinder_parser(char **params, t_scene *scene_obj)
 	return (0);
 }
 
-static int	parse_cylinder_bonus(char **params, t_cylinder *cylinder)
+static int	parse_cylinder_bonus(char **params, t_cylinder *cylinder, int line)
 {
 	if (!is_valid_real(params[3]) || !is_valid_real(params[4]))
+	{
+		print_error(OBJ_CYLINDER, ERR_NO_INFORMATION, line);
 		return (1);
+	}
 	cylinder->diam = ft_atod(params[3]);
 	cylinder->height = ft_atod(params[4]);
 	if (cylinder->diam <= 0.0)
 	{
-		print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, 0);
+		print_error(OBJ_CYLINDER, ERR_DIAMETER_NEGATIVE, line);
 		return (1);
 	}
 	if (cylinder->height <= 0.0)
 	{
-		print_error(OBJ_CYLINDER, ERR_NO_PARAM_HEIGHT, 0);
+		print_error(OBJ_CYLINDER, ERR_NO_PARAM_HEIGHT, line);
 		return (1);
 	}
-	if (fill_coordinate(params[1], &cylinder->center, OBJ_CYLINDER)
-		|| fill_normalized(params[2], &cylinder->v_axis, OBJ_CYLINDER)
-		|| fill_color(params[5], &cylinder->color, OBJ_CYLINDER)
+	if (fill_coordinate(params[1], &cylinder->center, OBJ_CYLINDER, line)
+		|| fill_normalized(params[2], &cylinder->v_axis, OBJ_CYLINDER,
+			line)
+		|| fill_color(params[5], &cylinder->color, OBJ_CYLINDER, line)
 		|| parse_material_bonus(params, 6, &cylinder->material,
-			OBJ_CYLINDER))
+			OBJ_CYLINDER, line))
 		return (1);
 	return (0);
 }

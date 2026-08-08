@@ -22,6 +22,7 @@ static const char	*obj_name(t_objs_type obj)
 	[OBJ_PLANE] = "Plane",
 	[OBJ_CYLINDER] = "Cylinder",
 	[OBJ_CONE] = "Cone",
+	[OBJ_SCENE] = "Scene",
 	};
 
 	return (names[obj]);
@@ -48,6 +49,7 @@ static const char	*error_msg(t_error_option option)
 	[ERR_COORDS_INVALID] = "invalid coordinates value",
 	[ERR_DIAMETER_NEGATIVE] = "diameter value negative",
 	[ERR_HEIGHT_NEGATIVE] = "height value negative",
+	[ERR_UNKNOWN_OBJECT] = "unknown object declaration in scene file",
 	};
 
 	return (msgs[option]);

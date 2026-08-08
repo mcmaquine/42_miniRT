@@ -58,7 +58,7 @@ void	free_scene_obj(t_scene **scene_obj)
 /*
 Fill struct point and checks its params.
 */
-int	fill_color(char *param, t_color *color, t_objs_type obj)
+int	fill_color(char *param, t_color *color, t_objs_type obj, int line)
 {
 	char	**colors;
 	t_color	temp;
@@ -66,7 +66,7 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 	colors = ft_split(param, ',');
 	if (ft_sizeof_split(colors) != 3)
 	{
-		print_error(obj, ERR_NO_PARAM_COLOR, 0);
+		print_error(obj, ERR_NO_PARAM_COLOR, line);
 		ft_free_split(colors);
 		return (1);
 	}
@@ -78,7 +78,7 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 	if ((temp.red < 0 || temp.red > 255) || (temp.green < 0 || temp.green > 255)
 		|| (temp.blue < 0 || temp.blue > 255))
 	{
-		print_error(obj, ERR_OUT_RANGE_COLOR, 0);
+		print_error(obj, ERR_OUT_RANGE_COLOR, line);
 		return (1);
 	}
 	color->red = temp.red / 255.0;
@@ -90,14 +90,14 @@ int	fill_color(char *param, t_color *color, t_objs_type obj)
 /*
 Fill point struct and validate if every coordinate is in range [min,max]
 */
-int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
+int	fill_coordinate(char *param, t_point *point, t_objs_type obj, int line)
 {
 	char	**points;
 
 	points = ft_split(param, ',');
 	if (ft_sizeof_split(points) != 3)
 	{
-		print_error(obj, ERR_NO_PARAM_COORDS, 0);
+		print_error(obj, ERR_NO_PARAM_COORDS, line);
 		ft_free_split(points);
 		return (1);
 	}
@@ -108,14 +108,14 @@ int	fill_coordinate(char *param, t_point *point, t_objs_type obj)
 	return (0);
 }
 
-int	fill_normalized(char *param, t_point *point, t_objs_type obj)
+int	fill_normalized(char *param, t_point *point, t_objs_type obj, int line)
 {
 	char	**points;
 
 	points = ft_split(param, ',');
 	if (ft_sizeof_split(points) != 3)
 	{
-		print_error(obj, ERR_NO_PARAM_VEC, 0);
+		print_error(obj, ERR_NO_PARAM_VEC, line);
 		ft_free_split(points);
 		return (1);
 	}
@@ -127,7 +127,7 @@ int	fill_normalized(char *param, t_point *point, t_objs_type obj)
 		|| (point->y < -1.0 || point->y > 1.0)
 		|| (point->z < -1.0 || point->z > 1.0))
 	{
-		print_error(obj, ERR_OUT_RANGE_VEC, 0);
+		print_error(obj, ERR_OUT_RANGE_VEC, line);
 		return (1);
 	}
 	return (0);

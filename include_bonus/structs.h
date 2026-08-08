@@ -149,6 +149,7 @@ typedef struct s_scene
 	t_list		*light;
 	t_list		*objs[COUNT];
 	t_bvh_node	*tree;
+	int			line;
 }	t_scene;
 
 typedef struct s_ray
