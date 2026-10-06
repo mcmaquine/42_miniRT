@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   vector_measure.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:18:16 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/12 22:43:16 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/04/07 11:24:03 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <float.h>
-# include "libft.h"
-# include "mlx.h"
-# include "definitions.h"
-# include "structs.h"
-# include "fileparser.h"
-# include "algelin.h"
-# include "cof_matrix.h"
-# include "utils.h"
-# include "raytracer.h"
-#endif
+#include "minirt.h"
+
+REAL	vec_magnitude(t_point a)
+{
+	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
+}
+
+t_point	vec_normalize(t_point a)
+{
+	t_point	p;
+	REAL	mag;
+
+	mag = vec_magnitude(a);
+	zero_point(&p);
+	if (!ft_dcmp(mag, 0.0, 1e-9))
+		return (p);
+	p.x = a.x / mag;
+	p.y = a.y / mag;
+	p.z = a.z / mag;
+	return (p);
+}

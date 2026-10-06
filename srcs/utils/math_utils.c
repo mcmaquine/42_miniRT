@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:18:16 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/30 17:38:21 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/04/07 11:24:50 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <float.h>
-# include "libft.h"
-# include "mlx.h"
-# include "definitions.h"
-# include "structs.h"
-# include "fileparser.h"
-# include "algelin.h"
-# include "cof_matrix.h"
-# include "utils.h"
-# include "raytracer.h"
-#endif
+#include "minirt.h"
+
+/*
+Converts degree to radians
+*/
+REAL to_radians(REAL degree)
+{
+	return (degree * (M_PI / 180.0));
+}

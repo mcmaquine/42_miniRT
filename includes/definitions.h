@@ -6,12 +6,13 @@
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 14:07:53 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/03/03 13:56:10 by mmaquine         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:21:41 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINITIONS_H
 # define DEFINITIONS_H
+# define REAL double
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
@@ -28,15 +29,16 @@
 # define KEY_L 108
 # define KEY_K 107
 
-enum e_obj_type
+typedef enum e_obj_type
 {
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	COUNT,
 	LIGHT,
 	CAMERA,
-	AMBIENT_LIGHT,
-	SPHERE,
-	PLAIN,
-	CILINDER
-};
+	AMBIENT_LIGHT
+}	t_obj_type;
 
 enum	e_identifier
 {
@@ -47,4 +49,5 @@ enum	e_identifier
 	pl,
 	cy
 };
+
 #endif

@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:18:16 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/30 17:46:58 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/05/13 18:45:56 by gabrgarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <float.h>
-# include "libft.h"
-# include "mlx.h"
-# include "definitions.h"
-# include "structs.h"
-# include "fileparser.h"
-# include "algelin.h"
-# include "cof_matrix.h"
-# include "utils.h"
-# include "raytracer.h"
+#ifndef UTILS_H
+# define UTILS_H
+
+typedef void	(*t_objs)(t_scene_obj *obj);
+
+REAL	to_radians(REAL degree);
+void	calc_components(t_scene *scene);
 #endif

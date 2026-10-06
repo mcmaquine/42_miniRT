@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_sizeof_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaquine <mmaquine@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 14:01:08 by mmaquine          #+#    #+#             */
-/*   Updated: 2026/04/07 11:18:16 by mmaquine         ###   ########.fr       */
+/*   Created: 2026/03/09 20:44:29 by mmaquine          #+#    #+#             */
+/*   Updated: 2026/03/09 20:56:55 by mmaquine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# include <math.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <float.h>
-# include "libft.h"
-# include "mlx.h"
-# include "definitions.h"
-# include "structs.h"
-# include "fileparser.h"
-# include "algelin.h"
-# include "cof_matrix.h"
-# include "utils.h"
-# include "raytracer.h"
-#endif
+#include "libft.h"
+
+/*
+   Counts how many itens has in params, not including NULL element in the end.
+*/
+size_t	ft_sizeof_split(char **params)
+{
+	size_t	size;
+
+	if (!params)
+		return (0);
+	size = 0;
+	while (params[size])
+		size++;
+	return (size);	
+}
+
